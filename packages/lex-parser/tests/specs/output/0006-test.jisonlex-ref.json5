@@ -8,29 +8,15 @@
 `,
   err: {
     name: 'JisonParserError',
-    message: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: "["[^\\]]"]" {return true;}
-^..............^^^^^^^^^^^^^^
-3: 'f"oo\\'bar'  {return 'baz2';}
-4: "fo\\"obar"  {return 'baz';}
-`,
-    stack: `JisonParserError: 
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: "["[^\\]]"]" {return true;}
-^..............^^^^^^^^^^^^^^
-3: 'f"oo\\'bar'  {return 'baz2';}
-4: "fo\\"obar"  {return 'baz';}
-
-    at Object.parseError (/lex-parser-cjs-es5.js:4153:13)
-    at Object.yyError (/lex-parser-cjs-es5.js:4303:21)
-    at Object.parser__PerformAction (/lex-parser-cjs-es5.js:3130:20)
-    at Object.parse (/lex-parser-cjs-es5.js:5305:36)
-    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8648:23)
+    message: 'this.lookAhead is not a function',
+    stack: `TypeError: this.lookAhead is not a function
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7301:29)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6640:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6746:22)
+    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6845:18)
+    at fastLex (/lex-parser-cjs-es5.js:4708:25)
+    at Object.parse (/lex-parser-cjs-es5.js:4829:22)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8572:23)
     at Context.testEachParserExample (/all-tests.js:318:19)
     at callFn (/runnable.js:364:21)
     at Runnable.run (/runnable.js:352:5)
@@ -47,69 +33,36 @@ The lexer rule's action code section does not compile: Cannot read properties of
     at Immediate._onImmediate (/runner.js:572:5)
     at process.processImmediate (node:internal/timers:504:21)`,
     hash: {
-      errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: "["[^\\]]"]" {return true;}
-^..............^^^^^^^^^^^^^^
-3: 'f"oo\\'bar'  {return 'baz2';}
-4: "fo\\"obar"  {return 'baz';}
-`,
-      exception: null,
-      text: '',
-      value: '',
+      errStr: 'Parsing aborted due to exception.',
+      exception: {
+        message: 'this.lookAhead is not a function',
+        name: 'TypeError',
+      },
+      text: ' ',
+      value: ' ',
       token: '"$accept"',
       token_id: 0,
       line: 1,
       loc: {
         first_line: 2,
-        first_column: 26,
+        first_column: 11,
         last_line: 2,
-        last_column: 26,
+        last_column: 12,
         range: [
-          29,
-          29,
+          14,
+          15,
         ],
       },
-      expected: [
-        'end of input',
-        '"<"',
-        '"}"',
-        '"|"',
-        '"("',
-        '"/"',
-        '"."',
-        '"^"',
-        '"$"',
-        '"%%"',
-        '"ACTION_START_AT_SOL"',
-        '"UNTERMINATED_ACTION_BLOCK"',
-        '"ACTION_START"',
-        '"UNKNOWN_DECL"',
-        '"OPTIONS"',
-        '"IMPORT"',
-        '"CODE"',
-        '"START_INC"',
-        '"START_EXC"',
-        '"SPECIAL_GROUP"',
-        '"/!"',
-        '"REGEX_SPECIAL_CHAR"',
-        '"ESCAPED_CHAR"',
-        "macro name in '{...}' curly braces",
-        '"REGEX_SET_START"',
-        '"STRING_LIT"',
-        '"CHARACTER_LIT"',
-      ],
+      expected: null,
       recoverable: false,
-      state: 181,
+      state: 93,
       action: 2,
-      new_state: 59,
+      new_state: 93,
       symbol_stack: [],
       state_stack: [],
       value_stack: [],
       location_stack: [],
-      stack_pointer: 9,
+      stack_pointer: 7,
       yy: {
         actionInclude: [],
         options: {},
@@ -120,7 +73,7 @@ The lexer rule's action code section does not compile: Cannot read properties of
           '???CONTEXT???',
         ],
         depth: 0,
-        include_command_allowed: false,
+        include_command_allowed: true,
       },
       lexer: {
         yy: {},
@@ -149,7 +102,6 @@ The lexer rule's action code section does not compile: Cannot read properties of
           'INITIAL',
         ],
         offset: 0,
-        base_position: 0,
       },
       parser: {
         yy: {},
@@ -320,57 +272,77 @@ The lexer rule's action code section does not compile: Cannot read properties of
         __reentrant_call_depth: 0,
         __error_infos: [
           {
-            errStr: `
-The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
- 8: %{
-^^..^^
- 9: //#include <stdio.h>
-^^..^^^^^^^^^^^^^^^^^^^^
-    (...continued...)
---  (---------------)
-12: void count();
-^^..^^^^^^^^^^^^^
-13: %}
-^^..^^
-14: 
-15: %%
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: '%{',
+            value: '%{',
             token: '"$accept"',
             token_id: 0,
-            line: 12,
+            line: 7,
             loc: {
-              first_line: 13,
-              first_column: 2,
-              last_line: 13,
+              first_line: 8,
+              first_column: 0,
+              last_line: 8,
               last_column: 2,
               range: [
-                146,
-                146,
+                84,
+                86,
               ],
             },
-            expected: [
-              'end of input',
-              '"%%"',
-              '"MACRO_NAME"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 114,
+            state: 3,
             action: 2,
-            new_state: 16,
+            new_state: 3,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 3,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: '\t\t',
+            value: '\t\t',
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
+            loc: {
+              first_line: 2,
+              first_column: 3,
+              last_line: 2,
+              last_column: 5,
+              range: [
+                6,
+                8,
+              ],
+            },
+            expected: null,
+            recoverable: false,
+            state: 31,
+            action: 2,
+            new_state: 31,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
@@ -386,75 +358,42 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: \\s+  {/* skip whitespace */}
-^.......^^^^^^^^^^^^^^^^^^^^^^^
-3: "/*"[^*]*"*"  {return yy.lexComment(this);}
-4: [a-zA-Z_][a-zA-Z0-9_]*  {return 'ID';}
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: '    \t',
+            value: '    \t',
             token: '"$accept"',
             token_id: 0,
             line: 1,
             loc: {
               first_line: 2,
-              first_column: 28,
+              first_column: 3,
               last_line: 2,
-              last_column: 28,
+              last_column: 8,
               range: [
-                31,
-                31,
+                6,
+                11,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 31,
             action: 2,
-            new_state: 59,
+            new_state: 31,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 6,
             yy: {
               actionInclude: [],
               options: {},
@@ -465,154 +404,42 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: \\n+     {yy.freshLine = true;}
-^..........^^^^^^^^^^^^^^^^^^^^^^
-3: \\s+     {yy.freshLine = false;}
-4: "y{"[^}]*"}"     {yytext = yytext.substr(2, yyleng-3);return 'ACTION';}
-`,
-            exception: null,
-            text: '',
-            value: '',
-            token: '"$accept"',
-            token_id: 0,
-            line: 1,
-            loc: {
-              first_line: 2,
-              first_column: 30,
-              last_line: 2,
-              last_column: 30,
-              range: [
-                33,
-                33,
-              ],
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
-            recoverable: false,
-            state: 181,
-            action: 2,
-            new_state: 59,
-            symbol_stack: [],
-            state_stack: [],
-            value_stack: [],
-            location_stack: [],
-            stack_pointer: 9,
-            yy: {
-              actionInclude: [],
-              options: {},
-              __options_flags__: 0,
-              __options_category_description__: '???',
-              startConditions: {},
-              __context_description__: [
-                '???CONTEXT???',
-              ],
-              depth: 0,
-              include_command_allowed: false,
-            },
-            lexer: '[lexer]',
-            parser: '[parser]',
-          },
-          {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-6: {D}"ohhai" {print(9);}
-^.............^^^^^^^^^^^
-7: "{" return '{';
-8: 
-`,
-            exception: null,
-            text: '',
-            value: '',
+            text: ' ',
+            value: ' ',
             token: '"$accept"',
             token_id: 0,
             line: 5,
             loc: {
               first_line: 6,
-              first_column: 22,
+              first_column: 10,
               last_line: 6,
-              last_column: 22,
+              last_column: 11,
               range: [
-                61,
-                61,
+                49,
+                50,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 93,
             action: 2,
-            new_state: 59,
+            new_state: 93,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 7,
             yy: {
               actionInclude: [],
               options: {},
@@ -623,75 +450,42 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-5: [{D}]"ohhai" {print(9);}
-^...............^^^^^^^^^^^
-6: "{" return '{';
-7: 
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: ' ',
+            value: ' ',
             token: '"$accept"',
             token_id: 0,
             line: 4,
             loc: {
               first_line: 5,
-              first_column: 24,
+              first_column: 12,
               last_line: 5,
-              last_column: 24,
+              last_column: 13,
               range: [
-                66,
-                66,
+                54,
+                55,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 93,
             action: 2,
-            new_state: 59,
+            new_state: 93,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 7,
             yy: {
               actionInclude: [],
               options: {},
@@ -702,75 +496,42 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: "\\n"+ {return 'NL';}
-^........^^^^^^^^^^^^^^
-3: \\n+ {return 'NL2';}
-4: "\\\\n"+ {return 'NL3';}
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: ' ',
+            value: ' ',
             token: '"$accept"',
             token_id: 0,
             line: 1,
             loc: {
               first_line: 2,
-              first_column: 20,
+              first_column: 5,
               last_line: 2,
-              last_column: 20,
+              last_column: 6,
               range: [
-                23,
-                23,
+                8,
+                9,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 31,
             action: 2,
-            new_state: 59,
+            new_state: 31,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 6,
             yy: {
               actionInclude: [],
               options: {},
@@ -781,75 +542,42 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: $ {return 'EOF';}
-^....^^^^^^^^^^^^^^^
-3: . {/* skip */}
-4: "stuff"*/("{"|";") {/* ok */}
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: ' ',
+            value: ' ',
             token: '"$accept"',
             token_id: 0,
             line: 1,
             loc: {
               first_line: 2,
-              first_column: 17,
+              first_column: 1,
               last_line: 2,
-              last_column: 17,
+              last_column: 2,
               range: [
-                20,
-                20,
+                4,
+                5,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 31,
             action: 2,
-            new_state: 59,
+            new_state: 31,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 6,
             yy: {
               actionInclude: [],
               options: {},
@@ -860,75 +588,42 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
           {
-            errStr: `
-The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
-2: "["[^\\]]"]" {return true;}
-^..............^^^^^^^^^^^^^^
-3: 'f"oo\\'bar'  {return 'baz2';}
-4: "fo\\"obar"  {return 'baz';}
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: ' ',
+            value: ' ',
             token: '"$accept"',
             token_id: 0,
             line: 1,
             loc: {
               first_line: 2,
-              first_column: 26,
+              first_column: 11,
               last_line: 2,
-              last_column: 26,
+              last_column: 12,
               range: [
-                29,
-                29,
+                14,
+                15,
               ],
             },
-            expected: [
-              'end of input',
-              '"<"',
-              '"}"',
-              '"|"',
-              '"("',
-              '"/"',
-              '"."',
-              '"^"',
-              '"$"',
-              '"%%"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-              '"SPECIAL_GROUP"',
-              '"/!"',
-              '"REGEX_SPECIAL_CHAR"',
-              '"ESCAPED_CHAR"',
-              "macro name in '{...}' curly braces",
-              '"REGEX_SET_START"',
-              '"STRING_LIT"',
-              '"CHARACTER_LIT"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 181,
+            state: 93,
             action: 2,
-            new_state: 59,
+            new_state: 93,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 9,
+            stack_pointer: 7,
             yy: {
               actionInclude: [],
               options: {},
@@ -939,13 +634,13 @@ The lexer rule's action code section does not compile: Cannot read properties of
                 '???CONTEXT???',
               ],
               depth: 0,
-              include_command_allowed: false,
+              include_command_allowed: true,
             },
             lexer: '[lexer]',
             parser: '[parser]',
           },
         ],
-        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 8]',
+        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 0]',
         lexer: {
           EOF: 1,
           ERROR: 2,
@@ -964,7 +659,6 @@ The lexer rule's action code section does not compile: Cannot read properties of
           matches: false,
           yytext: '',
           offset: 0,
-          base_position: 0,
           yyleng: 0,
           yylineno: 0,
           yylloc: {
@@ -976,11 +670,6 @@ The lexer rule's action code section does not compile: Cannot read properties of
               0,
               0,
             ],
-          },
-          CRLF_Re: {
-            re: '/\\r\\n?|\\n/',
-            source: '\\r\\n?|\\n',
-            flags: '',
           },
           options: {
             xregexp: true,
@@ -1038,7 +727,6 @@ The lexer rule's action code section does not compile: Cannot read properties of
           ],
           __currentRuleSet__: null,
           offset: 0,
-          base_position: 0,
         },
       },
     },

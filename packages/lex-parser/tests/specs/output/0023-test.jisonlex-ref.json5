@@ -43,15 +43,15 @@ rules (i.e. jison lex regexes) in "rules" state.
 3: return "%{..%}";
 4: }}}}}%
     at Object.parseError (/lex-parser-cjs-es5.js:4153:13)
-    at Object.lexer_parseError [as parseError] (/lex-parser-cjs-es5.js:5848:44)
-    at Object.yyError [as yyerror] (/lex-parser-cjs-es5.js:5880:19)
-    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7784:15)
-    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6711:34)
-    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6817:22)
-    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6916:18)
+    at Object.lexer_parseError [as parseError] (/lex-parser-cjs-es5.js:5844:44)
+    at Object.yyError [as yyerror] (/lex-parser-cjs-es5.js:5876:19)
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7708:15)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6640:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6746:22)
+    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6845:18)
     at fastLex (/lex-parser-cjs-es5.js:4708:25)
     at Object.parse (/lex-parser-cjs-es5.js:4829:22)
-    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8648:23)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8572:23)
     at Context.testEachParserExample (/all-tests.js:318:19)
     at callFn (/runnable.js:364:21)
     at Runnable.run (/runnable.js:352:5)
@@ -136,7 +136,6 @@ rules (i.e. jison lex regexes) in "rules" state.
           'INITIAL',
         ],
         offset: 0,
-        base_position: 0,
       },
     },
   },

@@ -1,5 +1,5 @@
 [
-  18,
+  6,
   {
     id: 13,
     token: '"%%"',
@@ -90,199 +90,34 @@
       ],
     },
   },
+  -1,
   {
-    id: 24,
-    token: '"ACTION_START"',
-    yytext: '%{',
-    yylloc: {
-      first_line: 1,
-      first_column: 19,
-      last_line: 1,
-      last_column: 19,
-      range: [
-        19,
-        19,
-      ],
-    },
-  },
-  {
-    id: 53,
-    token: '"ACTION_BODY"',
-    yytext: 'action={}',
-    yylloc: {
-      first_line: 1,
-      first_column: 19,
-      last_line: 1,
-      last_column: 32,
-      range: [
-        19,
-        32,
-      ],
-    },
-  },
-  {
-    id: 22,
-    token: '"ACTION_END"',
-    yytext: '',
-    yylloc: {
-      first_line: 1,
-      first_column: 32,
-      last_line: 1,
-      last_column: 32,
-      range: [
-        32,
-        32,
-      ],
-    },
-  },
-  {
-    id: 4,
-    token: '";"',
-    yytext: ';',
-    yylloc: {
-      first_line: 1,
-      first_column: 32,
-      last_line: 1,
-      last_column: 33,
-      range: [
-        32,
-        33,
-      ],
-    },
-  },
-  {
-    id: 16,
-    token: '"ID"',
-    yytext: 'hello',
-    yylloc: {
-      first_line: 1,
-      first_column: 34,
-      last_line: 1,
-      last_column: 39,
-      range: [
-        34,
-        39,
-      ],
-    },
-  },
-  {
-    id: 3,
-    token: '":"',
-    yytext: ':',
-    yylloc: {
-      first_line: 1,
-      first_column: 39,
-      last_line: 1,
-      last_column: 40,
-      range: [
-        39,
-        40,
-      ],
-    },
-  },
-  {
-    id: 16,
-    token: '"ID"',
-    yytext: 'world',
-    yylloc: {
-      first_line: 1,
-      first_column: 41,
-      last_line: 1,
-      last_column: 46,
-      range: [
-        41,
-        46,
-      ],
-    },
-  },
-  {
-    id: 4,
-    token: '";"',
-    yytext: ';',
-    yylloc: {
-      first_line: 1,
-      first_column: 47,
-      last_line: 1,
-      last_column: 48,
-      range: [
-        47,
-        48,
-      ],
-    },
-  },
-  {
-    id: 13,
-    token: '"%%"',
-    yytext: '',
-    yylloc: {
-      first_line: 3,
-      first_column: 0,
-      last_line: 3,
-      last_column: 0,
-      range: [
-        50,
-        50,
-      ],
-    },
-  },
-  {
-    id: 1,
-    token: 'end of input',
-    yytext: '',
-    yylloc: {
-      first_line: 3,
-      first_column: 0,
-      last_line: 3,
-      last_column: 0,
-      range: [
-        50,
-        50,
-      ],
-    },
-  },
-  {
-    id: 1,
-    token: 'end of input',
-    yytext: '',
-    yylloc: {
-      first_line: 3,
-      first_column: 0,
-      last_line: 3,
-      last_column: 0,
-      range: [
-        50,
-        50,
-      ],
-    },
-  },
-  {
-    id: 1,
-    token: 'end of input',
-    yytext: '',
-    yylloc: {
-      first_line: 3,
-      first_column: 0,
-      last_line: 3,
-      last_column: 0,
-      range: [
-        50,
-        50,
-      ],
-    },
-  },
-  {
-    id: 1,
-    token: 'end of input',
-    yytext: '',
-    yylloc: {
-      first_line: 3,
-      first_column: 0,
-      last_line: 3,
-      last_column: 0,
-      range: [
-        50,
-        50,
-      ],
+    fail: 1,
+    message: 'this.lookAhead is not a function',
+    name: 'TypeError',
+    stack: `TypeError: this.lookAhead is not a function
+    at Object.lexer__performAction [as performAction] (/ebnf-parser-cjs-es5.js:3546:20)
+    at Object.lexer_test_match [as test_match] (/ebnf-parser-cjs-es5.js:3398:26)
+    at Object.lexer_next [as next] (/ebnf-parser-cjs-es5.js:3420:74)
+    at Object.lexer_lex [as lex] (/ebnf-parser-cjs-es5.js:3435:53)
+    at Context.testEachParserExample (/bnf_parse.js:224:27)
+    at callFn (/runnable.js:364:21)
+    at Runnable.run (/runnable.js:352:5)
+    at Runner.runTest (/runner.js:677:10)
+    at /runner.js:801:12
+    at next (/runner.js:594:14)
+    at /runner.js:604:7
+    at next (/runner.js:486:14)
+    at cbHookRun (/runner.js:551:7)
+    at done (/runnable.js:308:5)
+    at callFn (/runnable.js:387:7)
+    at Runnable.run (/runnable.js:352:5)
+    at next (/runner.js:510:10)
+    at Immediate._onImmediate (/runner.js:572:5)
+    at process.processImmediate (node:internal/timers:504:21)`,
+    ex: {
+      message: 'this.lookAhead is not a function',
+      name: 'TypeError',
     },
   },
 ]

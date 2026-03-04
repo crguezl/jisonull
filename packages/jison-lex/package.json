@@ -7,7 +7,7 @@
   "name": "@gerhobbelt/jison-lex",
   "description": "lexical analyzer generator used by jison",
   "license": "MIT",
-  "version": "0.6.5-222",
+  "version": "0.6.5-223",
   "keywords": [
     "jison",
     "parser",
@@ -35,11 +35,11 @@
   "dependencies": {
     "ast-util": "0.6.0",
     "@gerhobbelt/json5": "2.1.0-48",
-    "@gerhobbelt/lex-parser": "0.6.5-222",
+    "@gerhobbelt/lex-parser": "0.6.5-223",
     "@gerhobbelt/nomnom": "1.8.4-29",
     "recast": "0.18.5",
     "@gerhobbelt/xregexp": "4.2.0-30",
-    "jison-helpers-lib": "0.6.5-222"
+    "jison-helpers-lib": "0.6.5-223"
   },
   "devDependencies": {
     "@babel/cli": "7.7.0",
@@ -54,9 +54,15 @@
     "rollup-plugin-node-resolve": "5.2.0"
   },
   "scripts": {
-    "test": "make test",
-    "build": "make",
-    "pub": "npm publish --access public"
+    "build": "node __patch_version_in_js.js && node __patch_lexer_kernel_in_js.js && mkdir -p dist && rollup -c && babel dist/regexp-lexer-cjs.js -o dist/regexp-lexer-cjs-es5.js && babel dist/regexp-lexer-umd.js -o dist/regexp-lexer-umd-es5.js && rollup -c rollup.config-cli.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && babel dist/cli-umd.js -o dist/cli-umd-es5.js && node __patch_nodebang_in_js.js",
+    "test": "mocha --timeout 18000 --check-leaks --globals assert tests/",
+    "test-nyc": "rm -rf ./coverage/ && nyc --reporter=lcov --reporter=html --reporter=text --exclude 'tests/specs/003-issue-*.js' -- mocha --timeout 18000 --check-leaks --globals assert tests/",
+    "pub": "npm publish --access public",
+    "npm-update": "ncu -a --packageFile=package.json && rm -f package-lock.json",
+    "npm-install": "npm install",
+    "bump": "cd ../../ && node __patch_version_in_js.js",
+    "clean": "rm -rf dist/",
+    "superclean": "npm run clean && rm -rf node_modules/ && rm -f package-lock.json"
   },
   "directories": {
     "lib": "lib",

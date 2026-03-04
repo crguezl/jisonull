@@ -118,45 +118,15 @@ void count();
 `,
   err: {
     name: 'JisonParserError',
-    message: `
-The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
- 8: %{
-^^..^^
- 9: //#include <stdio.h>
-^^..^^^^^^^^^^^^^^^^^^^^
-    (...continued...)
---  (---------------)
-12: void count();
-^^..^^^^^^^^^^^^^
-13: %}
-^^..^^
-14: 
-15: %%
-`,
-    stack: `JisonParserError: 
-The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
- 8: %{
-^^..^^
- 9: //#include <stdio.h>
-^^..^^^^^^^^^^^^^^^^^^^^
-    (...continued...)
---  (---------------)
-12: void count();
-^^..^^^^^^^^^^^^^
-13: %}
-^^..^^
-14: 
-15: %%
-
-    at Object.parseError (/lex-parser-cjs-es5.js:4153:13)
-    at Object.yyError (/lex-parser-cjs-es5.js:4303:21)
-    at Object.parser__PerformAction (/lex-parser-cjs-es5.js:2497:22)
-    at Object.parse (/lex-parser-cjs-es5.js:5305:36)
-    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8648:23)
+    message: 'this.lookAhead is not a function',
+    stack: `TypeError: this.lookAhead is not a function
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7201:34)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6640:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6746:22)
+    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6845:18)
+    at fastLex (/lex-parser-cjs-es5.js:4708:25)
+    at Object.parse (/lex-parser-cjs-es5.js:4829:22)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8572:23)
     at Context.testEachParserExample (/all-tests.js:318:19)
     at callFn (/runnable.js:364:21)
     at Runnable.run (/runnable.js:352:5)
@@ -173,62 +143,36 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
     at Immediate._onImmediate (/runner.js:572:5)
     at process.processImmediate (node:internal/timers:504:21)`,
     hash: {
-      errStr: `
-The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
- 8: %{
-^^..^^
- 9: //#include <stdio.h>
-^^..^^^^^^^^^^^^^^^^^^^^
-    (...continued...)
---  (---------------)
-12: void count();
-^^..^^^^^^^^^^^^^
-13: %}
-^^..^^
-14: 
-15: %%
-`,
-      exception: null,
-      text: '',
-      value: '',
+      errStr: 'Parsing aborted due to exception.',
+      exception: {
+        message: 'this.lookAhead is not a function',
+        name: 'TypeError',
+      },
+      text: '%{',
+      value: '%{',
       token: '"$accept"',
       token_id: 0,
-      line: 12,
+      line: 7,
       loc: {
-        first_line: 13,
-        first_column: 2,
-        last_line: 13,
+        first_line: 8,
+        first_column: 0,
+        last_line: 8,
         last_column: 2,
         range: [
-          146,
-          146,
+          84,
+          86,
         ],
       },
-      expected: [
-        'end of input',
-        '"%%"',
-        '"MACRO_NAME"',
-        '"ACTION_START_AT_SOL"',
-        '"UNTERMINATED_ACTION_BLOCK"',
-        '"ACTION_START"',
-        '"UNKNOWN_DECL"',
-        '"OPTIONS"',
-        '"IMPORT"',
-        '"CODE"',
-        '"START_INC"',
-        '"START_EXC"',
-      ],
+      expected: null,
       recoverable: false,
-      state: 114,
+      state: 3,
       action: 2,
-      new_state: 16,
+      new_state: 3,
       symbol_stack: [],
       state_stack: [],
       value_stack: [],
       location_stack: [],
-      stack_pointer: 6,
+      stack_pointer: 3,
       yy: {
         actionInclude: [],
         options: {},
@@ -268,7 +212,6 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
           'INITIAL',
         ],
         offset: 0,
-        base_position: 0,
       },
       parser: {
         yy: {},
@@ -439,62 +382,36 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
         __reentrant_call_depth: 0,
         __error_infos: [
           {
-            errStr: `
-The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
-    
-  Erroneous area:
- 8: %{
-^^..^^
- 9: //#include <stdio.h>
-^^..^^^^^^^^^^^^^^^^^^^^
-    (...continued...)
---  (---------------)
-12: void count();
-^^..^^^^^^^^^^^^^
-13: %}
-^^..^^
-14: 
-15: %%
-`,
-            exception: null,
-            text: '',
-            value: '',
+            errStr: 'Parsing aborted due to exception.',
+            exception: {
+              message: 'this.lookAhead is not a function',
+              name: 'TypeError',
+            },
+            text: '%{',
+            value: '%{',
             token: '"$accept"',
             token_id: 0,
-            line: 12,
+            line: 7,
             loc: {
-              first_line: 13,
-              first_column: 2,
-              last_line: 13,
+              first_line: 8,
+              first_column: 0,
+              last_line: 8,
               last_column: 2,
               range: [
-                146,
-                146,
+                84,
+                86,
               ],
             },
-            expected: [
-              'end of input',
-              '"%%"',
-              '"MACRO_NAME"',
-              '"ACTION_START_AT_SOL"',
-              '"UNTERMINATED_ACTION_BLOCK"',
-              '"ACTION_START"',
-              '"UNKNOWN_DECL"',
-              '"OPTIONS"',
-              '"IMPORT"',
-              '"CODE"',
-              '"START_INC"',
-              '"START_EXC"',
-            ],
+            expected: null,
             recoverable: false,
-            state: 114,
+            state: 3,
             action: 2,
-            new_state: 16,
+            new_state: 3,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 6,
+            stack_pointer: 3,
             yy: {
               actionInclude: [],
               options: {},
@@ -511,7 +428,7 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
             parser: '[parser]',
           },
         ],
-        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 1]',
+        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 0]',
         lexer: {
           EOF: 1,
           ERROR: 2,
@@ -530,7 +447,6 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
           matches: false,
           yytext: '',
           offset: 0,
-          base_position: 0,
           yyleng: 0,
           yylineno: 0,
           yylloc: {
@@ -542,11 +458,6 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
               0,
               0,
             ],
-          },
-          CRLF_Re: {
-            re: '/\\r\\n?|\\n/',
-            source: '\\r\\n?|\\n',
-            flags: '',
           },
           options: {
             xregexp: true,
@@ -604,7 +515,6 @@ The '%{...%}' lexer setup action code section does not compile: Cannot read prop
           ],
           __currentRuleSet__: null,
           offset: 0,
-          base_position: 0,
         },
       },
     },

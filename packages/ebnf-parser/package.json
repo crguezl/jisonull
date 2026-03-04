@@ -5,13 +5,20 @@
     "url": "http://zaa.ch"
   },
   "name": "@gerhobbelt/ebnf-parser",
-  "version": "0.6.5-222",
+  "version": "0.6.5-223",
   "description": "A parser for BNF and EBNF grammars used by jison",
   "main": "dist/ebnf-parser-cjs-es5.js",
   "module": "ebnf-parser.js",
   "scripts": {
-    "test": "make test",
-    "pub": "npm publish --access public"
+    "build": "node __patch_version_in_js.js && jison -m es bnf.y bnf.l && mv bnf.js parser.js && jison -m es ebnf.y && mv ebnf.js transform-parser.js && mkdir -p dist && rollup -c && babel dist/ebnf-parser-cjs.js -o dist/ebnf-parser-cjs-es5.js && babel dist/ebnf-parser-umd.js -o dist/ebnf-parser-umd-es5.js",
+    "test": "mocha --timeout 18000 --check-leaks --globals assert tests/",
+    "test-nyc": "rm -rf ./coverage/ && nyc --reporter=lcov --reporter=html --reporter=text -- mocha --timeout 18000 --check-leaks --globals assert tests/",
+    "pub": "npm publish --access public",
+    "npm-update": "ncu -a --packageFile=package.json && rm -f package-lock.json",
+    "npm-install": "npm install",
+    "bump": "cd ../../ && node __patch_version_in_js.js",
+    "clean": "rm -f parser.js && rm -f transform-parser.js && rm -f bnf.js && rm -f ebnf.js && rm -rf dist/",
+    "superclean": "npm run clean && rm -rf node_modules/ && rm -f package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -29,9 +36,9 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "@gerhobbelt/lex-parser": "0.6.5-222",
+    "@gerhobbelt/lex-parser": "0.6.5-223",
     "@gerhobbelt/xregexp": "4.2.0-30",
-    "jison-helpers-lib": "0.6.5-222"
+    "jison-helpers-lib": "0.6.5-223"
   },
   "devDependencies": {
     "@babel/cli": "7.7.0",

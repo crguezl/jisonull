@@ -112,12 +112,12 @@ rules (i.e. jison lex regexes) in "rules" state.
 ^..........^
 3: return "%{..%}";
 4: }}}}}%
-    at Object.lexer_parseError [as parseError] (/lex-parser-cjs-es5.js:5854:13)
-    at Object.yyError [as yyerror] (/lex-parser-cjs-es5.js:5880:19)
-    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7784:15)
-    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6711:34)
-    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6817:22)
-    at Object.lexer_lex [as lex] (/lex-parser-cjs-es5.js:6884:18)
+    at Object.lexer_parseError [as parseError] (/lex-parser-cjs-es5.js:5850:13)
+    at Object.yyError [as yyerror] (/lex-parser-cjs-es5.js:5876:19)
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7708:15)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6640:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6746:22)
+    at Object.lexer_lex [as lex] (/lex-parser-cjs-es5.js:6813:18)
     at Context.testEachParserExample (/all-tests.js:230:27)
     at callFn (/runnable.js:364:21)
     at Runnable.run (/runnable.js:352:5)
@@ -227,7 +227,6 @@ return "%{..%}";
           ],
           yytext: ']',
           offset: 12,
-          base_position: 0,
           yyleng: 1,
           yylineno: 1,
           yylloc: {
@@ -239,11 +238,6 @@ return "%{..%}";
               11,
               12,
             ],
-          },
-          CRLF_Re: {
-            re: '/\\r\\n?|\\n/',
-            source: '\\r\\n?|\\n',
-            flags: '',
           },
           options: {
             xregexp: true,

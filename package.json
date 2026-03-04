@@ -4,10 +4,13 @@
     "email": "zach@carter.name",
     "url": "http://zaa.ch"
   },
-  "contributors": ["Ger Hobbelt <ger@hobbelt.com>", "Casiano Rodriguez-Leon<crguezl@ull.edu.es>"],
+  "contributors": [
+    "Ger Hobbelt <ger@hobbelt.com>",
+    "Casiano Rodriguez-Leon<crguezl@ull.edu.es>"
+  ],
   "name": "jisonull",
   "description": "A parser generator with a Bison/YACC-similar API (derived off zaach/jison repo)",
-  "version": "0.6.5-222",
+  "version": "0.6.5-223",
   "license": "MIT",
   "keywords": [
     "jison",
@@ -21,6 +24,14 @@
     "compiler"
   ],
   "preferGlobal": true,
+  "workspaces": [
+    "packages/helpers-lib",
+    "packages/lex-parser",
+    "packages/ebnf-parser",
+    "packages/jison-lex",
+    "packages/json2jison",
+    "packages/jison2json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/crguezl/jisonull.git"
@@ -71,11 +82,33 @@
     "unicode-4.0.0": "0.7.5"
   },
   "scripts": {
-    "build": "make",
+    "prep": "npm run prep --workspaces --if-present && npm install",
+    "build:packages": "npm run build --workspaces --if-present",
+    "build:rollup": "mkdir -p dist && rollup -c && rollup -c rollup.config-cli.js",
+    "build:transpile": "babel dist/jison-cjs.js -o dist/jison-cjs-es5.js && babel dist/jison-umd.js -o dist/jison-umd-es5.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && babel dist/cli-umd.js -o dist/cli-umd-es5.js && node __patch_nodebang_in_js.js",
+    "build:patch": "node __patch_version_in_js.js && node __patch_parser_kernel_in_js.js",
+    "build": "npm run build:patch && npm run build:packages && npm run build:rollup && npm run build:transpile",
+    "sync": "npm run build:patch",
     "pub": "npm publish --access public",
-    "test": "make test",
-    "regen": "make sync",
-    "website": "node_modules/.bin/live-server docs/"
+    "pub:all": "npm run pub --workspaces --if-present && npm run pub",
+    "test": "npm run test --workspaces --if-present && mocha --timeout 18000 --check-leaks --globals assert --recursive tests/",
+    "test-nyc": "npm run clean-nyc && npm run test-nyc --workspaces --if-present && nyc --reporter=lcov --reporter=text --exclude 'examples/issue-lex*.js' -- mocha --timeout 18000 --check-leaks --globals assert --recursive tests/ && npm run report-nyc",
+    "clean-nyc": "rm -rf ./.nyc_output ./coverage/",
+    "report-nyc": "rm -rf ./coverage/ && nyc report --reporter=html",
+    "site": "npm run build && npm run test && npm run examples-test",
+    "regen": "npm run build:patch",
+    "website": "node_modules/.bin/live-server docs/",
+    "npm-install": "npm install",
+    "npm-update": "npm run npm-update --workspaces --if-present && ncu -a --packageFile=package.json && npm install",
+    "bump": "npm version --no-git-tag-version prerelease && npm run build:patch",
+    "git-tag": "node -e 'console.log(require(\"./package.json\").version);' | xargs git tag",
+    "git": "git pull --all && git push --all",
+    "clean": "npm run clean --workspaces --if-present && rm -rf dist coverage .nyc_output",
+    "superclean": "npm run superclean --workspaces --if-present && rm -rf dist coverage .nyc_output node_modules package-lock.json && find . -type d -name 'node_modules' -delete",
+    "examples-test": "cd examples && npm run test 2>/dev/null || echo 'Examples build not yet set up for npm workspaces'",
+    "examples": "cd examples && npm run build 2>/dev/null || echo 'Examples build not yet set up for npm workspaces'",
+    "all": "npm run clean-nyc && npm run sync && npm run build && npm run test && npm run test-nyc && npm run examples-test && npm run report-nyc",
+    "everything": "npm run clean && npm run npm-update && npm run prep && npm run all"
   },
   "homepage": "https://github.com/crguezl/jisonull/blob/main/docs/README.md"
 }
