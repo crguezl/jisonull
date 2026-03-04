@@ -1,7 +1,3 @@
-
-NANOC := $(shell command -v nanoc 2> /dev/null)
-
-ROLLUP = node_modules/.bin/rollup
 BABEL = node_modules/.bin/babel
 MOCHA = node_modules/.bin/mocha
 NYC = node_modules/.bin/nyc      --clean=false --temp-directory ./.nyc_output
@@ -20,57 +16,14 @@ everything:                         \
 		clean                       \
 		npm-update                  \
 		prep                        \
-		all                         \
-		site
+		all                       
 
 
 prep: subpackages-prep npm-install
 
-# `make site` will perform an extensive (re)build of the jison tool, all examples and the web pages.
-# Use `make compile-site` for a faster, if less complete, site rebuild action.
-site: build test examples-test web-examples web/content/assets/js/jison.js compile-site
+# `make site` will perform an extensive (re)build of the jison tool, all examples.
+site: build test examples-test
 
-clean-site:
-	-@rm -rf web/tmp/
-	-@rm -rf web/output/jison/
-	-@rm -rf web/content/examples/
-	-rm web/content/assets/js/jison.js
-	-rm web/content/assets/js/calculator.js
-
-# `make compile-site` will perform a quick (re)build of the web pages
-compile-site: web-examples web/content/assets/js/jison.js
-	-@rm -rf web/tmp/
-	-@rm -rf web/content/examples/
-	cp -r examples web/content/examples/
-ifndef NANOC
-	$(warning "*** nanoc is not available, please install ruby, gem and nanoc. ***")
-	$(warning "*** JISON website pages have NOT been updated!                  ***")
-else
-	cd web/ && nanoc compile
-	-@rm -rf docs/
-	-mkdir -p docs
-	cp -r web/output/jison/* docs/
-endif
-
-web/content/assets/js/jison.js:
-	@[ -a  node_modules/.bin/browserify ] || echo "### FAILURE: Make sure you run 'make prep' before as the browserify tool is unavailable! ###"
-	sh node_modules/.bin/browserify entry.js --exports require > web/content/assets/js/jison.js
-
-preview:
-ifndef NANOC
-	$(error "nanoc is not available, please install ruby, gem and nanoc")
-else
-	cd web/ && nanoc view &
-	open http://localhost:3000/jison/
-endif
-
-# `make deploy` is `make site` plus GIT checkin of the result into the gh-pages branch
-deploy: site
-	#git checkout gh-pages
-	#cp -r web/output/jison/* ./
-	#git add . --all
-	git commit -a -m 'Deploy site updates'
-	#git checkout master
 
 test:
 	$(MOCHA) --timeout 18000 --check-leaks --globals assert --recursive tests/
@@ -106,12 +59,7 @@ report-nyc:
 	# report collective coverage results:
 	$(NYC) report --reporter=html
 
-web-examples: web/content/assets/js/calculator.js
-
 examples: examples_directory
-
-web/content/assets/js/calculator.js: examples/calculator.jison build
-	$(JISON) examples/calculator.jison -o $@
 
 
 comparison:
@@ -470,20 +418,18 @@ prep_util_dir:
 	-mkdir -p dist
 	#+[ -f dist/cli-cjs-es5.js     ] || ( cp node_modules/jison-gho/dist/cli-cjs-es5.js      dist/cli-cjs-es5.js      && touch -d 1970/1/1  dist/cli-cjs-es5.js     )
 
-dist/cli-cjs-es5.js: dist/jison.js rollup.config-cli.js package.json lib/jison-parser-kernel.js
+dist/cli-cjs-es5.js: dist/jison.js package.json lib/jison-parser-kernel.js
 	node __patch_version_in_js.js
 	node __patch_parser_kernel_in_js.js
 	-mkdir -p dist
-	$(ROLLUP) -c rollup.config-cli.js
 	$(BABEL) dist/cli-cjs.js -o dist/cli-cjs-es5.js
 	$(BABEL) dist/cli-umd.js -o dist/cli-umd-es5.js
 	node __patch_nodebang_in_js.js
 
-dist/jison.js: rollup.config.js rollup.config-template.js package.json lib/jison-parser-kernel.js
+dist/jison.js: package.json lib/jison-parser-kernel.js
 	node __patch_version_in_js.js
 	node __patch_parser_kernel_in_js.js
 	-mkdir -p dist
-	$(ROLLUP) -c
 	$(BABEL) dist/jison-cjs.js -o dist/jison-cjs-es5.js
 	$(BABEL) dist/jison-umd.js -o dist/jison-umd-es5.js
 
@@ -598,7 +544,7 @@ superclean: clean clean-site
 .PHONY: all everything                                                              \
 		prep subpackages-prep														\
 		subpackages-build sync                                                      \
-		site preview deploy test web-examples examples examples-test                \
+		site preview deploy test examples examples-test                \
 		examples_directory comparison lexer-comparison                              \
 		error-handling-tests basic-tests github-issue-tests misc-tests              \
 		build npm-install                                                           \
@@ -660,5 +606,4 @@ superclean: clean clean-site
 # sync:
 # test-nyc:
 # test:
-# web-examples:
 # 

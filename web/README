@@ -1,8 +1,0 @@
-Build with nanoc
-
-Before building you'll need to install ruby, nanoc *and* kramdown:
-
-- install ruby
-- `gem install nanoc`
-- `gem install kramdown`
-
