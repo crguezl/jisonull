@@ -23,11 +23,11 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/GerHobbelt/jison.git"
+    "url": "https://github.com/crguezl/jisonull.git"
   },
   "bugs": {
     "email": "jison@librelist.com",
-    "url": "http://github.com/GerHobbelt/jison/issues"
+    "url": "https://github.com/crguezl/jisonull/issues"
   },
   "main": "dist/jison-cjs-es5.js",
   "module": "lib/jison.js",
@@ -77,5 +77,5 @@
     "regen": "make sync",
     "website": "node_modules/.bin/live-server docs/"
   },
-  "homepage": "http://jison.org"
+  "homepage": "https://github.com/crguezl/jisonull/blob/main/docs/README.md"
 }
