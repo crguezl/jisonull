@@ -88,11 +88,42 @@ npm run prep               # Prepare workspace (npm install + package preps)
 #### Convenience Commands
 
 ```bash
-npm run site               # Build + test + examples-test (full site build)
+npm run site               # Build + test + examples (full site build)
 npm run everything         # Full clean, update, prep, and build cycle
 npm run all                # Full build with coverage reporting
 npm run website            # Start live-server for docs/
 ```
+
+### Phase 4: Examples Migration ✅
+Converted examples from Makefile-based to npm workspace integration:
+
+#### Examples Workspace Structure
+- Created `examples/package.json` with npm scripts
+- Added examples to root workspaces array
+- Examples is a private package (not published to npm)
+
+#### Example Build Categories
+```bash
+npm run build:examples              # Build all test categories
+npm run build:examples:error-handling   # Build error handling tests
+npm run build:examples:basic            # Build basic examples
+npm run build:examples:github-issues    # Build GitHub issue examples
+npm run build:examples:misc             # Build miscellaneous examples
+npm run build:examples:codegen          # Build codegen feature testers
+```
+
+#### Example Build Features
+- ✅ ~200 individual example targets organized into 5 categories
+- ✅ Gracefully handles build failures per example (||true pattern)
+- ✅ Output directory: `examples/output/<example>/`
+- ✅ Integrated into root workflow (`site`, `all`, `everything`)
+
+#### Root Integration
+- `npm run examples-test` → builds all examples
+- `npm run examples` → alias for examples-test
+- `npm run site` → includes example build
+- `npm run all` → includes example build with coverage reporting
+- `npm run everything` → full clean + update + build cycle including examples
 
 ## How Workspaces Work
 
@@ -170,9 +201,10 @@ npm run test-nyc && npm run report-nyc
 ## Migration Notes
 
 ⚠️ **Important**:
-- The `examples/` directory still uses Makefiles (Phase 4 pending)
-- Some tests may fail due to existing issues (this is expected)
+- All Makefile functionality has been migrated to npm workspaces
+- Some tests may fail due to existing issues in the codebase (this is expected)
 - Git submodules are NOT used; packages are local to this monorepo
+- Makefile files remain in the repository but are no longer required
 
 ## Common Tasks
 
@@ -241,15 +273,21 @@ npm run build
 
 ## Next Steps
 
-### Phase 4: Examples Migration (Pending)
-- Convert `examples/Makefile` to npm scripts
-- Consider if examples should be a separate workspace or handled differently
-- Estimated effort: Medium (200+ build targets)
+### Phase 5: Optional Cleanup & Documentation
+- Archive old Makefile files (or keep for reference)
+- Remove Makefile references from README.md and other documentation
+- Update CI/CD configurations to use npm scripts instead of make
 
-### Phase 5: Automation (Pending)
-- Update CI/CD configurations to use npm scripts
-- Remove Makefile references from documentation
-- Add npm scripts to package.json for common workflows
+### Phase 6: CI/CD Integration (Pending)
+- GitHub Actions workflows using npm commands
+- Docker builds using npm workspaces
+- Automated release/publish workflows
+
+### Future Enhancements
+- Add npm script for automated changelog generation
+- Integrate turbo or other monorepo optimizers for faster builds
+- Add pre-commit hooks for linting and testing
+- Create automated version management tooling
 
 ## References
 

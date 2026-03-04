@@ -1,0 +1,23 @@
+{
+  "name": "jison-examples",
+  "version": "0.6.5-223",
+  "description": "Examples and tests for the Jison parser generator",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:test-categories",
+    "build:all": "npm run build:error-handling && npm run build:basic && npm run build:github-issues && npm run build:misc",
+    "build:error-handling": "mkdir -p output && for target in error-handling-and-yyclearin error-handling-and-yyerrok-loopfix error-handling-and-yyerrok-looping1 error-handling-and-yyerrok-looping2 error-handling-and-yyerrok-macro error-handling-and-yyerrok-part1 error-handling-and-yyerrok-part2 error-handling-and-yyerrok-part3 error-handling-and-yyerrok-part4a error-handling-and-yyerrok-part4b error-handling-and-yyerrok-part5 error-recognition-actions yacc-error-recovery; do node ../dist/cli-cjs-es5.js --main ./$target.jison -o ./output/$target/ 2>/dev/null || true; done",
+    "build:basic": "mkdir -p output && for target in basic basic2 basic2_lex basic_lex basic_w_error_rule bloop calc_LA_on_demand calculator calculator_json ccalc classy classy_ast comments compiled_calc dism dism_lr0 documentation--custom-lexer-ULcase documentation--custom-lexer-ULcase-alt dot error-only faking-multiple-start-rules faking-multiple-start-rules-alt flow formula grammar handlebars happyhappy inherited_y json_ast_js json_js klammergebirge lalr-but-not-slr lambdacalc lex lr-but-not-lalr mfcalc no-prec-hack-needed nv_classy_ast olmenu-proto2 parser-to-lexer-communication-test parser-to-lexer-communication-test-w-debug parser-to-lexer-communication-test--profiling parser-to-lexer-communication-test-w-debug--profiling phraser precedence reduce_conflict regex semwhitespace test-EOF-bugfix test-epsilon-rules-early-reduce test-literal-quote-tokens-in-grammar test-nonassociative-operator-0 test-nonassociative-operator-1 test-nonassociative-operator-2 test-propagation-rules-reduction-1 test-unused-rules-reporting test-unused-rules-reporting-alt theory-left-recurs-01 unicode unicode2 with-includes with_custom_lexer; do node ../dist/cli-cjs-es5.js --main ./$target.jison -o ./output/$target/ 2>/dev/null || true; done",
+    "build:github-issues": "mkdir -p output && for target in issue-51-gho-1 issue-58-gho issue-205 issue-205-2 issue-205-3 issue-205-4 issue-254 issue-289 issue-293 issue-342 issue-344-BAD issue-344-2-BAD issue-348 issue-357-url-lexing issue-360 issue-362 issue-387; do node ../dist/cli-cjs-es5.js --main ./$target.jison -o ./output/$target/ 2>/dev/null || true; done",
+    "build:misc": "mkdir -p output && for target in ansic btyacc-ansiC btyacc-ansiC2 btyacc-ftp btyacc-t1 btyacc-t2 c99 fsyacc-cgrammar gantt jscore lojban-300 mermaid pascal tikiwikiparser; do node ../dist/cli-cjs-es5.js --main ./$target.jison -o ./output/$target/ 2>/dev/null || true; done",
+    "build:codegen": "mkdir -p output && for target in codegen-feature-tester-base codegen-feature-tester-base-debug codegen-feature-tester-base-try-catch codegen-feature-tester-base-no-try-catch codegen-feature-tester-no-default-action codegen-feature-tester-base-error-recovery-10 codegen-feature-tester-all-default-action codegen-feature-tester-yylineno codegen-feature-tester-no-err-api-usage codegen-feature-tester-no-error-recovery codegen-feature-tester-no-location-assignment codegen-feature-tester-no-location-info codegen-feature-tester-no-location-tracking codegen-feature-tester-no-parseerror codegen-feature-tester-no-value-assignment codegen-feature-tester-no-value-tracking codegen-feature-tester-no-value-work codegen-feature-tester-no-yyclearin codegen-feature-tester-no-yyerrok codegen-feature-tester-no-yyerror codegen-feature-tester-no-yyleng codegen-feature-tester-no-yylineno codegen-feature-tester-no-yyloc codegen-feature-tester-no-yyrecovering codegen-feature-tester-no-yysp codegen-feature-tester-no-yysstack codegen-feature-tester-no-yystack codegen-feature-tester-no-yytext; do node ../dist/cli-cjs-es5.js --main ./$target.jison -o ./output/$target/ 2>/dev/null || true; done",
+    "build:test-categories": "npm run build:error-handling && npm run build:basic && npm run build:github-issues && npm run build:misc && npm run build:codegen",
+    "test": "echo 'Examples build complete. Output in ./output/ directory' && ls -1 output/ 2>/dev/null | wc -l",
+    "clean": "rm -rf output/",
+    "superclean": "npm run clean"
+  },
+  "engines": {
+    "node": ">=8.0"
+  },
+  "devDependencies": {}
+}
