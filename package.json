@@ -4,6 +4,7 @@
     "email": "zach@carter.name",
     "url": "http://zaa.ch"
   },
+  "contributors": ["Ger Hobbelt <ger@hobbelt.com>", "Casiano Rodriguez-Leon<crguezl@ull.edu.es>"],
   "name": "jison-gho",
   "description": "A parser generator with a Bison/YACC-similar API (derived off zaach/jison repo)",
   "version": "0.6.5-222",

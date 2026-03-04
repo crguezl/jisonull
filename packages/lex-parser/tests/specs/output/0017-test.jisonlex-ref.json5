@@ -39,33 +39,31 @@ to help jison grok more or less complex action code chunks.
 ^...^
 6: 
 7: 
-    at Object.parseError (\lex-parser-cjs-es5.js:3626:13)
-    at Object.lexer_parseError [as parseError] (\lex-parser-cjs-es5.js:5320:44)
-    at Object.yyError [as yyerror] (\lex-parser-cjs-es5.js:5352:19)
-    at Object.lexer__performAction [as performAction] (\lex-parser-cjs-es5.js:6669:17)
-    at Object.lexer_test_match [as test_match] (\lex-parser-cjs-es5.js:6183:34)
-    at Object.lexer_next [as next] (\lex-parser-cjs-es5.js:6289:22)
-    at Object.lexer_fastLex [as fastLex] (\lex-parser-cjs-es5.js:6388:18)
-    at fastLex (\lex-parser-cjs-es5.js:4181:25)
-    at Object.parse (\lex-parser-cjs-es5.js:4302:22)
-    at Object.yyparse [as parse] (\lex-parser-cjs-es5.js:8185:25)
-    at Context.testEachParserExample (\all-tests.js:318:19)
-    at callFn (\runnable.js:372:21)
-    at Test.Runnable.run (\runnable.js:364:7)
-    at Runner.runTest (\runner.js:455:10)
-    at \runner.js:573:12
-    at next (\runner.js:369:14)
-    at \runner.js:379:7
-    at next (\runner.js:303:14)
-    at \runner.js:342:7
-    at done (\runnable.js:319:5)
-    at callFn (\runnable.js:395:7)
-    at Hook.Runnable.run (\runnable.js:364:7)
-    at next (\runner.js:317:10)
-    at Immediate.<anonymous> (\runner.js:347:5)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)`,
+    at Object.parseError (/lex-parser-cjs-es5.js:4153:13)
+    at Object.lexer_parseError [as parseError] (/lex-parser-cjs-es5.js:5848:44)
+    at Object.yyError [as yyerror] (/lex-parser-cjs-es5.js:5880:19)
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7182:17)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6711:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6817:22)
+    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6916:18)
+    at fastLex (/lex-parser-cjs-es5.js:4708:25)
+    at Object.parse (/lex-parser-cjs-es5.js:4829:22)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8648:23)
+    at Context.testEachParserExample (/all-tests.js:318:19)
+    at callFn (/runnable.js:364:21)
+    at Runnable.run (/runnable.js:352:5)
+    at Runner.runTest (/runner.js:677:10)
+    at /runner.js:801:12
+    at next (/runner.js:594:14)
+    at /runner.js:604:7
+    at next (/runner.js:486:14)
+    at cbHookRun (/runner.js:551:7)
+    at done (/runnable.js:308:5)
+    at callFn (/runnable.js:387:7)
+    at Runnable.run (/runnable.js:352:5)
+    at next (/runner.js:510:10)
+    at Immediate._onImmediate (/runner.js:572:5)
+    at process.processImmediate (node:internal/timers:504:21)`,
     hash: {
       errStr: `Lexical error on line 5: 
 too many closing curly braces in lexer rule action block.

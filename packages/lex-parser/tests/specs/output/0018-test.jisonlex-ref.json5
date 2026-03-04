@@ -10,140 +10,119 @@ return true;
   err: {
     name: 'JisonParserError',
     message: `
-There's probably an error in one or more of your lexer regex rules.
-The lexer rule spec should have this structure:
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
     
-        regex  action_code
-    
-where 'regex' is a lex-style regex expression (see the
-jison and jison-lex documentation) which is intended to match a chunk
-of the input to lex, while the 'action_code' block is the JS code
-which will be invoked when the regex is matched. The 'action_code' block
-may be any (indented!) set of JS statements, optionally surrounded
-by '{...}' curly braces or otherwise enclosed in a '%{...%}' block.
-    
-  Erroneous code:
+  Erroneous area:
 2: "["[^\\]]"]" %{
+^..............^^
 3: return true;
+^..^^^^^^^^^^^^
 4: %}
+^..^^
 5: }
-^..^
 6: 
-7: 
-    
-  Technical error report:
-Parse error on line 5: 
-}
-^
-Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_AT_SOL", "UNTERMINATED_ACTION_BLOCK", "ACTION_START", "UNKNOWN_DECL", "OPTIONS", "IMPORT", "CODE", "START_INC", "START_EXC", "SPECIAL_GROUP", "/!", "REGEX_SPECIAL_CHAR", "ESCAPED_CHAR", macro name in '{...}' curly braces, "REGEX_SET_START", "STRING_LIT", "CHARACTER_LIT", "option_keyword", "import_keyword", "init_code_keyword", "start_inclusive_keyword", "start_exclusive_keyword", "start_conditions_marker", "scoped_rules_collective", "rule", "start_conditions", "regex", "nonempty_regex_list", "regex_concat", "regex_base", "name_expansion", "any_group_regex", "literal_string", "epilogue", got unexpected "}"
 `,
     stack: `JisonParserError: 
-There's probably an error in one or more of your lexer regex rules.
-The lexer rule spec should have this structure:
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
     
-        regex  action_code
-    
-where 'regex' is a lex-style regex expression (see the
-jison and jison-lex documentation) which is intended to match a chunk
-of the input to lex, while the 'action_code' block is the JS code
-which will be invoked when the regex is matched. The 'action_code' block
-may be any (indented!) set of JS statements, optionally surrounded
-by '{...}' curly braces or otherwise enclosed in a '%{...%}' block.
-    
-  Erroneous code:
+  Erroneous area:
 2: "["[^\\]]"]" %{
+^..............^^
 3: return true;
+^..^^^^^^^^^^^^
 4: %}
+^..^^
 5: }
-^..^
 6: 
-7: 
-    
-  Technical error report:
-Parse error on line 5: 
-}
-^
-Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_AT_SOL", "UNTERMINATED_ACTION_BLOCK", "ACTION_START", "UNKNOWN_DECL", "OPTIONS", "IMPORT", "CODE", "START_INC", "START_EXC", "SPECIAL_GROUP", "/!", "REGEX_SPECIAL_CHAR", "ESCAPED_CHAR", macro name in '{...}' curly braces, "REGEX_SET_START", "STRING_LIT", "CHARACTER_LIT", "option_keyword", "import_keyword", "init_code_keyword", "start_inclusive_keyword", "start_exclusive_keyword", "start_conditions_marker", "scoped_rules_collective", "rule", "start_conditions", "regex", "nonempty_regex_list", "regex_concat", "regex_base", "name_expansion", "any_group_regex", "literal_string", "epilogue", got unexpected "}"
 
-    at Object.parseError (\lex-parser-cjs-es5.js:3626:13)
-    at Object.yyError (\lex-parser-cjs-es5.js:3776:21)
-    at Object.parser__PerformAction (\lex-parser-cjs-es5.js:1633:18)
-    at Object.parse (\lex-parser-cjs-es5.js:4649:42)
-    at Object.yyparse [as parse] (\lex-parser-cjs-es5.js:8185:25)
-    at Context.testEachParserExample (\all-tests.js:318:19)
-    at callFn (\runnable.js:372:21)
-    at Test.Runnable.run (\runnable.js:364:7)
-    at Runner.runTest (\runner.js:455:10)
-    at \runner.js:573:12
-    at next (\runner.js:369:14)
-    at \runner.js:379:7
-    at next (\runner.js:303:14)
-    at \runner.js:342:7
-    at done (\runnable.js:319:5)
-    at callFn (\runnable.js:395:7)
-    at Hook.Runnable.run (\runnable.js:364:7)
-    at next (\runner.js:317:10)
-    at Immediate.<anonymous> (\runner.js:347:5)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)`,
+    at Object.parseError (/lex-parser-cjs-es5.js:4153:13)
+    at Object.yyError (/lex-parser-cjs-es5.js:4303:21)
+    at Object.parser__PerformAction (/lex-parser-cjs-es5.js:3130:20)
+    at Object.parse (/lex-parser-cjs-es5.js:5305:36)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8648:23)
+    at Context.testEachParserExample (/all-tests.js:318:19)
+    at callFn (/runnable.js:364:21)
+    at Runnable.run (/runnable.js:352:5)
+    at Runner.runTest (/runner.js:677:10)
+    at /runner.js:801:12
+    at next (/runner.js:594:14)
+    at /runner.js:604:7
+    at next (/runner.js:486:14)
+    at cbHookRun (/runner.js:551:7)
+    at done (/runnable.js:308:5)
+    at callFn (/runnable.js:387:7)
+    at Runnable.run (/runnable.js:352:5)
+    at next (/runner.js:510:10)
+    at Immediate._onImmediate (/runner.js:572:5)
+    at process.processImmediate (node:internal/timers:504:21)`,
     hash: {
       errStr: `
-There's probably an error in one or more of your lexer regex rules.
-The lexer rule spec should have this structure:
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
     
-        regex  action_code
-    
-where 'regex' is a lex-style regex expression (see the
-jison and jison-lex documentation) which is intended to match a chunk
-of the input to lex, while the 'action_code' block is the JS code
-which will be invoked when the regex is matched. The 'action_code' block
-may be any (indented!) set of JS statements, optionally surrounded
-by '{...}' curly braces or otherwise enclosed in a '%{...%}' block.
-    
-  Erroneous code:
+  Erroneous area:
 2: "["[^\\]]"]" %{
+^..............^^
 3: return true;
+^..^^^^^^^^^^^^
 4: %}
+^..^^
 5: }
-^..^
 6: 
-7: 
-    
-  Technical error report:
-Parse error on line 5: 
-}
-^
-Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_AT_SOL", "UNTERMINATED_ACTION_BLOCK", "ACTION_START", "UNKNOWN_DECL", "OPTIONS", "IMPORT", "CODE", "START_INC", "START_EXC", "SPECIAL_GROUP", "/!", "REGEX_SPECIAL_CHAR", "ESCAPED_CHAR", macro name in '{...}' curly braces, "REGEX_SET_START", "STRING_LIT", "CHARACTER_LIT", "option_keyword", "import_keyword", "init_code_keyword", "start_inclusive_keyword", "start_exclusive_keyword", "start_conditions_marker", "scoped_rules_collective", "rule", "start_conditions", "regex", "nonempty_regex_list", "regex_concat", "regex_base", "name_expansion", "any_group_regex", "literal_string", "epilogue", got unexpected "}"
 `,
       exception: null,
       text: '',
       value: '',
-      token: 'end of input',
-      token_id: 1,
-      line: 6,
+      token: '"$accept"',
+      token_id: 0,
+      line: 3,
       loc: {
-        first_line: 7,
-        first_column: 0,
-        last_line: 7,
-        last_column: 0,
+        first_line: 4,
+        first_column: 2,
+        last_line: 4,
+        last_column: 2,
         range: [
-          37,
-          37,
+          33,
+          33,
         ],
       },
       expected: [
         'end of input',
+        '"<"',
+        '"}"',
+        '"|"',
+        '"("',
+        '"/"',
+        '"."',
+        '"^"',
+        '"$"',
+        '"%%"',
+        '"ACTION_START_AT_SOL"',
+        '"UNTERMINATED_ACTION_BLOCK"',
+        '"ACTION_START"',
+        '"UNKNOWN_DECL"',
+        '"OPTIONS"',
+        '"IMPORT"',
+        '"CODE"',
+        '"START_INC"',
+        '"START_EXC"',
+        '"SPECIAL_GROUP"',
+        '"/!"',
+        '"REGEX_SPECIAL_CHAR"',
+        '"ESCAPED_CHAR"',
+        "macro name in '{...}' curly braces",
+        '"REGEX_SET_START"',
+        '"STRING_LIT"',
+        '"CHARACTER_LIT"',
       ],
       recoverable: false,
-      state: 89,
+      state: 181,
       action: 2,
-      new_state: 3,
+      new_state: 59,
       symbol_stack: [],
       state_stack: [],
       value_stack: [],
       location_stack: [],
-      stack_pointer: 6,
+      stack_pointer: 9,
       yy: {
         actionInclude: [],
         options: {},
@@ -354,29 +333,107 @@ Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_A
         __reentrant_call_depth: 0,
         __error_infos: [
           {
-            errStr: `Parse error on line 5: 
-}
-^
-Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_AT_SOL", "UNTERMINATED_ACTION_BLOCK", "ACTION_START", "UNKNOWN_DECL", "OPTIONS", "IMPORT", "CODE", "START_INC", "START_EXC", "SPECIAL_GROUP", "/!", "REGEX_SPECIAL_CHAR", "ESCAPED_CHAR", macro name in '{...}' curly braces, "REGEX_SET_START", "STRING_LIT", "CHARACTER_LIT", "option_keyword", "import_keyword", "init_code_keyword", "start_inclusive_keyword", "start_exclusive_keyword", "start_conditions_marker", "scoped_rules_collective", "rule", "start_conditions", "regex", "nonempty_regex_list", "regex_concat", "regex_base", "name_expansion", "any_group_regex", "literal_string", "epilogue", got unexpected "}"`,
+            errStr: `
+The '%{...%}' lexer setup action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+ 8: %{
+^^..^^
+ 9: //#include <stdio.h>
+^^..^^^^^^^^^^^^^^^^^^^^
+    (...continued...)
+--  (---------------)
+12: void count();
+^^..^^^^^^^^^^^^^
+13: %}
+^^..^^
+14: 
+15: %%
+`,
             exception: null,
-            text: '}',
-            value: '}',
-            token: '"}"',
-            token_id: 5,
-            line: 4,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 12,
             loc: {
-              first_line: 5,
-              first_column: 0,
-              last_line: 5,
-              last_column: 1,
+              first_line: 13,
+              first_column: 2,
+              last_line: 13,
+              last_column: 2,
               range: [
-                34,
-                35,
+                146,
+                146,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"%%"',
+              '"MACRO_NAME"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+            ],
+            recoverable: false,
+            state: 114,
+            action: 2,
+            new_state: 16,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 6,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: \\s+  {/* skip whitespace */}
+^.......^^^^^^^^^^^^^^^^^^^^^^^
+3: "/*"[^*]*"*"  {return yy.lexComment(this);}
+4: [a-zA-Z_][a-zA-Z0-9_]*  {return 'ID';}
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
+            loc: {
+              first_line: 2,
+              first_column: 28,
+              last_line: 2,
+              last_column: 28,
+              range: [
+                31,
+                31,
               ],
             },
             expected: [
               'end of input',
               '"<"',
+              '"}"',
               '"|"',
               '"("',
               '"/"',
@@ -401,33 +458,16 @@ Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_A
               '"REGEX_SET_START"',
               '"STRING_LIT"',
               '"CHARACTER_LIT"',
-              '"option_keyword"',
-              '"import_keyword"',
-              '"init_code_keyword"',
-              '"start_inclusive_keyword"',
-              '"start_exclusive_keyword"',
-              '"start_conditions_marker"',
-              '"scoped_rules_collective"',
-              '"rule"',
-              '"start_conditions"',
-              '"regex"',
-              '"nonempty_regex_list"',
-              '"regex_concat"',
-              '"regex_base"',
-              '"name_expansion"',
-              '"any_group_regex"',
-              '"literal_string"',
-              '"epilogue"',
             ],
-            recoverable: true,
-            state: 24,
-            action: 0,
-            new_state: 185,
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
             symbol_stack: [],
             state_stack: [],
             value_stack: [],
             location_stack: [],
-            stack_pointer: 5,
+            stack_pointer: 9,
             yy: {
               actionInclude: [],
               options: {},
@@ -445,61 +485,1136 @@ Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_A
           },
           {
             errStr: `
-There's probably an error in one or more of your lexer regex rules.
-The lexer rule spec should have this structure:
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
     
-        regex  action_code
-    
-where 'regex' is a lex-style regex expression (see the
-jison and jison-lex documentation) which is intended to match a chunk
-of the input to lex, while the 'action_code' block is the JS code
-which will be invoked when the regex is matched. The 'action_code' block
-may be any (indented!) set of JS statements, optionally surrounded
-by '{...}' curly braces or otherwise enclosed in a '%{...%}' block.
-    
-  Erroneous code:
-2: "["[^\\]]"]" %{
-3: return true;
-4: %}
-5: }
-^..^
-6: 
-7: 
-    
-  Technical error report:
-Parse error on line 5: 
-}
-^
-Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_AT_SOL", "UNTERMINATED_ACTION_BLOCK", "ACTION_START", "UNKNOWN_DECL", "OPTIONS", "IMPORT", "CODE", "START_INC", "START_EXC", "SPECIAL_GROUP", "/!", "REGEX_SPECIAL_CHAR", "ESCAPED_CHAR", macro name in '{...}' curly braces, "REGEX_SET_START", "STRING_LIT", "CHARACTER_LIT", "option_keyword", "import_keyword", "init_code_keyword", "start_inclusive_keyword", "start_exclusive_keyword", "start_conditions_marker", "scoped_rules_collective", "rule", "start_conditions", "regex", "nonempty_regex_list", "regex_concat", "regex_base", "name_expansion", "any_group_regex", "literal_string", "epilogue", got unexpected "}"
+  Erroneous area:
+2: \\n+     {yy.freshLine = true;}
+^..........^^^^^^^^^^^^^^^^^^^^^^
+3: \\s+     {yy.freshLine = false;}
+4: "y{"[^}]*"}"     {yytext = yytext.substr(2, yyleng-3);return 'ACTION';}
 `,
             exception: null,
             text: '',
             value: '',
-            token: 'end of input',
-            token_id: 1,
-            line: 6,
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
             loc: {
-              first_line: 7,
-              first_column: 0,
-              last_line: 7,
-              last_column: 0,
+              first_line: 2,
+              first_column: 30,
+              last_line: 2,
+              last_column: 30,
               range: [
-                37,
-                37,
+                33,
+                33,
               ],
             },
             expected: [
               'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
             ],
             recoverable: false,
-            state: 89,
+            state: 181,
             action: 2,
-            new_state: 3,
+            new_state: 59,
             symbol_stack: [],
             state_stack: [],
-            value_stack: '[reference to sibling array --> *.hash.parser.__error_infos.[0].value_stack, length = 0]',
+            value_stack: [],
             location_stack: [],
-            stack_pointer: 6,
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+6: {D}"ohhai" {print(9);}
+^.............^^^^^^^^^^^
+7: "{" return '{';
+8: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 5,
+            loc: {
+              first_line: 6,
+              first_column: 22,
+              last_line: 6,
+              last_column: 22,
+              range: [
+                61,
+                61,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+5: [{D}]"ohhai" {print(9);}
+^...............^^^^^^^^^^^
+6: "{" return '{';
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 24,
+              last_line: 5,
+              last_column: 24,
+              range: [
+                66,
+                66,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "\\n"+ {return 'NL';}
+^........^^^^^^^^^^^^^^
+3: \\n+ {return 'NL2';}
+4: "\\\\n"+ {return 'NL3';}
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
+            loc: {
+              first_line: 2,
+              first_column: 20,
+              last_line: 2,
+              last_column: 20,
+              range: [
+                23,
+                23,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: $ {return 'EOF';}
+^....^^^^^^^^^^^^^^^
+3: . {/* skip */}
+4: "stuff"*/("{"|";") {/* ok */}
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
+            loc: {
+              first_line: 2,
+              first_column: 17,
+              last_line: 2,
+              last_column: 17,
+              range: [
+                20,
+                20,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {return true;}
+^..............^^^^^^^^^^^^^^
+3: 'f"oo\\'bar'  {return 'baz2';}
+4: "fo\\"obar"  {return 'baz';}
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 1,
+            loc: {
+              first_line: 2,
+              first_column: 26,
+              last_line: 2,
+              last_column: 26,
+              range: [
+                29,
+                29,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" %{
+^..............^^
+3: return true;
+^..^^^^^^^^^^^^
+4: %}
+^..^^
+5: 
+6: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 3,
+            loc: {
+              first_line: 4,
+              first_column: 2,
+              last_line: 4,
+              last_column: 2,
+              range: [
+                33,
+                33,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {
+^..............^
+3: var b={};
+^..^^^^^^^^^
+4: return true;
+^..^^^^^^^^^^^^
+5: }
+^..^
+6: 
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 1,
+              last_line: 5,
+              last_column: 1,
+              range: [
+                41,
+                41,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {
+^..............^
+3: var b=7; /* { */ return true;
+^..^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4: }
+^..^
+5: 
+6: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 3,
+            loc: {
+              first_line: 4,
+              first_column: 1,
+              last_line: 4,
+              last_column: 1,
+              range: [
+                48,
+                48,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {
+^..............^
+3: var b={}; // {
+^..^^^^^^^^^^^^^^
+4: return 2 / 3;
+^..^^^^^^^^^^^^^
+5: }
+^..^
+6: 
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 1,
+              last_line: 5,
+              last_column: 1,
+              range: [
+                47,
+                47,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {
+^..............^
+3: var b='{' + "{"; // {
+^..^^^^^^^^^^^^^^^^^^^^^
+4: return 2 / 3;
+^..^^^^^^^^^^^^^
+5: }
+^..^
+6: 
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 1,
+              last_line: 5,
+              last_column: 1,
+              range: [
+                54,
+                54,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" {
+^..............^
+3: var b=/{/; // {
+^..^^^^^^^^^^^^^^^
+4: return 2 / 3;
+^..^^^^^^^^^^^^^
+5: }
+^..^
+6: 
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 1,
+              last_line: 5,
+              last_column: 1,
+              range: [
+                48,
+                48,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]"
+3:   var b=/{/;
+^....^^^^^^^^^^
+4:   // {
+^..^^^^^^
+5:   return 2 / 3;
+^..^^^^^^^^^^^^^^^
+6: 
+7: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 4,
+            loc: {
+              first_line: 5,
+              first_column: 15,
+              last_line: 5,
+              last_column: 15,
+              range: [
+                50,
+                50,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
+            yy: {
+              actionInclude: [],
+              options: {},
+              __options_flags__: 0,
+              __options_category_description__: '???',
+              startConditions: {},
+              __context_description__: [
+                '???CONTEXT???',
+              ],
+              depth: 0,
+              include_command_allowed: false,
+            },
+            lexer: '[lexer]',
+            parser: '[parser]',
+          },
+          {
+            errStr: `
+The lexer rule's action code section does not compile: Cannot read properties of undefined (reading 'encode')
+    
+  Erroneous area:
+2: "["[^\\]]"]" %{
+^..............^^
+3: return true;
+^..^^^^^^^^^^^^
+4: %}
+^..^^
+5: }
+6: 
+`,
+            exception: null,
+            text: '',
+            value: '',
+            token: '"$accept"',
+            token_id: 0,
+            line: 3,
+            loc: {
+              first_line: 4,
+              first_column: 2,
+              last_line: 4,
+              last_column: 2,
+              range: [
+                33,
+                33,
+              ],
+            },
+            expected: [
+              'end of input',
+              '"<"',
+              '"}"',
+              '"|"',
+              '"("',
+              '"/"',
+              '"."',
+              '"^"',
+              '"$"',
+              '"%%"',
+              '"ACTION_START_AT_SOL"',
+              '"UNTERMINATED_ACTION_BLOCK"',
+              '"ACTION_START"',
+              '"UNKNOWN_DECL"',
+              '"OPTIONS"',
+              '"IMPORT"',
+              '"CODE"',
+              '"START_INC"',
+              '"START_EXC"',
+              '"SPECIAL_GROUP"',
+              '"/!"',
+              '"REGEX_SPECIAL_CHAR"',
+              '"ESCAPED_CHAR"',
+              "macro name in '{...}' curly braces",
+              '"REGEX_SET_START"',
+              '"STRING_LIT"',
+              '"CHARACTER_LIT"',
+            ],
+            recoverable: false,
+            state: 181,
+            action: 2,
+            new_state: 59,
+            symbol_stack: [],
+            state_stack: [],
+            value_stack: [],
+            location_stack: [],
+            stack_pointer: 9,
             yy: {
               actionInclude: [],
               options: {},
@@ -516,7 +1631,7 @@ Expecting end of input, "<", "|", "(", "/", ".", "^", "$", "%%", "ACTION_START_A
             parser: '[parser]',
           },
         ],
-        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 2]',
+        __error_recovery_infos: '[reference to sibling array --> *.hash.parser.__error_infos.[0].parser.__error_recovery_infos, length = 16]',
         lexer: {
           EOF: 1,
           ERROR: 2,
