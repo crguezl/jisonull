@@ -37,7 +37,7 @@
   "dependencies": {
     "@crguezl/ebnf-parser": "0.6.5-223",
     "@crguezl/lex-parser": "0.6.5-223",
-    "@crguezl/nomnom": "1.8.4-29"
+    "commander": "11.1.0"
   },
   "devDependencies": {
     "chai": "4.2.0",

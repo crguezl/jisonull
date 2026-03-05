@@ -6,37 +6,30 @@ var version = require('./package.json').version;
 
 var path = require('path');
 var fs = require('fs');
+var { Command } = require('commander');
 
 var jison2json = require('./jison2json');
 
+var program = new Command();
 
-
-var opts = require('@crguezl/nomnom')
-  .unknownOptionTreatment(false)              // do not accept unknown options!
-  .script('json2jison')
-  .option('file', {
-    flag: true,
-    position: 0,
-    help: 'file containing a JISON grammar'
-  })
-  .option('lexfile', {
-    flag: true,
-    position: 1,
-    help: 'optional file containing a JISON lexer'
-  })
-  .option('outfile', {
-    abbr: 'o',
-    metavar: 'FILE',
-    help: 'Filename and base module name of the generated JSON file'
-  })
-  .option('version', {
-    abbr: 'V',
-    flag: true,
-    help: 'print version and exit',
-    callback: function() {
-       return version;
-    }
+program
+  .version(version)
+  .strictOption(false)
+  .argument('[file]', 'file containing a JISON grammar')
+  .argument('[lexfile]', 'optional file containing a JISON lexer')
+  .option('-o, --outfile <FILE>', 'Filename and base module name of the generated JSON file')
+  .action(function(file, lexfile, options) {
+    var opts = { file, lexfile, outfile: options.outfile };
+    exports.main(opts);
   });
+
+program.parse(process.argv);
+
+// Handle case where no arguments provided
+if (!process.argv.slice(2).length) {
+  var opts = {};
+  exports.main(opts);
+}
 
 
 exports.main = function main (opts) {

@@ -39,7 +39,7 @@ export default {
   external: [
     'ast-util',
     '@gerhobbelt/json5',
-    '@gerhobbelt/nomnom',
+    'commander',
     '@gerhobbelt/prettier-miscellaneous',
     'recast',
     '@gerhobbelt/xregexp',

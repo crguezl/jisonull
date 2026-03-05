@@ -36,7 +36,7 @@
     "ast-util": "0.6.0",
     "@crguezl/json5": "2.1.0-48",
     "@crguezl/lex-parser": "0.6.5-223",
-    "@crguezl/nomnom": "1.8.4-29",
+    "commander": "11.1.0",
     "recast": "0.18.5",
     "@gerhobbelt/xregexp": "4.2.0-30",
     "jison-helpers-lib": "0.6.5-223"

@@ -44,7 +44,7 @@ export default {
   external: [
     'ast-util',
     '@crguezl/json5',
-    '@crguezl/nomnom',
+    'commander',
     '@crguezl/prettier-miscellaneous',
     'recast',
     '@crguezl/xregexp',

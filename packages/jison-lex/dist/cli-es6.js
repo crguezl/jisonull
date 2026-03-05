@@ -3,7 +3,7 @@
 
 import fs from 'fs';
 import path$1 from 'path';
-import nomnom from '@crguezl/nomnom';
+import { Command } from 'commander';
 import XRegExp from '@gerhobbelt/xregexp';
 import recast from 'recast';
 import { transformSync } from '@babel/core';
@@ -15510,88 +15510,55 @@ var version$1 = '0.6.5-223';                              // require('./package.
 
 function getCommandlineOptions() {
 
-    var opts = nomnom
-        .script('jison-lex')
-        .unknownOptionTreatment(false)              // do not accept unknown options!
-        .options({
-            file: {
-                flag: true,
-                position: 0,
-                help: 'file containing a lexical grammar.'
-            },
-            json: {
-                abbr: 'j',
-                flag: true,
-                default: false,
-                help: 'jison will expect a grammar in either JSON/JSON5 or JISON format: the precise format is autodetected.'
-            },
-            outfile: {
-                abbr: 'o',
-                metavar: 'FILE',
-                help: 'Filepath and base module name of the generated parser. When terminated with a "/" (dir separator) it is treated as the destination directory where the generated output will be stored.'
-            },
-            debug: {
-                abbr: 't',
-                flag: true,
-                default: false,
-                help: 'Debug mode.'
-            },
-            dumpSourceCodeOnFailure: {
-                full: 'dump-sourcecode-on-failure',
-                flag: true,
-                default: true,
-                help: 'Dump the generated source code to a special named file when the internal generator tests fail, i.e. when the generated source code does not compile in the JavaScript engine. Enabling this option helps you to diagnose/debug crashes (thrown exceptions) in the code generator due to various reasons: you can, for example, load the dumped sourcecode in another environment (e.g. NodeJS) to get more info on the precise location and cause of the compile failure.'
-            },
-            throwErrorOnCompileFailure: {
-                full: 'throw-on-compile-failure',
-                flag: true,
-                default: true,
-                help: 'Throw an exception when the generated source code fails to compile in the JavaScript engine. **WARNING**: Turning this feature OFF permits the code generator to produce non-working source code and treat that as SUCCESS. This MAY be desirable code generator behaviour, but only rarely.'
-            },
-            reportStats: {
-                full: 'info',
-                abbr: 'I',
-                flag: true,
-                default: false,
-                help: 'Report some statistics about the generated parser.'
-            },
-            moduleType: {
-                full: 'module-type',
-                abbr: 'm',
-                default: 'commonjs',
-                metavar: 'TYPE',
-                choices: ['commonjs', 'amd', 'js', 'es'],
-                help: 'The type of module to generate (commonjs, amd, es, js)'
-            },
-            moduleName: {
-                full: 'module-name',
-                abbr: 'n',
-                metavar: 'NAME',
-                help: 'The name of the generated parser object, namespace supported.'
-            },
-            main: {
-                full: 'main',
-            	abbr: 'x',
-                flag: true,
-                default: false,
-                help: 'Include .main() entry point in generated commonjs module.'
-            },
-            moduleMain: {
-                full: 'module-main',
-                abbr: 'y',
-                metavar: 'NAME',
-                help: 'The main module function definition.'
-            },
-            version: {
-                abbr: 'V',
-                flag: true,
-                help: 'Print version and exit.',
-                callback: function () {
-                    console.log(version$1);
-                    process.exit(0);
-                }
-            }
-        }).parse();
+    var program = new Command();
+    
+    var opts = {
+        file: null,
+        json: false,
+        outfile: null,
+        debug: false,
+        dumpSourceCodeOnFailure: true,
+        throwErrorOnCompileFailure: true,
+        reportStats: false,
+        moduleType: 'commonjs',
+        moduleName: null,
+        main: false,
+        moduleMain: null
+    };
+    
+    program
+        .name('jison-lex')
+        .version(version$1)
+        .strictOption(false)
+        .argument('[file]', 'file containing a lexical grammar.')
+        .option('-j, --json', 'jison will expect a grammar in either JSON/JSON5 or JISON format: the precise format is autodetected.')
+        .option('-o, --outfile <FILE>', 'Filepath and base module name of the generated parser. When terminated with a "/" (dir separator) it is treated as the destination directory where the generated output will be stored.')
+        .option('-t, --debug', 'Debug mode.')
+        .option('--dump-sourcecode-on-failure', 'Dump the generated source code to a special named file when the internal generator tests fail.')
+        .option('--throw-on-compile-failure', 'Throw an exception when the generated source code fails to compile in the JavaScript engine.')
+        .option('-I, --info', 'Report some statistics about the generated parser.')
+        .option('-m, --module-type <TYPE>', 'The type of module to generate (commonjs, es, js)', 'commonjs')
+        .option('-n, --module-name <NAME>', 'The name of the generated parser object, namespace supported.')
+        .option('-x, --main', 'Include .main() entry point in generated commonjs module.')
+        .option('-y, --module-main <NAME>', 'The main module function definition.')
+        .action(function(file) {
+            opts.file = file;
+        });
+
+    var parsed = program.parse();
+    var cmdOpts = parsed.opts();
+    
+    // Map commander options to our internal format
+    opts.json = cmdOpts.json || false;
+    opts.outfile = cmdOpts.outfile || null;
+    opts.debug = cmdOpts.debug || false;
+    opts.dumpSourceCodeOnFailure = cmdOpts.dumpSourcecodeOnFailure !== false;
+    opts.throwErrorOnCompileFailure = cmdOpts.throwOnCompileFailure !== false;
+    opts.reportStats = cmdOpts.info || false;
+    opts.moduleType = cmdOpts.moduleType;
+    opts.moduleName = cmdOpts.moduleName || null;
+    opts.main = cmdOpts.main || false;
+    opts.moduleMain = cmdOpts.moduleMain || null;
 
     if (opts.debug) {
         console.log("JISON-LEX CLI options:\n", opts);

@@ -6,32 +6,29 @@ var version = require('./package.json').version;
 
 var path = require('path');
 var fs = require('fs');
+var { Command } = require('commander');
 
 var json2jison = require('./json2jison');
 
+var program = new Command();
 
-
-var opts = require('@crguezl/nomnom')
-  .unknownOptionTreatment(false)              // do not accept unknown options!
-  .script('json2jison')
-  .option('file', {
-    flag: true,
-    position: 0,
-    help: 'file containing a grammar in JSON format'
-  })
-  .option('outfile', {
-    abbr: 'o',
-    metavar: 'FILE',
-    help: 'Filename and base module name of the generated jison grammar file'
-  })
-  .option('version', {
-    abbr: 'V',
-    flag: true,
-    help: 'print version and exit',
-    callback: function() {
-       return version;
-    }
+program
+  .version(version)
+  .strictOption(false)
+  .argument('[file]', 'file containing a grammar in JSON format')
+  .option('-o, --outfile <FILE>', 'Filename and base module name of the generated jison grammar file')
+  .action(function(file, options) {
+    var opts = { file, outfile: options.outfile };
+    exports.main(opts);
   });
+
+program.parse(process.argv);
+
+// Handle case where no arguments provided
+if (!process.argv.slice(2).length) {
+  var opts = {};
+  exports.main(opts);
+}
 
 
 exports.main = function main (opts) {

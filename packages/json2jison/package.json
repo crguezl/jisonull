@@ -35,7 +35,7 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "@crguezl/nomnom": "1.8.4-29"
+    "commander": "11.1.0"
   },
   "devDependencies": {
     "chai": "4.2.0",

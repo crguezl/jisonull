@@ -53,7 +53,7 @@
   "dependencies": {
     "ast-util": "0.6.0",
     "@crguezl/json5": "2.1.0-48",
-    "@crguezl/nomnom": "1.8.4-30",
+    "commander": "11.1.0",
     "recast": "0.20.4",
     "@gerhobbelt/xregexp": "4.4.0-32"
   },

@@ -9,7 +9,7 @@ import XRegExp$2 from '@gerhobbelt/xregexp';
 import JSON5$1 from '@gerhobbelt/json5';
 import astUtils from 'ast-util';
 import process$1 from 'process';
-import nomnom from '@crguezl/nomnom';
+import { Command } from 'commander';
 
 // Return TRUE if `src` starts with `searchString`. 
 function startsWith(src, searchString) {
@@ -43480,265 +43480,193 @@ var version$3 = '0.6.5-223';                              // require('./package.
 function getCommandlineOptions() {
 
     var defaults = Jison.defaultJisonOptions;
-    var opts = nomnom
-        .script('jison')
-        .unknownOptionTreatment(false)              // do not accept unknown options!
-        .produceExplicitOptionsOnly(true)
-        .options({
-            file: {
-                flag: true,
-                position: 0,
-                help: 'file containing a grammar.'
-            },
-            lexfile: {
-                flag: true,
-                position: 1,
-                help: 'file containing a lexical grammar.'
-            },
-            json: {
-                abbr: 'j',
-                flag: true,
-                default: defaults.json,
-                help: 'jison will expect a grammar in either JSON/JSON5 or JISON format: the precise format is autodetected.'
-            },
-            outfile: {
-                abbr: 'o',
-                metavar: 'FILE',
-                help: 'Filepath and base module name of the generated parser. When terminated with a "/" (dir separator) it is treated as the destination directory where the generated output will be stored.'
-            },
-            debug: {
-                abbr: 't',
-                flag: true,
-                default: defaults.debug,
-                help: 'Debug mode.'
-            },
-            dumpSourceCodeOnFailure: {
-                full: 'dump-sourcecode-on-failure',
-                flag: true,
-                default: defaults.dumpSourceCodeOnFailure,
-                help: 'Dump the generated source code to a special named file when the internal generator tests fail, i.e. when the generated source code does not compile in the JavaScript engine. Enabling this option helps you to diagnose/debug crashes (thrown exceptions) in the code generator due to various reasons: you can, for example, load the dumped sourcecode in another environment (e.g. NodeJS) to get more info on the precise location and cause of the compile failure.'
-            },
-            throwErrorOnCompileFailure: {
-                full: 'throw-on-compile-failure',
-                flag: true,
-                default: defaults.throwErrorOnCompileFailure,
-                help: 'Throw an exception when the generated source code fails to compile in the JavaScript engine. **WARNING**: Turning this feature OFF permits the code generator to produce non-working source code and treat that as SUCCESS. This MAY be desirable code generator behaviour, but only rarely.'
-            },
-            reportStats: {
-                full: 'info',
-                abbr: 'I',
-                flag: true,
-                default: defaults.reportStats,
-                help: 'Report some statistics about the generated parser.'
-            },
-            moduleType: {
-                full: 'module-type',
-                abbr: 'm',
-                default: defaults.moduleType,
-                metavar: 'TYPE',
-                choices: ['commonjs', 'cjs', 'amd', 'umd', 'js', 'iife', 'es'],
-                help: 'The type of module to generate.'
-            },
-            moduleName: {
-                full: 'module-name',
-                abbr: 'n',
-                metavar: 'NAME',
-                default: defaults.defaultModuleName,
-                help: 'The name of the generated parser object, namespace supported.'
-            },
-            parserType: {
-                full: 'parser-type',
-                abbr: 'p',
-                default: defaults.type,
-                metavar: 'TYPE',
-                help: 'The type of algorithm to use for the parser. (lr0, slr, lalr, lr, ll)'
-            },
-            compressTables: {
-                full: 'compress-tables',
-                abbr: 'c',
-                flag: false,
-                default: defaults.compressTables,             // 0, 1, 2
-                choices: [0, 1, 2],
-                help: 'Output compressed parser tables in generated modules. (0 = no compression, 1 = default compression, 2 = deep compression)'
-            },
-            outputDebugTables: {
-                full: 'output-debug-tables',
-                abbr: 'T',
-                flag: true,
-                default: defaults.outputDebugTables,
-                help: 'Output extra parser tables (rules list + look-ahead analysis) in generated modules to assist debugging / diagnostics purposes.'
-            },
-            hasDefaultResolve: {
-                full: 'default-resolve',
-                abbr: 'X',
-                flag: true,
-                default: !defaults.noDefaultResolve,
-                help: 'Turn this OFF to make jison act another way when a conflict is found in the grammar.'
-            },
-            hasPartialLrUpgradeOnConflict: {
-                full: 'partial-lr-upgrade-on-conflict',
-                abbr: 'Z',
-                flag: true,
-                default: defaults.hasPartialLrUpgradeOnConflict,
-                help: 'When enabled, the grammar generator attempts to resolve LALR(1) conflicts by, at least for the conflicting rules, moving towards LR(1) behaviour.'
-            },
-            noDefaultAction: {
-                flag: false,
-                callback: function () {
-                    // FAIL when found:
-                    return this.help;
-                },
-                help: 'OBSOLETED. Use \'--default-action=[for-value,for-location]\' instead. (See below in \'--help\' output.)'
-            },
-            defaultActionMode: {
-                full: 'default-action',
-                flag: false,
-                default: defaults.defaultActionMode,
-                callback: function (val) {
-                    // split value at comma, expect zero, one or two values:
-                    var v = ('' + val).split(',');
-                    if (v.length > 2) {
-                        return 'default-action=yyval,yylloc expects at most 2 modes! You specified ' + v.length;
-                    }
-                },
-                transform: function (val) {
-                    // split value at comma, expect zero, one or two values:
-                    var option = this;
-                    var def = option.default;
-                    var v = ('' + val).split(',').map(function cvt_modes(mode, idx) {
-                        mode = mode.trim();
-                        switch (mode) {
-                        case 'false':
-                        case '0':
-                            return "none";
+    
+    const program = new Command();
+    
+    program
+        .name('jison')
+        .version(version$3, '-V, --version')
+        .argument('[file]', 'file containing a grammar.')
+        .argument('[lexfile]', 'file containing a lexical grammar.')
+        .option('-j, --json', 'jison will expect a grammar in either JSON/JSON5 or JISON format: the precise format is autodetected.', defaults.json)
+        .option('-o, --outfile <FILE>', 'Filepath and base module name of the generated parser. When terminated with a "/" (dir separator) it is treated as the destination directory where the generated output will be stored.')
+        .option('-t, --debug', 'Debug mode.', defaults.debug)
+        .option('--dump-sourcecode-on-failure', 'Dump the generated source code to a special named file when the internal generator tests fail, i.e. when the generated source code does not compile in the JavaScript engine. Enabling this option helps you to diagnose/debug crashes (thrown exceptions) in the code generator due to various reasons: you can, for example, load the dumped sourcecode in another environment (e.g. NodeJS) to get more info on the precise location and cause of the compile failure.', defaults.dumpSourceCodeOnFailure)
+        .option('--throw-on-compile-failure', 'Throw an exception when the generated source code fails to compile in the JavaScript engine. **WARNING**: Turning this feature OFF permits the code generator to produce non-working source code and treat that as SUCCESS. This MAY be desirable code generator behaviour, but only rarely.', defaults.throwErrorOnCompileFailure)
+        .option('-I, --info', 'Report some statistics about the generated parser.', defaults.reportStats)
+        .option('-m, --module-type <TYPE>', 'The type of module to generate.', defaults.moduleType)
+        .option('-n, --module-name <NAME>', 'The name of the generated parser object, namespace supported.', defaults.defaultModuleName)
+        .option('-p, --parser-type <TYPE>', 'The type of algorithm to use for the parser. (lr0, slr, lalr, lr, ll)', defaults.type)
+        .option('-c, --compress-tables <NUM>', 'Output compressed parser tables in generated modules. (0 = no compression, 1 = default compression, 2 = deep compression)', defaults.compressTables)
+        .option('-T, --output-debug-tables', 'Output extra parser tables (rules list + look-ahead analysis) in generated modules to assist debugging / diagnostics purposes.', defaults.outputDebugTables)
+        .option('-X, --default-resolve', 'Turn this OFF to make jison act another way when a conflict is found in the grammar.', !defaults.noDefaultResolve)
+        .option('-Z, --partial-lr-upgrade-on-conflict', 'When enabled, the grammar generator attempts to resolve LALR(1) conflicts by, at least for the conflicting rules, moving towards LR(1) behaviour.', defaults.hasPartialLrUpgradeOnConflict)
+        .option('--default-action <MODES>', rmCommonWS$6`
+            Specify the kind of default action that jison should include for every parser rule.
 
-                        case 'true':
-                        case '1':
-                        case '':
-                            return def[idx];
+            You can specify a mode for *value handling* ("$$") and one for *location tracking* ("@$"), separated by a comma, e.g.:
+                --default-action=ast,none
 
-                        default:
-                            return mode;
-                        }
-                    });
-                    if (v.length === 1) {
-                        v[1] = v[0];
-                    }
-                    return v;
-                },
-                help: rmCommonWS$6`
-                    Specify the kind of default action that jison should include for every parser rule.
+            Supported value modes:
+            - classic : generate a parser which includes the default
+                            $$ = $1;
+                        action for every rule.
+            - ast     : generate a parser which produces a simple AST-like tree-of-arrays structure: every rule produces an array of its production terms' values. Otherwise it is dentical to "classic" mode.
+            - none    : JISON will produce a slightly faster parser but then you are solely responsible for propagating rule action "$$" results. The default rule value is still deterministic though as it is set to "undefined": "$$ = undefined;"
+            - skip    : same as "none" mode, except JISON does NOT INJECT a default value action ANYWHERE, hence rule results are not deterministic when you do not properly manage the "$$" value yourself!
 
-                    You can specify a mode for *value handling* ("$$") and one for *location tracking* ("@$"), separated by a comma, e.g.:
-                        --default-action=ast,none
+            Supported location modes:
+            - merge   : generate a parser which includes the default "@$ = merged(@1..@n);" location tracking action for every rule, i.e. the rule\'s production \'location\' is the range spanning its terms.
+            - classic : same as "merge" mode.
+            - ast     : ditto.
+            - none    : JISON will produce a slightly faster parser but then you are solely responsible for propagating rule action "@$" location results. The default rule location is still deterministic though, as it is set to "undefined": "@$ = undefined;"
+            - skip    : same as "none" mode, except JISON does NOT INJECT a default location action ANYWHERE, hence rule location results are not deterministic when you do not properly manage the "@$" value yourself!
 
-                    Supported value modes:
-                    - classic : generate a parser which includes the default
-                                    $$ = $1;
-                                action for every rule.
-                    - ast     : generate a parser which produces a simple AST-like tree-of-arrays structure: every rule produces an array of its production terms' values. Otherwise it is dentical to "classic" mode.
-                    - none    : JISON will produce a slightly faster parser but then you are solely responsible for propagating rule action "$$" results. The default rule value is still deterministic though as it is set to "undefined": "$$ = undefined;"
-                    - skip    : same as "none" mode, except JISON does NOT INJECT a default value action ANYWHERE, hence rule results are not deterministic when you do not properly manage the "$$" value yourself!
+            Notes:
+            - when you do specify a value default mode, but DO NOT specify a location value mode, the latter is assumed to be the same as the former. Hence:
+                  --default-action=ast
+              equals:
+                  --default-action=ast,ast
+            - when you do not specify an explicit default mode or only a "true"/"1" value, the default is assumed: "${defaults.defaultActionMode.join(",")}".
+            - when you specify "false"/"0" as an explicit default mode, "none,none" is assumed. This produces the fastest deterministic parser.
+        `)
+        .option('--try-catch', 'Generate a parser which catches exceptions from the grammar action code or parseError error reporting calls using a try/catch/finally code block. When you turn this OFF, it will produce a slightly faster parser at the cost of reduced code safety.', !defaults.noTryCatch)
+        .option('-Q, --error-recovery-token-discard-count <COUNT>', 'Specify the number of lexed tokens that may be gobbled by an error recovery process before we cry wolf.', defaults.errorRecoveryTokenDiscardCount)
+        .option('-E, --export-all-tables', 'Next to producing a grammar source file, also export the symbols, terminals, grammar and parse tables to separate JSON files for further use by other tools. The files\' names will be derived from the outputFile name by appending a suffix.', defaults.exportAllTables)
+        .option('--export-ast [FILE|false|true]', 'Output grammar AST to file in JSON / JSON5 format (as identified by the file extension, JSON by default).', defaults.exportAST)
+        .option('--pretty [FILE|false|true]', 'Output the generated code pretty-formatted; turning this option OFF will output the generated code as-is a.k.a. \'raw\'.', defaults.prettyCfg)
+        .option('-x, --main', 'Include .main() entry point in generated commonjs module.', !defaults.noMain)
+        .option('-y, --module-main <NAME>', 'The main module function definition.');
 
-                    Supported location modes:
-                    - merge   : generate a parser which includes the default "@$ = merged(@1..@n);" location tracking action for every rule, i.e. the rule\'s production \'location\' is the range spanning its terms.
-                    - classic : same as "merge" mode.
-                    - ast     : ditto.
-                    - none    : JISON will produce a slightly faster parser but then you are solely responsible for propagating rule action "@$" location results. The default rule location is still deterministic though, as it is set to "undefined": "@$ = undefined;"
-                    - skip    : same as "none" mode, except JISON does NOT INJECT a default location action ANYWHERE, hence rule location results are not deterministic when you do not properly manage the "@$" value yourself!
+    program.parse(process$1.argv);
 
-                    Notes:
-                    - when you do specify a value default mode, but DO NOT specify a location value mode, the latter is assumed to be the same as the former. Hence:
-                          --default-action=ast
-                      equals:
-                          --default-action=ast,ast
-                    - when you do not specify an explicit default mode or only a "true"/"1" value, the default is assumed: "${defaults.defaultActionMode.join(",")}".
-                    - when you specify "false"/"0" as an explicit default mode, "none,none" is assumed. This produces the fastest deterministic parser.
-                `
-            },
-            hasTryCatch: {
-                full: 'try-catch',
-                flag: true,
-                default: !defaults.noTryCatch,
-                help: 'Generate a parser which catches exceptions from the grammar action code or parseError error reporting calls using a try/catch/finally code block. When you turn this OFF, it will produce a slightly faster parser at the cost of reduced code safety.'
-            },
-            errorRecoveryTokenDiscardCount: {
-                full: 'error-recovery-token-discard-count',
-                abbr: 'Q',
-                flag: false,
-                default: defaults.errorRecoveryTokenDiscardCount,
-                callback: function (count) {
-                    if (count != parseInt(count)) {
-                        return "count must be an integer";
-                    }
-                    count = parseInt(count);
-                    if (count < 2) {
-                        return "count must be >= 2";
-                    }
-                },
-                transform: function (val) {
-                    return parseInt(val);
-                },
-                help: 'Specify the number of lexed tokens that may be gobbled by an error recovery process before we cry wolf.'
-            },
-            exportAllTables: {
-                full: 'export-all-tables',
-                abbr: 'E',
-                flag: true,
-                default: defaults.exportAllTables,
-                help: 'Next to producing a grammar source file, also export the symbols, terminals, grammar and parse tables to separate JSON files for further use by other tools. The files\' names will be derived from the outputFile name by appending a suffix.'
-            },
-            exportAST: {
-                full: 'export-ast',
-                optional: true,
-                metavar: 'false|true|FILE',
-                default: defaults.exportAST,
-                help: 'Output grammar AST to file in JSON / JSON5 format (as identified by the file extension, JSON by default).',
-                transform: function (val) {
-                    switch (val) {
-                    case 'false':
-                    case '0':
-                        return false;
+    const args = program.args;
+    const opts = program.opts();
 
-                    case 'true':
-                    case '1':
-                        return true;
+    // Map positional arguments
+    if (args.length > 0) {
+        opts.file = args[0];
+    }
+    if (args.length > 1) {
+        opts.lexfile = args[1];
+    }
 
-                    default:
-                        return val;
-                    }
-                }
-            },
-            prettyCfg: {
-                full: 'pretty',
-                flag: true,
-                metavar: 'false|true|CFGFILE',
-                default: defaults.prettyCfg,
-                help: 'Output the generated code pretty-formatted; turning this option OFF will output the generated code as-is a.k.a. \'raw\'.',
-            },
-            main: {
-                full: 'main',
-                abbr: 'x',
-                flag: true,
-                default: !defaults.noMain,
-                help: 'Include .main() entry point in generated commonjs module.'
-            },
-            moduleMain: {
-                full: 'module-main',
-                abbr: 'y',
-                metavar: 'NAME',
-                help: 'The main module function definition.'
-            },
-            version: {
-                abbr: 'V',
-                flag: true,
-                help: 'Print version and exit.',
-                callback: function () {
-                    console.log(version$3);
-                    process$1.exit(0);
-                }
+    // Validate and transform moduleType choices
+    if (opts.moduleType) {
+        const validTypes = ['commonjs', 'cjs', 'js', 'iife', 'es'];
+        if (!validTypes.includes(opts.moduleType)) {
+            console.error(`Error: Invalid module type '${opts.moduleType}'. Valid options are: ${validTypes.join(', ')}`);
+            process$1.exit(1);
+        }
+    }
+
+    // Transform compress-tables (convert string to number)
+    if (opts.compressTables !== undefined && typeof opts.compressTables === 'string') {
+        const compressed = parseInt(opts.compressTables);
+        if (isNaN(compressed) || compressed < 0 || compressed > 2) {
+            console.error('Error: compress-tables must be 0, 1, or 2');
+            process$1.exit(1);
+        }
+        opts.compressTables = compressed;
+    }
+
+    // Transform error-recovery-token-discard-count (convert string to number)
+    if (opts.errorRecoveryTokenDiscardCount !== undefined && typeof opts.errorRecoveryTokenDiscardCount === 'string') {
+        const count = parseInt(opts.errorRecoveryTokenDiscardCount);
+        if (isNaN(count) || count < 2) {
+            console.error('Error: error-recovery-token-discard-count must be an integer >= 2');
+            process$1.exit(1);
+        }
+        opts.errorRecoveryTokenDiscardCount = count;
+    }
+
+    // Transform default-action mode
+    if (opts.defaultAction) {
+        var v = ('' + opts.defaultAction).split(',');
+        if (v.length > 2) {
+            console.error('Error: default-action expects at most 2 modes!');
+            process$1.exit(1);
+        }
+        var def = defaults.defaultActionMode;
+        v = v.map(function cvt_modes(mode, idx) {
+            mode = mode.trim();
+            switch (mode) {
+            case 'false':
+            case '0':
+                return "none";
+
+            case 'true':
+            case '1':
+            case '':
+                return def[idx];
+
+            default:
+                return mode;
             }
-        }).parse();
+        });
+        if (v.length === 1) {
+            v[1] = v[0];
+        }
+        opts.defaultAction = v;
+        opts.defaultActionMode = v;
+    }
+
+    // Transform export-ast
+    if (opts.exportAst !== undefined) {
+        switch (opts.exportAst) {
+        case 'false':
+        case '0':
+            opts.exportAST = false;
+            break;
+
+        case 'true':
+        case '1':
+            opts.exportAST = true;
+            break;
+
+        default:
+            opts.exportAST = opts.exportAst;
+            break;
+        }
+        delete opts.exportAst;
+    }
+
+    // Transform pretty config
+    if (opts.pretty !== undefined) {
+        switch (opts.pretty) {
+        case 'false':
+        case '0':
+            opts.prettyCfg = false;
+            break;
+
+        case 'true':
+        case '1':
+            opts.prettyCfg = true;
+            break;
+
+        default:
+            opts.prettyCfg = opts.pretty;
+            break;
+        }
+        delete opts.pretty;
+    }
+
+    // Ensure camelCase property names
+    opts.outfile = opts.outfile || opts.outFile;
+    opts.dumpSourceCodeOnFailure = opts.dumpSourcecodeOnFailure !== undefined ? opts.dumpSourcecodeOnFailure : opts.dumpSourceCodeOnFailure;
+    opts.throwErrorOnCompileFailure = opts.throwOnCompileFailure !== undefined ? opts.throwOnCompileFailure : opts.throwErrorOnCompileFailure;
+    opts.reportStats = opts.info !== undefined ? opts.info : opts.reportStats;
+    opts.moduleType = opts.moduleType || defaults.moduleType;
+    opts.moduleName = opts.moduleName || opts.defaultModuleName;
+    opts.parserType = opts.parserType || defaults.type;
+    opts.compressTables = opts.compressTables !== undefined ? opts.compressTables : defaults.compressTables;
+    opts.outputDebugTables = opts.outputDebugTables !== undefined ? opts.outputDebugTables : defaults.outputDebugTables;
+    opts.hasDefaultResolve = opts.defaultResolve !== undefined ? opts.defaultResolve : !defaults.noDefaultResolve;
+    opts.hasPartialLrUpgradeOnConflict = opts.partialLrUpgradeOnConflict !== undefined ? opts.partialLrUpgradeOnConflict : defaults.hasPartialLrUpgradeOnConflict;
+    opts.hasTryCatch = opts.tryCatch !== undefined ? opts.tryCatch : !defaults.noTryCatch;
+    opts.errorRecoveryTokenDiscardCount = opts.errorRecoveryTokenDiscardCount !== undefined ? opts.errorRecoveryTokenDiscardCount : defaults.errorRecoveryTokenDiscardCount;
+    opts.exportAllTables = opts.exportAllTables !== undefined ? opts.exportAllTables : defaults.exportAllTables;
+    opts.main = opts.main !== undefined ? opts.main : !defaults.noMain;
 
     if (opts.debug) {
         console.log("JISON CLI options:\n", opts);
