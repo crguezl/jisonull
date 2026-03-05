@@ -2,7 +2,6 @@
 // import Lexer from '../../packages/jison-lex';
 // import ebnfParser from '../../packages/ebnf-parser';
 // import lexParser from '../../packages/lex-parser';
-// import XRegExp from '@crguezl/xregexp';
 // import recast from 'recast';
 // import astUtils from 'ast-util';
 // import prettier from '@crguezl/prettier-miscellaneous';

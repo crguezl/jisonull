@@ -9,7 +9,6 @@ var path$1 = _interopDefault(require('path'));
 var recast = _interopDefault(require('recast'));
 var babel = require('@babel/core');
 var assert$1 = _interopDefault(require('assert'));
-var XRegExp$1 = _interopDefault(require('@crguezl/xregexp'));
 var JSON5$1 = _interopDefault(require('@crguezl/json5'));
 
 // Return TRUE if `src` starts with `searchString`. 
@@ -1232,8 +1231,6 @@ function detectIstanbulGlobal() {
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-
-//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.
@@ -4979,8 +4976,8 @@ function transformProduction(id, production, grammar) {
                 // seek out all names and aliases; strip out literal tokens first as those cannot serve as $names:
                 var alist = list.terms; // rhs.replace(/'[^']+'/g, '~').replace(/"[^"]+"/g, '~').split(' ');
 
-                var alias_re = new XRegExp$1(`\\[${ID_REGEX_BASE$1}\\]`);
-                var term_re = new XRegExp$1(`^${ID_REGEX_BASE$1}$`);
+                var alias_re = new XRegExp(`\\[${ID_REGEX_BASE$1}\\]`);
+                var term_re = new XRegExp(`^${ID_REGEX_BASE$1}$`);
                 // and collect the PERMITTED aliases: the names of the terms and all the remaining aliases
                 var good_aliases = {};
                 var alias_cnt = {};
@@ -5048,7 +5045,7 @@ function transformProduction(id, production, grammar) {
                 // require access to the parse stack: `#n` references can be resolved completely 
                 // at grammar compile time.
                 //
-                var nameref_re = new XRegExp$1(`(?:[$@]|##)${ID_REGEX_BASE$1}`, 'g');
+                var nameref_re = new XRegExp(`(?:[$@]|##)${ID_REGEX_BASE$1}`, 'g');
                 var named_spots = nameref_re.exec(action);
                 var numbered_spots = action.match(/(?:[$@]|##)[0-9]+\b/g);
                 var max_term_index = list.terms.length;

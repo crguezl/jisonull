@@ -528,7 +528,6 @@ function detectIstanbulGlobal(){const gcv="__coverage__";const globalvar=new Fun
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-//import XRegExp from '@crguezl/xregexp';
 // validate the given regex.
 //
 // You can specify an (advanced or regular) regex class as a third parameter.

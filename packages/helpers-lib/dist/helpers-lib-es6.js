@@ -1226,8 +1226,6 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@crguezl/xregexp';
-
 
 // validate the given regex.
 //
