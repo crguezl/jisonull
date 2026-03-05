@@ -25,6 +25,7 @@
   ],
   "preferGlobal": true,
   "workspaces": [
+    "packages/jison",
     "packages/helpers-lib",
     "packages/lex-parser",
     "packages/ebnf-parser",
@@ -41,10 +42,10 @@
     "email": "jison@librelist.com",
     "url": "https://github.com/crguezl/jisonull/issues"
   },
-  "main": "dist/jison-cjs-es5.js",
-  "module": "lib/jison.js",
+  "main": "packages/jison/dist/jison-cjs-es5.js",
+  "module": "packages/jison/lib/jison.js",
   "bin": {
-    "jison": "dist/cli-cjs.js"
+    "jison": "packages/jison/dist/cli-cjs-es5.js"
   },
   "engines": {
     "node": ">=8.0"
@@ -84,11 +85,11 @@
   },
   "scripts": {
     "prep": "npm run prep --workspaces --if-present && npm install",
-    "build:packages": "npm run build --workspaces --if-present --exclude examples",
-    "build:rollup": "mkdir -p dist && rollup -c && rollup -c rollup.config-cli.js",
-    "build:transpile": "babel dist/jison-cjs.js -o dist/jison-cjs-es5.js && babel dist/jison-umd.js -o dist/jison-umd-es5.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && babel dist/cli-umd.js -o dist/cli-umd-es5.js && node __patch_nodebang_in_js.js",
+    "build:packages": "npm run build -w packages/jison -w packages/helpers-lib -w packages/lex-parser -w packages/ebnf-parser -w packages/jison-lex -w packages/json2jison -w packages/jison2json --if-present",
+    "build:rollup": "cd packages/jison && mkdir -p dist && rollup -c && rollup -c rollup.config-cli.js",
+    "build:transpile": "cd packages/jison && babel dist/jison-cjs.js -o dist/jison-cjs-es5.js && babel dist/jison-umd.js -o dist/jison-umd-es5.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && babel dist/cli-umd.js -o dist/cli-umd-es5.js && cd ../.. && node __patch_nodebang_in_js.js",
     "build:patch": "node __patch_version_in_js.js && node __patch_parser_kernel_in_js.js",
-    "build": "npm run build:patch && npm run build:packages && npm run build:rollup && npm run build:transpile",
+    "build": "npm run build:patch && npm run build:packages",
     "build:examples:error-handling": "cd examples && npm run build:error-handling",
     "build:examples:basic": "cd examples && npm run build:basic",
     "build:examples:github-issues": "cd examples && npm run build:github-issues",
@@ -98,8 +99,8 @@
     "sync": "npm run build:patch",
     "pub": "npm publish --access public",
     "pub:all": "npm run pub --workspaces --if-present && npm run pub",
-    "test": "npm run test --workspaces --if-present --exclude examples && mocha --timeout 18000 --check-leaks --globals assert --recursive tests/",
-    "test-nyc": "npm run clean-nyc && npm run test-nyc --workspaces --if-present --exclude examples && nyc --reporter=lcov --reporter=text --exclude 'examples/issue-lex*.js' -- mocha --timeout 18000 --check-leaks --globals assert --recursive tests/ && npm run report-nyc",
+    "test": "npm run test -w packages/jison -w packages/helpers-lib -w packages/lex-parser -w packages/ebnf-parser -w packages/jison-lex -w packages/json2jison -w packages/jison2json --if-present && mocha --timeout 18000 --check-leaks --globals assert --recursive tests/",
+    "test-nyc": "npm run clean-nyc && npm run test-nyc -w packages/jison -w packages/helpers-lib -w packages/lex-parser -w packages/ebnf-parser -w packages/jison-lex -w packages/json2jison -w packages/jison2json --if-present && nyc --reporter=lcov --reporter=text --exclude 'examples/issue-lex*.js' -- mocha --timeout 18000 --check-leaks --globals assert --recursive tests/ && npm run report-nyc",
     "clean-nyc": "rm -rf ./.nyc_output ./coverage/",
     "report-nyc": "rm -rf ./coverage/ && nyc report --reporter=html",
     "site": "npm run build && npm run test && npm run build:examples",
@@ -110,7 +111,7 @@
     "bump": "npm version --no-git-tag-version prerelease && npm run build:patch",
     "git-tag": "node -e 'console.log(require(\"./package.json\").version);' | xargs git tag",
     "git": "git pull --all && git push --all",
-    "clean": "npm run clean --workspaces --if-present && rm -rf dist coverage .nyc_output",
+    "clean": "npm run clean --workspaces --if-present && rm -rf packages/jison/dist coverage .nyc_output",
     "superclean": "npm run superclean --workspaces --if-present && rm -rf dist coverage .nyc_output node_modules package-lock.json && find . -type d -name 'node_modules' -delete",
     "examples-test": "npm run build:examples",
     "examples": "npm run build:examples",

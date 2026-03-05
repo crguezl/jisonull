@@ -6,7 +6,7 @@ const globby = require('globby');
 const fs = require('fs');
 
  
-globby(['lib/jison*.js', 'lib/cli*.js']).then(paths => {
+globby(['packages/jison/lib/jison*.js', 'packages/jison/lib/cli*.js']).then(paths => {
 	var count = 0;
 
     //console.log(paths);

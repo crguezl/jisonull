@@ -10,17 +10,17 @@ function encode(str) {
     .trim();
 }
 
-var kernel = encode(fs.readFileSync('lib/jison-parser-kernel.js', 'utf8'));
+var kernel = encode(fs.readFileSync('packages/jison/lib/jison-parser-kernel.js', 'utf8'));
 
-var parseErrorCode = encode(fs.readFileSync('lib/jison-parser-parseError-function.js', 'utf8'));
+var parseErrorCode = encode(fs.readFileSync('packages/jison/lib/jison-parser-parseError-function.js', 'utf8'));
 
-var errorClassCode = encode(fs.readFileSync('lib/jison-parser-error-code.js', 'utf8'));
+var errorClassCode = encode(fs.readFileSync('packages/jison/lib/jison-parser-error-code.js', 'utf8'));
 
-var debugTraceCode = encode(fs.readFileSync('lib/jison-parser-debugTrace-function.js', 'utf8'));
+var debugTraceCode = encode(fs.readFileSync('packages/jison/lib/jison-parser-debugTrace-function.js', 'utf8'));
 
-var commonJsMainCode = encode(fs.readFileSync('lib/jison-parser-commonJsMain-function.js', 'utf8'));
+var commonJsMainCode = encode(fs.readFileSync('packages/jison/lib/jison-parser-commonJsMain-function.js', 'utf8'));
 
-var parserAPIs1Code = encode(fs.readFileSync('lib/jison-parser-API-section1.js', 'utf8'))
+var parserAPIs1Code = encode(fs.readFileSync('packages/jison/lib/jison-parser-API-section1.js', 'utf8'))
     .replace(/^[^{]*\{/, '')
     .replace(/\}[^\}]*$/, '')
     .trim();
@@ -44,7 +44,7 @@ if (test) {
 
 
 
-globby(['lib/jison.js']).then(paths => {
+globby(['packages/jison/lib/jison.js']).then(paths => {
     var count = 0;
     var edit_cnt = 0;
 

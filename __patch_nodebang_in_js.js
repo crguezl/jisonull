@@ -3,7 +3,7 @@ const globby = require('globby');
 const fs = require('fs');
 
  
-globby(['dist/cli*.js']).then(paths => {
+globby(['packages/jison/dist/cli*.js']).then(paths => {
 	var count = 0;
 
     //console.log(paths);
