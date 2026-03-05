@@ -4714,9 +4714,9 @@
 
         rules: [
           /*  0: */  /^(?:\s+)/,
-          /*  1: */  new XRegExp('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+          /*  1: */  new XRegExp$1('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
           /*  2: */  /^(?:\$end\b)/,
-          /*  3: */  new XRegExp('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+          /*  3: */  new XRegExp$1('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
           /*  4: */  /^(?:'((?:\\'|\\[^']|[^'\\])*)')/,
           /*  5: */  /^(?:"((?:\\"|\\[^"]|[^"\\])*)")/,
           /*  6: */  /^(?:\.)/,
@@ -4980,8 +4980,8 @@
                     // seek out all names and aliases; strip out literal tokens first as those cannot serve as $names:
                     var alist = list.terms; // rhs.replace(/'[^']+'/g, '~').replace(/"[^"]+"/g, '~').split(' ');
 
-                    var alias_re = new XRegExp(`\\[${ID_REGEX_BASE$1}\\]`);
-                    var term_re = new XRegExp(`^${ID_REGEX_BASE$1}$`);
+                    var alias_re = new XRegExp$1(`\\[${ID_REGEX_BASE$1}\\]`);
+                    var term_re = new XRegExp$1(`^${ID_REGEX_BASE$1}$`);
                     // and collect the PERMITTED aliases: the names of the terms and all the remaining aliases
                     var good_aliases = {};
                     var alias_cnt = {};
@@ -5049,7 +5049,7 @@
                     // require access to the parse stack: `#n` references can be resolved completely 
                     // at grammar compile time.
                     //
-                    var nameref_re = new XRegExp(`(?:[$@]|##)${ID_REGEX_BASE$1}`, 'g');
+                    var nameref_re = new XRegExp$1(`(?:[$@]|##)${ID_REGEX_BASE$1}`, 'g');
                     var named_spots = nameref_re.exec(action);
                     var numbered_spots = action.match(/(?:[$@]|##)[0-9]+\b/g);
                     var max_term_index = list.terms.length;

@@ -1,5 +1,5 @@
 import parser from './transform-parser.js';
-import XRegExp from '@gerhobbelt/xregexp';
+import XRegExp from '@crguezl/xregexp';
 
 //import assert from 'assert';
 

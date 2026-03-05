@@ -1,12 +1,12 @@
 
 import Jison from './jison.js';
 
-import json5 from '@gerhobbelt/json5';
+import json5 from '@crguezl/json5';
 import helpers from '../../helpers-lib';           // jison-helpers-lib
 var rmCommonWS = helpers.rmCommonWS;
 var mkIdentifier = helpers.mkIdentifier;
 import process from 'process';
-import nomnom from '@gerhobbelt/nomnom';
+import nomnom from '@crguezl/nomnom';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';

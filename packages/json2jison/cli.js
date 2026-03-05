@@ -11,7 +11,7 @@ var json2jison = require('./json2jison');
 
 
 
-var opts = require('@gerhobbelt/nomnom')
+var opts = require('@crguezl/nomnom')
   .unknownOptionTreatment(false)              // do not accept unknown options!
   .script('json2jison')
   .option('file', {
