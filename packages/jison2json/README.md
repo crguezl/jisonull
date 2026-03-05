@@ -9,7 +9,7 @@
 
 ## install
 
-    npm install @gerhobbelt/jison2json -g
+    npm install @crguezl/jison2json -g
 
 
 
@@ -38,7 +38,7 @@ compatible libraries in the local `dist/` directory.
 
 Or require it and convert programatically:
 
-    var jison2json = require('@gerhobbelt/jison2json');
+    var jison2json = require('@crguezl/jison2json');
     var grammar = "%% foo: bar { return true; };";
 
     var json = jison2json.convert(grammar);

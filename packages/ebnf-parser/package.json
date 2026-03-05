@@ -4,7 +4,7 @@
     "email": "zach@carter.name",
     "url": "http://zaa.ch"
   },
-  "name": "@gerhobbelt/ebnf-parser",
+  "name": "@crguezl/ebnf-parser",
   "version": "0.6.5-223",
   "description": "A parser for BNF and EBNF grammars used by jison",
   "main": "dist/ebnf-parser-cjs-es5.js",
@@ -36,8 +36,8 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "@gerhobbelt/lex-parser": "0.6.5-223",
-    "@gerhobbelt/xregexp": "4.2.0-30",
+    "@crguezl/lex-parser": "0.6.5-223",
+    "@crguezl/xregexp": "4.2.0-30",
     "jison-helpers-lib": "0.6.5-223"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import nomnom from '@gerhobbelt/nomnom';
+import nomnom from '@crguezl/nomnom';
 
 import helpers from '../helpers-lib';
 var mkIdentifier = helpers.mkIdentifier;

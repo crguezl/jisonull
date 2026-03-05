@@ -11,7 +11,7 @@
 
 
 //import unicode4IdStart from "unicode-4.0.0/Binary_Property/ID_Start/symbols.js";
-import XRegExp from '@gerhobbelt/xregexp';
+import XRegExp from '@crguezl/xregexp';
 import recast from 'recast';
 //import astUtils from 'ast-util';
 import * as babel from '@babel/core';

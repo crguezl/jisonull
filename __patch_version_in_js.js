@@ -52,8 +52,8 @@ globby(['packages/jison/lib/jison*.js', 'packages/jison/lib/cli*.js']).then(path
                 return m1 + version + m3;
             })
             // lines looks like:     
-            //     "@gerhobbelt/lex-parser": "0.6.1-206"
-            .replace(/^(\s*"@gerhobbelt\/(?:lex-parser|ebnf-parser|jison-lex|jison2json|json2jison)":\s*")([^"\s]+)(",?)/gm, function repl(s, m1, m2, m3) {
+            //     "@crguezl/lex-parser": "0.6.1-206"
+            .replace(/^(\s*"@crguezl\/(?:lex-parser|ebnf-parser|jison-lex|jison2json|json2jison)":\s*")([^"\s]+)(",?)/gm, function repl(s, m1, m2, m3) {
                 if (m2 !== version) {
                     updated = true;
                 }

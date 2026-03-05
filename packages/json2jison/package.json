@@ -1,5 +1,5 @@
 {
-  "name": "@gerhobbelt/json2jison",
+  "name": "@crguezl/json2jison",
   "version": "0.6.5-223",
   "description": "Converts json grammar definitions to jison's own format",
   "main": "json2jison.js",
@@ -35,7 +35,7 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "@gerhobbelt/nomnom": "1.8.4-29"
+    "@crguezl/nomnom": "1.8.4-29"
   },
   "devDependencies": {
     "chai": "4.2.0",
