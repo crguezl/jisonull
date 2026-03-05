@@ -6,7 +6,7 @@ function _interopDefault(ex) {
 
 var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
 
-var JSON5 = _interopDefault(require('@crguezl/json5'));
+var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
 
 var fs = _interopDefault(require('fs'));
 

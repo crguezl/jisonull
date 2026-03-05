@@ -5,7 +5,7 @@
 // import recast from 'recast';
 // import astUtils from 'ast-util';
 // import prettier from '@crguezl/prettier-miscellaneous';
-import json5 from '@crguezl/json5';
+import json5 from '@gerhobbelt/json5';
 import helpers from '../../../helpers-lib';
 var rmCommonWS = helpers.rmCommonWS;
 var camelCase  = helpers.camelCase;

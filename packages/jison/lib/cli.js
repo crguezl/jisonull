@@ -1,7 +1,7 @@
 
 import Jison from './jison.js';
 
-import json5 from '@crguezl/json5';
+import json5 from '@gerhobbelt/json5';
 import helpers from '../../helpers-lib';           // jison-helpers-lib
 var rmCommonWS = helpers.rmCommonWS;
 var mkIdentifier = helpers.mkIdentifier;
