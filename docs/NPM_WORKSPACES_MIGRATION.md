@@ -293,5 +293,5 @@ npm run build
 
 - [npm workspaces documentation](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
 - [Monorepo best practices](https://turbo.build/repo/docs/handbook/what-is-a-monorepo)
-- [Root package.json](./package.json)
-- [Workspace package.json files](./packages/*/package.json)
+- [Root package.json](../package.json)
+- [Workspace package.json files](../packages/*/package.json)
