@@ -5,128 +5,116 @@ Fork, make your changes, run tests and/or add tests then send a pull request.
 
 ## Required tools for Development
 
-- NodeJS
-- NPM
-- GNU make  (make sure you can run the `make` command from your (bash) shell command line)
-
-When you are working on the Microsoft Windows OS, you can obtain the prerequisite tools
-by installing Git-for-Windows **and its Developer SDK**
-(as only the latter includes *GNU make*, for example, at the time of writing: April 2017):
-
-- [Git-for-Windows](https://git-for-windows.github.io/)
-- [Git-fo-Windows Developer SDK](https://github.com/git-for-windows/build-extra/releases/latest)
+- NodeJS (v8.0 or higher)
+- NPM (v7.0 or higher, for npm workspaces support)
 
 
 ## Installing
 
-JISON consists of the main project and a couple of git modules; when you work on JISON itself you MUST install those submodules too:
+JISON uses npm workspaces to manage multiple packages. Install dependencies across all workspaces:
 
 ```
-$ git submodule update --init
+$ npm run prep
 ```
 
-should fetch the submodules listed in this project's `.gitmodules` file and you're good to go!
-
-The next step would be to install the required NPM packages for all modules. `make` to the rescue:
-
-```
-$ make prep
-```
+This installs all dependencies for the main project and all workspace packages (helpers-lib, lex-parser, ebnf-parser, jison-lex, json2jison, jison2json, and examples).
 
 
 ## Building the app
 
-Simply run `make`; this includes running the unit tests for every module as the app is assembled:
+Build the entire project across all workspaces:
 
 ```
-$ make
+$ npm run build
 ```
 
+This builds all packages, generates distribution files, and transpiles code to ES5 for compatibility.
 
 ## Running tests
 
-Then run tests with:
+Run tests across all workspaces:
 
-    make test
+```
+$ npm run test
+```
 
+For coverage reports:
 
+```
+$ npm run test-nyc
+```
 
-## Building the site
+## Building the site and examples
 
-To build the site, as well as the Browserified web version of Jison, run:
+To build the site and all parser examples, run:
 
-    make site
+```
+$ npm run site
+```
 
-Then you can also preview the site by doing:
-
-    make preview
-
-Note that you will need `nanoc` and `adsf` in order to build/preview the site. `gem install` them if you haven't.
-
-> ### Note
->
-> The `make site` build command will print a WARNING message when `nanoc` is not available,
-> but WILL NOT fail the `site` build task. This behaviour has been specifically chosen to
-> allow (pre)release build runs to complete and deliver a new jison revision when everything
-> but the web pages has compiled successfully.
->
+This builds the application, runs tests, and builds all ~200 parser examples in the `examples/` directory.
 
 
 ## Building a new (beta-)release
 
-Bump all packages' versions (revision/build number: the **fourth** number in the SEMVER) by running
+Bump all packages' versions (revision/build number: the **fourth** number in the SEMVER):
 
-	make bump
+```
+$ npm run bump
+```
 
-which will patch all `package.json` files.
+This patches all `package.json` files across all workspaces.
 
-You can now run
+Then build everything:
 
-    make
-    make site
+```
+$ npm run build
+$ npm run site
+```
 
-to build all files, but when you want to be absolute sure and/or need to update some of the core files using your latest jison compiler, then push jison and all its submodules to github and run
+When you want to do a complete clean rebuild (removing all node_modules and dist files):
 
-    make superclean
+```
+$ npm run superclean
+$ npm run prep
+$ npm run build
+$ npm run site
+```
 
-which will nuke 100% of the installed NPM packages, *including* jison's dependency upon *itself*.
+Apply the new version as a git tag:
 
-Next you must re-install the npm packages, which will fetch these from the repositories:
-
-	make prep
-
-and then execute your regular full-build command:
-
-	make site
-
-When you are happy with the result, you can apply the new (previously bumped) version as a TAG to the current commit (which is not necessarily the commit where you ran `make bump` if you found some stuff to do along the way here ;-) ):
-
-	make git-tag
-
+```
+$ npm run git-tag
+```
 
 ### Doing all this in one go
 
-You can accomplish all the above (and a few other cleanups and checks along the way) by invoking
-the bash shell script:
+You can accomplish all the above automatically with:
 
 ```
 ./git-tag-and-bump-and-rebuild.sh
 ```
 
+Or run the comprehensive workflow command:
+
+```
+$ npm run everything
+```
+
+This cleans, updates dependencies, prepares, builds, tests, generates coverage, and builds examples.
 
 ---
 
+## npm Workspaces Overview
 
-## TL;DR
+The project is organized as an npm workspace with the following packages:
 
-Run these commands to bump your version, nuke all installed NPM packages and thus erase any and all dependencies on some older bit of jison; then fetch the latest of the repositories and build all:
+- **packages/helpers-lib** — Shared utilities
+- **packages/lex-parser** — Lexical analyzer parser
+- **packages/ebnf-parser** — EBNF/BNF grammar parser  
+- **packages/jison-lex** — Lexer generator
+- **packages/json2jison** — JSON to Jison grammar converter
+- **packages/jison2json** — Jison to JSON grammar converter
+- **examples** — ~200 parser examples for testing and documentation
 
-	make bump
-
-	make superclean
-	make prep
-	make site
-
-	make git-tag
-
----
+All workspace packages use shared devDependencies (Rollup, Babel, Mocha, Nyc, etc.) installed at the root level.
