@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path$1 from 'path';
-import XRegExp from '@crguezl/xregexp';
+import XRegExp from '@gerhobbelt/xregexp';
 import recast from 'recast';
 import { transformSync } from '@babel/core';
 import assert from 'assert';

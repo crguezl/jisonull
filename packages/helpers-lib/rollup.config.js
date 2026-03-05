@@ -15,11 +15,6 @@ export default Object.assign(base, {
 	  {
 	    file: 'dist/helpers-lib-es6.js',
 	    format: 'es'
-	  },
-	  {
-	    file: 'dist/helpers-lib-umd.js',
-	    name: 'jison-helpers-lib',
-	    format: 'umd'
 	  }
   ],
 });

@@ -8,7 +8,7 @@ var fs = _interopDefault(require('fs'));
 
 var path$1 = _interopDefault(require('path'));
 
-var XRegExp = _interopDefault(require('@crguezl/xregexp'));
+var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
 
 var recast = _interopDefault(require('recast'));
 

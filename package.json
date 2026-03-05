@@ -87,7 +87,7 @@
     "prep": "npm run prep --workspaces --if-present && npm install",
     "build:packages": "npm run build -w packages/jison -w packages/helpers-lib -w packages/lex-parser -w packages/ebnf-parser -w packages/jison-lex -w packages/json2jison -w packages/jison2json --if-present",
     "build:rollup": "cd packages/jison && mkdir -p dist && rollup -c && rollup -c rollup.config-cli.js",
-    "build:transpile": "cd packages/jison && babel dist/jison-cjs.js -o dist/jison-cjs-es5.js && babel dist/jison-umd.js -o dist/jison-umd-es5.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && babel dist/cli-umd.js -o dist/cli-umd-es5.js && cd ../.. && node __patch_nodebang_in_js.js",
+    "build:transpile": "cd packages/jison && babel dist/jison-cjs.js -o dist/jison-cjs-es5.js && babel dist/cli-cjs.js -o dist/cli-cjs-es5.js && cd ../.. && node __patch_nodebang_in_js.js",
     "build:patch": "node __patch_version_in_js.js && node __patch_parser_kernel_in_js.js",
     "build": "npm run build:patch && npm run build:packages",
     "build:examples:error-handling": "cd examples && npm run build:error-handling",

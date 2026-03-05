@@ -5,7 +5,7 @@
   "main": "dist/helpers-lib-cjs-es5.js",
   "module": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && rollup -c && babel dist/helpers-lib-cjs.js -o dist/helpers-lib-cjs-es5.js && babel dist/helpers-lib-umd.js -o dist/helpers-lib-umd-es5.js",
+    "build": "mkdir -p dist && rollup -c && babel dist/helpers-lib-cjs.js -o dist/helpers-lib-cjs-es5.js",
     "test": "mocha --timeout 18000 --check-leaks --globals assert tests/",
     "test-nyc": "rm -rf ./coverage/ && nyc --reporter=lcov --reporter=html --reporter=text -- mocha --timeout 18000 --check-leaks --globals assert tests/",
     "pub": "npm publish --access public",

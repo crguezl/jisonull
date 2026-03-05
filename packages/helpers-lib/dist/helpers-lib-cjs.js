@@ -4,7 +4,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var fs = _interopDefault(require('fs'));
 var path$1 = _interopDefault(require('path'));
-var XRegExp = _interopDefault(require('@crguezl/xregexp'));
+var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
 var recast = _interopDefault(require('recast'));
 var babel = require('@babel/core');
 var assert = _interopDefault(require('assert'));

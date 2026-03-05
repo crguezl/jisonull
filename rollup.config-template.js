@@ -13,11 +13,6 @@ export default {
   //  {
   //    file: 'dist/dummy-es6.js',
   //    format: 'es'
-  //  },
-  //  {
-  //    file: 'dist/dummy-umd.js',
-  //    name: 'jison-cli',
-  //    format: 'umd'
   //  }
   //],
   plugins: [

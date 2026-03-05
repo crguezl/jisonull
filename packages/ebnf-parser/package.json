@@ -10,7 +10,7 @@
   "main": "dist/ebnf-parser-cjs-es5.js",
   "module": "ebnf-parser.js",
   "scripts": {
-    "build": "node __patch_version_in_js.js && jison -m es bnf.y bnf.l && mv bnf.js parser.js && jison -m es ebnf.y && mv ebnf.js transform-parser.js && mkdir -p dist && rollup -c && babel dist/ebnf-parser-cjs.js -o dist/ebnf-parser-cjs-es5.js && babel dist/ebnf-parser-umd.js -o dist/ebnf-parser-umd-es5.js",
+    "build": "node __patch_version_in_js.js && jison -m es bnf.y bnf.l && mv bnf.js parser.js && jison -m es ebnf.y && mv ebnf.js transform-parser.js && mkdir -p dist && rollup -c && babel dist/ebnf-parser-cjs.js -o dist/ebnf-parser-cjs-es5.js",
     "test": "mocha --timeout 18000 --check-leaks --globals assert tests/",
     "test-nyc": "rm -rf ./coverage/ && nyc --reporter=lcov --reporter=html --reporter=text -- mocha --timeout 18000 --check-leaks --globals assert tests/",
     "pub": "npm publish --access public",

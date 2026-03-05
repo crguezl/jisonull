@@ -10,7 +10,7 @@
   "main": "dist/lex-parser-cjs-es5.js",
   "module": "lex-parser.js",
   "scripts": {
-    "build": "jison -m es -o lex-parser.js lex.y lex.l && mkdir -p dist && rollup -c && babel dist/lex-parser-cjs.js -o dist/lex-parser-cjs-es5.js && babel dist/lex-parser-umd.js -o dist/lex-parser-umd-es5.js",
+    "build": "jison -m es -o lex-parser.js lex.y lex.l && mkdir -p dist && rollup -c && babel dist/lex-parser-cjs.js -o dist/lex-parser-cjs-es5.js",
     "test": "mocha --timeout 18000 --check-leaks --globals assert tests/",
     "test-nyc": "rm -rf ./coverage/ && nyc --reporter=lcov --reporter=html --reporter=text -- mocha --timeout 18000 --check-leaks --globals assert tests/",
     "pub": "npm publish --access public",

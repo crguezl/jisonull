@@ -2,10 +2,10 @@ import XRegExp from '@gerhobbelt/xregexp';
 import JSON5 from '@gerhobbelt/json5';
 import fs from 'fs';
 import path$1 from 'path';
-import XRegExp$1 from '@crguezl/xregexp';
 import recast from 'recast';
 import { transformSync } from '@babel/core';
 import assert$1 from 'assert';
+import XRegExp$1 from '@crguezl/xregexp';
 import JSON5$1 from '@crguezl/json5';
 
 // Return TRUE if `src` starts with `searchString`. 
@@ -717,7 +717,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         //   
         //   -> (1) start-#
         tokenDirectIdentifierStart: escChar + typeIdChar[0],
-        tokenDirectIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})#`, 'g'),
+        tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
 
         // - alias/token value references, e.g. `$token`, `$2`
         // 
@@ -726,7 +726,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> $ is an accepted starter, so no encoding required
         tokenValueReferenceStart: '$',
-        tokenValueReferenceRe: new XRegExp$1(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
 
         // - alias/token location reference, e.g. `@token`, `@2`
         // 
@@ -735,7 +735,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (6) single-@
         tokenLocationStart: escChar + typeIdChar[1],
-        tokenLocationRe: new XRegExp$1(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+        tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
 
         // - alias/token id numbers, e.g. `#token`, `#2`
         // 
@@ -744,7 +744,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (3) single-#
         tokenIdentifierStart: escChar + typeIdChar[2],
-        tokenIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+        tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
         
         // - alias/token stack indexes, e.g. `##token`, `##2`
         // 
@@ -753,31 +753,31 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (4) double-#
         tokenStackIndexStart: escChar + typeIdChar[3],
-        tokenStackIndexRe: new XRegExp$1(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+        tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
 
         // - 'negative index' value references, e.g. `$-2`
         // 
         //   -> (8) single-negative-$
         tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-        tokenValueReferenceRe: new XRegExp$1(`$-([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
            
         // - 'negative index' location reference, e.g. `@-2`
         // 
         //   -> (7) single-negative-@
         tokenNegativeLocationStart: escChar + typeIdChar[5],
-        tokenNegativeLocationRe: new XRegExp$1(`@-([0-9]+)`, 'g'),
+        tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
            
         // - 'negative index' stack indexes, e.g. `##-2`
         // 
         //   -> (5) double-negative-#
         tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-        tokenNegativeStackIndexRe: new XRegExp$1(`#-([0-9]+)`, 'g'),
+        tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
 
         // combined regex for encoding direction
-        tokenDetect4EncodeRe: new XRegExp$1(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         // combined regex for decoding direction
-        tokenDetect4DecodeRe: new XRegExp$1(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         encode: function encodeJisonTokens(src, locationOffsetSpec) {
             let re = this.tokenDetect4EncodeRe;

@@ -15,11 +15,6 @@ export default Object.assign(base, {
 	  {
 	    file: 'dist/regexp-lexer-es6.js',
 	    format: 'es'
-	  },
-	  {
-	    file: 'dist/regexp-lexer-umd.js',
-	    name: 'regexp-lexer',
-	    format: 'umd'
 	  }
   ],
 });

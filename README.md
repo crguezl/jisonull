@@ -95,10 +95,10 @@ Debug mode  \[false\]
 Report some statistics about the generated parser  \[false\]
 
 :   -m TYPE, --module-type TYPE
-The type of module to generate \(commonjs, amd, es, js\) or an alias \(cjs=commonjs, umd=amd and iffe=js\)  \[commonjs\]
+The type of module to generate \(commonjs, es, js\) or an alias \(cjs=commonjs and iffe=js\)  \[commonjs\]
 
 :   -n NAME, --module-name NAME
-The name of the generated parser object, namespace supported. This has no effect on amd/umd or es modules.
+The name of the generated parser object, namespace supported. This has no effect on es modules.
 
 :   -p TYPE, --parser-type TYPE
 The type of algorithm to use for the parser \(lr0, slr, lalr, lr, ll\)  \[lalr\]
@@ -128,7 +128,7 @@ Next to producing a grammar source file, also export the symbols, terminals, gra
 Include .main\(\) entry point in generated commonjs module  \[false\]
 
 :   -y NAME, --module-main NAME
-The module exports NAME as `exports.main` (module type commonjs or cjs) or as `yymain` (module type es). This option has no effect with module type `amd` or `umd`. It only has an effect when used with -x, though it does *not* (contrary to possible expectations) rename the main function; it simply elides the creation of a main and exports NAME as a main. 
+The module exports NAME as `exports.main` (module type commonjs or cjs) or as `yymain` (module type es). It only has an effect when used with -x, though it does *not* (contrary to possible expectations) rename the main function; it simply elides the creation of a main and exports NAME as a main. 
 
 :   -V, --version
 print version and exit
@@ -174,7 +174,7 @@ parser.parse("adfe34bc zxg");
 
 ## Differences in module types
 
-Jison allows you to emit these module types: \(commonjs/cjs, amd/umd, es, js/iffe\). In the following sections, \<parser\> represents the parser code common to all types of module.
+Jison allows you to emit these module types: \(commonjs/cjs, es, js/iffe\). In the following sections, \<parser\> represents the parser code common to all types of module.
 
 ### cjs/commonjs
 
@@ -199,17 +199,6 @@ exports.main = function (args) {
   ...
 }
 ```
-
-### amd/umd
-
-The parser is wrapped with:
-``` javascript
-define(function (require) {
-  \<parser\>
-  return parser;
-});
-```
-The --module-name NAME option has no effect if the type is amd or umd.
 
 ### js/iffe
 
