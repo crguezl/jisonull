@@ -11,27 +11,27 @@ $ {return 'EOF';}
     name: 'JisonParserError',
     message: 'this.lookAhead is not a function',
     stack: `TypeError: this.lookAhead is not a function
-    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7301:29)
-    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6640:34)
-    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6746:22)
-    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6845:18)
-    at fastLex (/lex-parser-cjs-es5.js:4708:25)
-    at Object.parse (/lex-parser-cjs-es5.js:4829:22)
-    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8572:23)
+    at Object.lexer__performAction [as performAction] (/lex-parser-cjs-es5.js:7287:29)
+    at Object.lexer_test_match [as test_match] (/lex-parser-cjs-es5.js:6626:34)
+    at Object.lexer_next [as next] (/lex-parser-cjs-es5.js:6732:22)
+    at Object.lexer_fastLex [as fastLex] (/lex-parser-cjs-es5.js:6831:18)
+    at fastLex (/lex-parser-cjs-es5.js:4694:25)
+    at Object.parse (/lex-parser-cjs-es5.js:4815:22)
+    at Object.yyparse [as parse] (/lex-parser-cjs-es5.js:8558:23)
     at Context.testEachParserExample (/all-tests.js:318:19)
-    at callFn (/runnable.js:364:21)
-    at Runnable.run (/runnable.js:352:5)
-    at Runner.runTest (/runner.js:677:10)
-    at /runner.js:801:12
-    at next (/runner.js:594:14)
-    at /runner.js:604:7
-    at next (/runner.js:486:14)
-    at cbHookRun (/runner.js:551:7)
-    at done (/runnable.js:308:5)
-    at callFn (/runnable.js:387:7)
-    at Runnable.run (/runnable.js:352:5)
-    at next (/runner.js:510:10)
-    at Immediate._onImmediate (/runner.js:572:5)
+    at callFn (/runnable.js:387:21)
+    at Runnable.run (/runnable.js:379:7)
+    at Runner.runTest (/runner.js:535:10)
+    at /runner.js:653:12
+    at next (/runner.js:447:14)
+    at /runner.js:457:7
+    at next (/runner.js:362:14)
+    at /runner.js:420:7
+    at done (/runnable.js:334:5)
+    at callFn (/runnable.js:410:7)
+    at Runnable.run (/runnable.js:379:7)
+    at next (/runner.js:384:10)
+    at Immediate._onImmediate (/runner.js:425:5)
     at process.processImmediate (node:internal/timers:504:21)`,
     hash: {
       errStr: 'Parsing aborted due to exception.',
