@@ -2,10 +2,10 @@
 // import Lexer from '../../packages/jison-lex';
 // import ebnfParser from '../../packages/ebnf-parser';
 // import lexParser from '../../packages/lex-parser';
-// import XRegExp from '@gerhobbelt/xregexp';
+// import XRegExp from '@crguezl/xregexp';
 // import recast from 'recast';
 // import astUtils from 'ast-util';
-// import prettier from '@gerhobbelt/prettier-miscellaneous';
+// import prettier from '@crguezl/prettier-miscellaneous';
 import json5 from '@crguezl/json5';
 import helpers from '../../../helpers-lib';
 var rmCommonWS = helpers.rmCommonWS;
