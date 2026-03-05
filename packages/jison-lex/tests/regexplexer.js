@@ -2518,7 +2518,7 @@ console.error('lexer:', typeof lexer);
           {
             qualifier: 'imports',
             include: `
-              import XRegExp from '@gerhobbelt/xregexp';
+              import XRegExp from '@crguezl/xregexp';
             `,
           },
         ],
