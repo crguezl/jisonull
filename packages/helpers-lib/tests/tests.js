@@ -1,5 +1,5 @@
 var fs = require('fs');
-var XRegExp = require('@crguezl/xregexp');
+var XRegExp = require('@gerhobbelt/xregexp');
 var assert = require("chai").assert;
 // NodeJS doesn't support ES2015 import statements yet, so we must use the compiled/rollup-ed version instead:
 var helpers = require('../dist/helpers-lib-cjs-es5');

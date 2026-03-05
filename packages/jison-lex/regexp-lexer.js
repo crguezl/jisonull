@@ -2,7 +2,7 @@
 // Zachary Carter <zach@carter.name>
 // MIT Licensed
 
-import XRegExp from '@crguezl/xregexp';
+import XRegExp from '@gerhobbelt/xregexp';
 import JSON5 from '@crguezl/json5';
 import lexParser from '../lex-parser';
 import setmgmt from './regexp-set-management.js';

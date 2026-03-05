@@ -35,7 +35,7 @@
     "node": ">=8.0"
   },
   "dependencies": {
-    "@crguezl/xregexp": "4.2.0-30",
+    "@gerhobbelt/xregexp": "4.2.0-30",
     "jison-helpers-lib": "0.6.5-223"
   },
   "devDependencies": {

@@ -5,10 +5,10 @@ var path$1 = require('path');
 var recast = require('recast');
 var babel = require('@babel/core');
 var assert$1 = require('assert');
-var XRegExp$1 = require('@crguezl/xregexp');
+var XRegExp$1 = require('@gerhobbelt/xregexp');
 var json5 = require('@crguezl/json5');
-var XRegExp$2 = require('@gerhobbelt/xregexp');
 var JSON5$1 = require('@gerhobbelt/json5');
+var XRegExp$2 = require('@crguezl/xregexp');
 var astUtils = require('ast-util');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -19,8 +19,8 @@ var recast__default = /*#__PURE__*/_interopDefaultLegacy(recast);
 var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert$1);
 var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp$1);
 var json5__default = /*#__PURE__*/_interopDefaultLegacy(json5);
-var XRegExp__default$1 = /*#__PURE__*/_interopDefaultLegacy(XRegExp$2);
 var JSON5__default = /*#__PURE__*/_interopDefaultLegacy(JSON5$1);
+var XRegExp__default$1 = /*#__PURE__*/_interopDefaultLegacy(XRegExp$2);
 var astUtils__default = /*#__PURE__*/_interopDefaultLegacy(astUtils);
 
 // Return TRUE if `src` starts with `searchString`. 
@@ -16833,7 +16833,7 @@ function set2bitarray(bitarr, s, opts) {
                         var ba4p = Pcodes_bitarray_cache[pex];
                         if (!ba4p) {
                             // expand escape:
-                            var xr = new XRegExp__default$1['default']('[' + pex + ']');           // TODO: case-insensitive grammar???
+                            var xr = new XRegExp__default['default']('[' + pex + ']');           // TODO: case-insensitive grammar???
                             // rewrite to a standard `[...]` regex set: XRegExp will do this for us via `XRegExp.toString()`:
                             var xs = '' + xr;
                             // remove the wrapping `/.../` to get at the (possibly *combined* series of) `[...]` sets inside:
@@ -17286,7 +17286,7 @@ function reduceRegexToSetBitArray(s, name, opts) {
         var re;
         assert__default['default'](s);
         assert__default['default'](!(s instanceof Error));
-        re = new XRegExp__default$1['default']('[' + s + ']');
+        re = new XRegExp__default['default']('[' + s + ']');
         re.test(s[0]);
 
         // One thing is apparently *not* caught by the RegExp compile action above: `[a[b]c]`
@@ -23986,9 +23986,9 @@ EOF: 1,
 
     rules: [
       /*  0: */  /^(?:\s+)/,
-      /*  1: */  new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /*  1: */  new XRegExp__default$1['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /*  2: */  /^(?:\$end\b)/,
-      /*  3: */  new XRegExp__default['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+      /*  3: */  new XRegExp__default$1['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
       /*  4: */  /^(?:'((?:\\'|\\[^']|[^'\\])*)')/,
       /*  5: */  /^(?:"((?:\\"|\\[^"]|[^"\\])*)")/,
       /*  6: */  /^(?:\.)/,
@@ -24252,8 +24252,8 @@ function transformProduction(id, production, grammar) {
                 // seek out all names and aliases; strip out literal tokens first as those cannot serve as $names:
                 var alist = list.terms; // rhs.replace(/'[^']+'/g, '~').replace(/"[^"]+"/g, '~').split(' ');
 
-                var alias_re = new XRegExp__default['default'](`\\[${ID_REGEX_BASE$2}\\]`);
-                var term_re = new XRegExp__default['default'](`^${ID_REGEX_BASE$2}$`);
+                var alias_re = new XRegExp__default$1['default'](`\\[${ID_REGEX_BASE$2}\\]`);
+                var term_re = new XRegExp__default$1['default'](`^${ID_REGEX_BASE$2}$`);
                 // and collect the PERMITTED aliases: the names of the terms and all the remaining aliases
                 var good_aliases = {};
                 var alias_cnt = {};
@@ -24321,7 +24321,7 @@ function transformProduction(id, production, grammar) {
                 // require access to the parse stack: `#n` references can be resolved completely 
                 // at grammar compile time.
                 //
-                var nameref_re = new XRegExp__default['default'](`(?:[$@]|##)${ID_REGEX_BASE$2}`, 'g');
+                var nameref_re = new XRegExp__default$1['default'](`(?:[$@]|##)${ID_REGEX_BASE$2}`, 'g');
                 var named_spots = nameref_re.exec(action);
                 var numbered_spots = action.match(/(?:[$@]|##)[0-9]+\b/g);
                 var max_term_index = list.terms.length;
@@ -33126,10 +33126,10 @@ EOF: 1,
 
     rules: [
       /*  0: */  /^(?:\/\/[^\r\n]*)/,
-      /*  1: */  new XRegExp__default$1['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
-      /*  2: */  new XRegExp__default$1['default']('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
+      /*  1: */  new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*  2: */  new XRegExp__default['default']('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
       /*  3: */  /^(?:%include\b)/,
-      /*  4: */  new XRegExp__default$1['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*  4: */  new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
       /*  5: */  /^(?:\/\/.*)/,
       /*  6: */  /^(?:;)/,
       /*  7: */  /^(?:\|)/,
@@ -33160,7 +33160,7 @@ EOF: 1,
       /* 32: */  /^(?:>)/,
       /* 33: */  /^(?:,)/,
       /* 34: */  /^(?:\*)/,
-      /* 35: */  new XRegExp__default$1['default']('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
+      /* 35: */  new XRegExp__default['default']('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
       /* 36: */  /^(?:([^\s!"$%'-,./:-?\[-\^`{-}])+)/,
       /* 37: */  /^(?:(\r\n|\n|\r)([^\S\n\r])+(?=\S))/,
       /* 38: */  /^(?:(\r\n|\n|\r))/,
@@ -33170,7 +33170,7 @@ EOF: 1,
       /* 42: */  /^(?:"((?:\\"|\\[^"]|[^\n\r"\\])*)")/,
       /* 43: */  /^(?:'((?:\\'|\\[^']|[^\n\r'\\])*)')/,
       /* 44: */  /^(?:`((?:\\`|\\[^`]|[^\\`])*)`)/,
-      /* 45: */  new XRegExp__default$1['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+      /* 45: */  new XRegExp__default['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
       /* 46: */  /^(?:%empty\b)/,
       /* 47: */  /^(?:%epsilon\b)/,
       /* 48: */  /^(?:\u0190)/,
@@ -33181,7 +33181,7 @@ EOF: 1,
       /* 53: */  /^(?:\$eof\b)/,
       /* 54: */  /^(?:(0[Xx][\dA-Fa-f]+))/,
       /* 55: */  /^(?:([1-9]\d*))/,
-      /* 56: */  new XRegExp__default$1['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /* 56: */  new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /* 57: */  /^(?:\()/,
       /* 58: */  /^(?:\))/,
       /* 59: */  /^(?:\+)/,
@@ -33204,14 +33204,14 @@ EOF: 1,
       /* 76: */  /^(?:%on_error_recovery_reduce\b)/,
       /* 77: */  /^(?:%parse-param[s]?)/,
       /* 78: */  /^(?:%option[s]?)/,
-      /* 79: */  new XRegExp__default$1['default'](
+      /* 79: */  new XRegExp__default['default'](
         '^(?:%lex((?:[^\\S\\n\\r])*(?:(?:\\r\\n|\\n|\\r)[^]*?)?(?:\\r\\n|\\n|\\r)(?:[^\\S\\n\\r])*)\\/lex\\b)',
         ''
       ),
       /* 80: */  /^(?:%code\b)/,
       /* 81: */  /^(?:%import\b)/,
       /* 82: */  /^(?:%include\b)/,
-      /* 83: */  new XRegExp__default$1['default'](
+      /* 83: */  new XRegExp__default['default'](
         '^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))',
         ''
       ),
@@ -34973,7 +34973,7 @@ Jison.Lexer = RegExpLexer;
 Jison.ebnfParser = ebnfParser;
 Jison.lexParser = lexParser;
 Jison.codeExec = code_exec$2;
-Jison.XRegExp = XRegExp__default['default'];
+Jison.XRegExp = XRegExp__default$1['default'];
 Jison.recast = recast__default['default'];
 Jison.astUtils = astUtils__default['default'];
 //Jison.prettier = prettier;
@@ -35786,7 +35786,7 @@ generator.buildProductions = function buildProductions(bnf, productions, nonterm
             for (i = 0; i < rhs.length; i++) {
                 sym = rhs[i];
                 // check for aliased names, e.g., id[alias] and strip them
-                rhs_i = sym.match(new XRegExp__default['default'](`\\[${ID_REGEX_BASE$3}\\]$`));
+                rhs_i = sym.match(new XRegExp__default$1['default'](`\\[${ID_REGEX_BASE$3}\\]$`));
                 if (rhs_i) {
                     sym = sym.substr(0, sym.length - rhs_i[0].length);
                 }
@@ -35797,7 +35797,7 @@ generator.buildProductions = function buildProductions(bnf, productions, nonterm
             }
         } else {
             // no action -> don't care about aliases; strip them.
-            handle = handle.replace(new XRegExp__default['default'](`\\[${ID_REGEX_BASE$3}\\]`, 'g'), '');
+            handle = handle.replace(new XRegExp__default$1['default'](`\\[${ID_REGEX_BASE$3}\\]`, 'g'), '');
             rhs = splitStringIntoSymbols(handle);
             for (i = 0; i < rhs.length; i++) {
                 sym = rhs[i];
@@ -35961,7 +35961,7 @@ generator.buildProductions = function buildProductions(bnf, productions, nonterm
             ls += rhs.substr(0, pos);
             // check for aliased literals, e.g., `'>'[gt]` and keep it and the alias together
             rhs = rhs.substr(pos + 1);
-            var alias = rhs.match(new XRegExp__default['default'](`^\\[${ID_REGEX_BASE$3}\\]`));
+            var alias = rhs.match(new XRegExp__default$1['default'](`^\\[${ID_REGEX_BASE$3}\\]`));
             if (alias) {
                 ls += alias[0];
                 rhs = rhs.substr(alias[0].length);
@@ -35996,7 +35996,7 @@ generator.buildProductions = function buildProductions(bnf, productions, nonterm
 
             for (i = 0; i < rhs.length; i++) {
                 // check for aliased names, e.g., id[alias] and strip them
-                rhs_i = rhs[i].match(new XRegExp__default['default'](`\\[${ID_REGEX_BASE$3}\\]$`));
+                rhs_i = rhs[i].match(new XRegExp__default$1['default'](`\\[${ID_REGEX_BASE$3}\\]$`));
                 if (rhs_i) {
                     rhs[i] = rhs[i].substr(0, rhs[i].length - rhs_i[0].length);
                     rhs_i = rhs_i[0].substr(1, rhs_i[0].length - 2);
@@ -36036,7 +36036,7 @@ generator.buildProductions = function buildProductions(bnf, productions, nonterm
             }
         } else {
             // no action -> don't care about aliases; strip them.
-            handle = handle.replace(new XRegExp__default['default'](`\\[${ID_REGEX_BASE$3}\\]`, 'g'), '');
+            handle = handle.replace(new XRegExp__default$1['default'](`\\[${ID_REGEX_BASE$3}\\]`, 'g'), '');
             rhs = splitStringIntoSymbols(handle);
             for (i = 0; i < rhs.length; i++) {
                 if (rhs[i] === 'error') {
@@ -36362,7 +36362,7 @@ generator.buildProductionActions = function buildProductionActions() {
     // Replace direct symbol references, e.g. #NUMBER# when there's a `%token NUMBER` for your grammar.
     // We allow these tokens to be referenced anywhere in your code as #TOKEN#.
     var moduleInclude = preprocessActionCode(this.moduleInclude)
-        .replace(new XRegExp__default['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
+        .replace(new XRegExp__default$1['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
             return provideSymbolAsSourcecode(sym);
         });
     // and COPY the `moduleInit` array, after preprocessing the individual COPIES:
@@ -36372,7 +36372,7 @@ generator.buildProductionActions = function buildProductionActions() {
         return {
             qualifier: chunk.qualifier,
             include: preprocessActionCode(chunk.include)
-                .replace(new XRegExp__default['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
+                .replace(new XRegExp__default$1['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
                     return provideSymbolAsSourcecode(sym);
                 })
         };
@@ -36466,7 +36466,7 @@ generator.buildProductionActions = function buildProductionActions() {
 
         // Replace direct symbol references, e.g. #NUMBER# when there's a `%token NUMBER` for your grammar.
         // We allow these tokens to be referenced anywhere in your code as #TOKEN#.
-        .replace(new XRegExp__default['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
+        .replace(new XRegExp__default$1['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
             return provideSymbolAsSourcecode(sym);
         });
 
@@ -36825,7 +36825,7 @@ generator.buildProductionActions = function buildProductionActions() {
             rhs_i;
 
         var rhs = handle.handle;
-        var named_token_re = new XRegExp__default['default'](`^${ID_REGEX_BASE$3}$`);
+        var named_token_re = new XRegExp__default$1['default'](`^${ID_REGEX_BASE$3}$`);
 
         // semantic action specified
         var label = [
@@ -36855,12 +36855,12 @@ generator.buildProductionActions = function buildProductionActions() {
         //
         // Here we expand those direct token/symbol references: #TOKEN#
         action = action
-            .replace(new XRegExp__default['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
+            .replace(new XRegExp__default$1['default'](`#(${ID_REGEX_BASE$3})#`, 'g'), function (_, sym) {
                 return provideSymbolAsSourcecode(sym);
             });
 
         // replace named semantic values ($nonterminal)
-        if (action.match(new XRegExp__default['default'](`(?:[$@#]|##)${ID_REGEX_BASE$3}`))) {
+        if (action.match(new XRegExp__default$1['default'](`(?:[$@#]|##)${ID_REGEX_BASE$3}`))) {
             var count = {},
                 names = {},
                 donotalias = {};
@@ -36942,7 +36942,7 @@ generator.buildProductionActions = function buildProductionActions() {
                 }
             }
             action = action.replace(
-                new XRegExp__default['default'](`([$@#]|##)(${ID_REGEX_BASE$3})`, 'g'), function (str, mrkr, pl) {
+                new XRegExp__default$1['default'](`([$@#]|##)(${ID_REGEX_BASE$3})`, 'g'), function (str, mrkr, pl) {
                     if (names[pl] && count[pl] !== 1) {
                         throw new Error(`The action block references the ambiguous named alias or term reference "${pl}" which is mentioned ${count[pl]} times in production "${handle.handle}", implicit and explicit aliases included.` +
                             '\nYou should either provide unambiguous = uniquely named aliases for these terms or use numeric index references (e.g. `$3`) as a stop-gap in your action code.');
@@ -40034,7 +40034,7 @@ lrGeneratorMixin.generateModule_ = function generateModule_() {
 
         var js = JSON.stringify(obj, null, 2);
 
-        js = js.replace(new XRegExp__default['default'](`  "(${ID_REGEX_BASE$3})": `, 'g'), '  $1: ');
+        js = js.replace(new XRegExp__default$1['default'](`  "(${ID_REGEX_BASE$3})": `, 'g'), '  $1: ');
         js = js.replace(/^( +)pre_parse: true(,)?$/gm, function (m, ls, tc) {
             return ls + 'pre_parse: ' + String(pre) + (tc || '');
         });
