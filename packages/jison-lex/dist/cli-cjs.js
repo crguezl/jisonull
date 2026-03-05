@@ -3,24 +3,16 @@
 
 'use strict';
 
-var fs = require('fs');
-var path$1 = require('path');
-var nomnom = require('@gerhobbelt/nomnom');
-var XRegExp = require('@gerhobbelt/xregexp');
-var recast = require('recast');
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var fs = _interopDefault(require('fs'));
+var path$1 = _interopDefault(require('path'));
+var nomnom = _interopDefault(require('@gerhobbelt/nomnom'));
+var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
+var recast = _interopDefault(require('recast'));
 var babel = require('@babel/core');
-var assert$1 = require('assert');
-var JSON5 = require('@gerhobbelt/json5');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
-var path__default = /*#__PURE__*/_interopDefaultLegacy(path$1);
-var nomnom__default = /*#__PURE__*/_interopDefaultLegacy(nomnom);
-var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp);
-var recast__default = /*#__PURE__*/_interopDefaultLegacy(recast);
-var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert$1);
-var JSON5__default = /*#__PURE__*/_interopDefaultLegacy(JSON5);
+var assert$1 = _interopDefault(require('assert'));
+var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
 
 // Return TRUE if `src` starts with `searchString`. 
 function startsWith(src, searchString) {
@@ -278,8 +270,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
     options = options || {};
 
     try {
-        var dumpPaths = [(options.outfile ? path__default['default'].dirname(options.outfile) : null), options.inputPath, process.cwd()];
-        var dumpName = path__default['default'].basename(options.inputFilename || options.moduleName || (options.outfile ? path__default['default'].dirname(options.outfile) : null) || options.defaultModuleName || errname)
+        var dumpPaths = [(options.outfile ? path$1.dirname(options.outfile) : null), options.inputPath, process.cwd()];
+        var dumpName = path$1.basename(options.inputFilename || options.moduleName || (options.outfile ? path$1.dirname(options.outfile) : null) || options.defaultModuleName || errname)
         .replace(/\.[a-z]{1,5}$/i, '')          // remove extension .y, .yacc, .jison, ...whatever
         .replace(/[^a-z0-9_]/ig, '_');          // make sure it's legal in the destination filesystem: the least common denominator.
         if (dumpName === '' || dumpName === '_') {
@@ -305,8 +297,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
             }
 
             try {
-                dumpfile = path__default['default'].normalize(dumpPaths[i] + '/' + dumpName);
-                fs__default['default'].writeFileSync(dumpfile, sourcecode, 'utf8');
+                dumpfile = path$1.normalize(dumpPaths[i] + '/' + dumpName);
+                fs.writeFileSync(dumpfile, sourcecode, 'utf8');
                 console.error("****** offending generated " + errname + " source code dumped into file: ", dumpfile);
                 break;          // abort loop once a dump action was successful!
             } catch (ex3) {
@@ -393,13 +385,13 @@ var code_exec = {
 
 
 
-assert__default['default'](recast__default['default']);
-var types = recast__default['default'].types;
-assert__default['default'](types);
+assert$1(recast);
+var types = recast.types;
+assert$1(types);
 var namedTypes = types.namedTypes;
-assert__default['default'](namedTypes);
+assert$1(namedTypes);
 var b = types.builders;
-assert__default['default'](b);
+assert$1(b);
 // //assert(astUtils);
 
 
@@ -583,7 +575,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // strip out the spaces:
         set = set.replace(/\s+/g, '');
 
-        assert__default['default'](set.length >= 1);
+        assert$1(set.length >= 1);
         let lsidx = 0;
         let lsfreq = Infinity;
         for (let i = 0, l = set.length; i < l; i++) {
@@ -731,7 +723,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         //   
         //   -> (1) start-#
         tokenDirectIdentifierStart: escChar + typeIdChar[0],
-        tokenDirectIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})#`, 'g'),
+        tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
 
         // - alias/token value references, e.g. `$token`, `$2`
         // 
@@ -740,7 +732,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> $ is an accepted starter, so no encoding required
         tokenValueReferenceStart: '$',
-        tokenValueReferenceRe: new XRegExp__default['default'](`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
 
         // - alias/token location reference, e.g. `@token`, `@2`
         // 
@@ -749,7 +741,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (6) single-@
         tokenLocationStart: escChar + typeIdChar[1],
-        tokenLocationRe: new XRegExp__default['default'](`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+        tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
 
         // - alias/token id numbers, e.g. `#token`, `#2`
         // 
@@ -758,7 +750,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (3) single-#
         tokenIdentifierStart: escChar + typeIdChar[2],
-        tokenIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+        tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
         
         // - alias/token stack indexes, e.g. `##token`, `##2`
         // 
@@ -767,31 +759,31 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (4) double-#
         tokenStackIndexStart: escChar + typeIdChar[3],
-        tokenStackIndexRe: new XRegExp__default['default'](`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+        tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
 
         // - 'negative index' value references, e.g. `$-2`
         // 
         //   -> (8) single-negative-$
         tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-        tokenValueReferenceRe: new XRegExp__default['default'](`$-([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
            
         // - 'negative index' location reference, e.g. `@-2`
         // 
         //   -> (7) single-negative-@
         tokenNegativeLocationStart: escChar + typeIdChar[5],
-        tokenNegativeLocationRe: new XRegExp__default['default'](`@-([0-9]+)`, 'g'),
+        tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
            
         // - 'negative index' stack indexes, e.g. `##-2`
         // 
         //   -> (5) double-negative-#
         tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-        tokenNegativeStackIndexRe: new XRegExp__default['default'](`#-([0-9]+)`, 'g'),
+        tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
 
         // combined regex for encoding direction
-        tokenDetect4EncodeRe: new XRegExp__default['default'](`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         // combined regex for decoding direction
-        tokenDetect4DecodeRe: new XRegExp__default['default'](`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         encode: function encodeJisonTokens(src, locationOffsetSpec) {
             let re = this.tokenDetect4EncodeRe;
@@ -954,7 +946,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
 
 function parseCodeChunkToAST(src, options) {
     let s = options.mapper4JisonGrammarIdentifiers.encode(src, options.mapperErrorReporter);
-    let ast = recast__default['default'].parse(s);
+    let ast = recast.parse(s);
     return ast;
 }
 
@@ -1002,7 +994,7 @@ function prettyPrintAST(ast, options) {
         reuseWhitespace: false
     };
 
-    let s = recast__default['default'].prettyPrint(ast, defaultOptions);
+    let s = recast.prettyPrint(ast, defaultOptions);
     let new_src = s.code;
 
     new_src = new_src
@@ -2616,7 +2608,7 @@ case 10:
     
     // Note: make sure we don't try re-define/override any XRegExp `\p{...}` or `\P{...}`
     // macros here:
-    if (XRegExp__default['default']._getUnicodeProperty(yyvstack[yysp - 2])) {
+    if (XRegExp._getUnicodeProperty(yyvstack[yysp - 2])) {
         // Work-around so that you can use `\p{ascii}` for a XRegExp slug, a.k.a.
         // Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories,
         // while using `\p{ASCII}` as a *macro expansion* of the `ASCII`
@@ -3832,8 +3824,8 @@ case 73:
       }
       // a 'keyword' starts with an alphanumeric character,
       // followed by zero or more alphanumerics or digits:
-      var re = new XRegExp__default['default']('\\w[\\w\\d]*$');
-      if (XRegExp__default['default'].match(this.$, re)) {
+      var re = new XRegExp('\\w[\\w\\d]*$');
+      if (XRegExp.match(this.$, re)) {
         this.$ = yyvstack[yysp] + "\\b";
       } else {
         this.$ = yyvstack[yysp];
@@ -4107,7 +4099,7 @@ case 107:
     // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
     
     
-    if (XRegExp__default['default']._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
+    if (XRegExp._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
         && yyvstack[yysp].toUpperCase() !== yyvstack[yysp]
     ) {
         // treat this as part of an XRegExp `\p{...}` Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories
@@ -4360,7 +4352,7 @@ case 120:
     // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
     
     
-    this.$ = JSON5__default['default'].parse(yyvstack[yysp]);
+    this.$ = JSON5.parse(yyvstack[yysp]);
     break;
 
 case 121:
@@ -4561,7 +4553,7 @@ case 133:
     }
     
     // **Aside**: And no, we don't support nested '%include'!
-    var fileContent = fs__default['default'].readFileSync(path, { encoding: 'utf-8' });
+    var fileContent = fs.readFileSync(path, { encoding: 'utf-8' });
     
     var srcCode = trimActionCode$1(fileContent);
     if (srcCode) {
@@ -10232,10 +10224,10 @@ EOF: 1,
 
     rules: [
       /*   0: */  /^(?:\/\/[^\r\n]*)/,
-      /*   1: */  new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
-      /*   2: */  new XRegExp__default['default']('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
+      /*   1: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*   2: */  new XRegExp('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
       /*   3: */  /^(?:%include\b)/,
-      /*   4: */  new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*   4: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
       /*   5: */  /^(?:\/\/.*)/,
       /*   6: */  /^(?:\|)/,
       /*   7: */  /^(?:%%)/,
@@ -10266,12 +10258,12 @@ EOF: 1,
       /*  32: */  /^(?:>)/,
       /*  33: */  /^(?:,)/,
       /*  34: */  /^(?:\*)/,
-      /*  35: */  new XRegExp__default['default']('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
+      /*  35: */  new XRegExp('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
       /*  36: */  /^(?:([^\s!"$%'-,./:-?\[-\^`{-}])+)/,
       /*  37: */  /^(?:(\r\n|\n|\r)([^\S\n\r])+(?=\S))/,
       /*  38: */  /^(?:(\r\n|\n|\r))/,
       /*  39: */  /^(?:([^\S\n\r])+)/,
-      /*  40: */  new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /*  40: */  new XRegExp('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /*  41: */  /^(?:(\r\n|\n|\r)+)/,
       /*  42: */  /^(?:$)/,
       /*  43: */  /^(?:(\r\n|\n|\r)+)/,
@@ -10312,14 +10304,14 @@ EOF: 1,
       /*  78: */  /^(?:%pointer\b)/,
       /*  79: */  /^(?:%array\b)/,
       /*  80: */  /^(?:%include\b)/,
-      /*  81: */  new XRegExp__default['default'](
+      /*  81: */  new XRegExp(
         '^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))',
         ''
       ),
       /*  82: */  /^(?:%%)/,
       /*  83: */  /^(?:\{\d+(,\s*\d+|,)?\})/,
-      /*  84: */  new XRegExp__default['default']('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
-      /*  85: */  new XRegExp__default['default']('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+      /*  84: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+      /*  85: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
       /*  86: */  /^(?:\{)/,
       /*  87: */  /^(?:\})/,
       /*  88: */  /^(?:(?:\\[^\n\r]|[^\]{])+)/,
@@ -11201,7 +11193,7 @@ function updatePcodesBitarrayCacheTestOrder(opts) {
     for (i = 0; i <= UNICODE_BASE_PLANE_MAX_CP; i++) {
         k = t[i][0];
         if (t[i].length === 1 && !done[k]) {
-            assert__default['default'](l[k] > 0);
+            assert$1(l[k] > 0);
             lut.push([i, k]);
             done[k] = true;
         }
@@ -11215,7 +11207,7 @@ function updatePcodesBitarrayCacheTestOrder(opts) {
         }
         
         if (!done[k]) {
-            assert__default['default'](l[k] > 0);
+            assert$1(l[k] > 0);
             // find a minimum span character to mark this one:
             var w = Infinity;
             var rv;
@@ -11224,7 +11216,7 @@ function updatePcodesBitarrayCacheTestOrder(opts) {
                 if (ba[i]) {
                     var tl = t[i].length;
                     if (tl > 1 && tl < w) {
-                        assert__default['default'](l[k] > 0);
+                        assert$1(l[k] > 0);
                         rv = [i, k];
                         w = tl;
                     }
@@ -11386,7 +11378,7 @@ function set2bitarray(bitarr, s, opts) {
                         var ba4p = Pcodes_bitarray_cache[pex];
                         if (!ba4p) {
                             // expand escape:
-                            var xr = new XRegExp__default['default']('[' + pex + ']');           // TODO: case-insensitive grammar???
+                            var xr = new XRegExp('[' + pex + ']');           // TODO: case-insensitive grammar???
                             // rewrite to a standard `[...]` regex set: XRegExp will do this for us via `XRegExp.toString()`:
                             var xs = '' + xr;
                             // remove the wrapping `/.../` to get at the (possibly *combined* series of) `[...]` sets inside:
@@ -11413,7 +11405,7 @@ function set2bitarray(bitarr, s, opts) {
                     s = s.substr(c1.length);
                     // check for \S, \s, \D, \d, \W, \w and expand them:
                     var ba4e = EscCode_bitarray_output_refs.esc2bitarr[c1[1]];
-                    assert__default['default'](ba4e);
+                    assert$1(ba4e);
                     add2bitarray(bitarr, ba4e);
                     continue;
 
@@ -11682,9 +11674,9 @@ function bitarray2set(l, output_inverted_variant, output_minimized) {
         }
     }
 
-    assert__default['default'](rv.length);
+    assert$1(rv.length);
     var s = rv.join('');
-    assert__default['default'](s);
+    assert$1(s);
 
     // Check if the set is better represented by one of the regex escapes:
     var esc4s = EscCode_bitarray_output_refs.set2esc[s];
@@ -11837,9 +11829,9 @@ function reduceRegexToSetBitArray(s, name, opts) {
     // inside a regex set:
     try {
         var re;
-        assert__default['default'](s);
-        assert__default['default'](!(s instanceof Error));
-        re = new XRegExp__default['default']('[' + s + ']');
+        assert$1(s);
+        assert$1(!(s instanceof Error));
+        re = new XRegExp('[' + s + ']');
         re.test(s[0]);
 
         // One thing is apparently *not* caught by the RegExp compile action above: `[a[b]c]`
@@ -11853,7 +11845,7 @@ function reduceRegexToSetBitArray(s, name, opts) {
         s = new Error('[macro [' + name + '] is unsuitable for use inside regex set expressions: "[' + s + ']"]: ' + ex.message);
     }
 
-    assert__default['default'](s);
+    assert$1(s);
     // propagate deferred exceptions = error reports.
     if (s instanceof Error) {
         return s;
@@ -12128,7 +12120,7 @@ function autodetectAndConvertToJSONformat(lexerSpec, options) {
     if (typeof lexerSpec === 'string') {
         if (options.json) {
             try {
-                chk_l = JSON5__default['default'].parse(lexerSpec);
+                chk_l = JSON5.parse(lexerSpec);
 
                 // When JSON5-based parsing of the lexer spec succeeds, this implies the lexer spec is specified in `JSON mode`
                 // *OR* there's a JSON/JSON5 format error in the input:
@@ -12208,7 +12200,7 @@ function autodetectAndConvertToJSONformat(lexerSpec, options) {
 function prepareRules(dict, actions, caseHelper, tokens, startConditions, opts) {
     var m, i, k, rule, action, conditions;
     var active_conditions;
-    assert__default['default'](Array.isArray(dict.rules));
+    assert$1(Array.isArray(dict.rules));
     var rules = dict.rules.slice(0);    // shallow copy of the rules array as we MAY modify it in here!
     var newRules = [];
     var macros = {};
@@ -12216,7 +12208,7 @@ function prepareRules(dict, actions, caseHelper, tokens, startConditions, opts) 
     var simple_rule_count = 0;
 
     // Assure all options are camelCased:
-    assert__default['default'](typeof opts.options['case-insensitive'] === 'undefined');
+    assert$1(typeof opts.options['case-insensitive'] === 'undefined');
 
     if (!tokens) {
         tokens = {};
@@ -12289,7 +12281,7 @@ function prepareRules(dict, actions, caseHelper, tokens, startConditions, opts) 
 
         if (typeof m === 'string') {
             m = expandMacros(m, macros, opts);
-            m = new XRegExp__default['default']('^(?:' + m + ')', opts.options.caseInsensitive ? 'i' : '');
+            m = new XRegExp('^(?:' + m + ')', opts.options.caseInsensitive ? 'i' : '');
         }
         newRules.push(m);
         action = rule[1];
@@ -12434,7 +12426,7 @@ function reduceRegex(s, name, opts, expandAllMacrosInSet_cb, expandAllMacrosElse
             // expand any macros in here:
             if (expandAllMacrosInSet_cb) {
                 se = expandAllMacrosInSet_cb(se);
-                assert__default['default'](se);
+                assert$1(se);
                 if (se instanceof Error) {
                     return new Error(errinfo() + ': ' + se.message);
                 }
@@ -12491,7 +12483,7 @@ function reduceRegex(s, name, opts, expandAllMacrosInSet_cb, expandAllMacrosElse
                     c2 = c1 + c2 + c3;
                     if (expandAllMacrosElsewhere_cb) {
                         c2 = expandAllMacrosElsewhere_cb(c2);
-                        assert__default['default'](c2);
+                        assert$1(c2);
                         if (c2 instanceof Error) {
                             return new Error(errinfo() + ': ' + c2.message);
                         }
@@ -12538,7 +12530,7 @@ function reduceRegex(s, name, opts, expandAllMacrosInSet_cb, expandAllMacrosElse
     // inside a regex set:
     try {
         var re;
-        re = new XRegExp__default['default'](s);
+        re = new XRegExp(s);
         re.test(s[0]);
     } catch (ex) {
         // make sure we produce a regex expression which will fail badly when it is used
@@ -12546,7 +12538,7 @@ function reduceRegex(s, name, opts, expandAllMacrosInSet_cb, expandAllMacrosElse
         return new Error(errinfo() + ': expands to an invalid regex: /' + s + '/');
     }
 
-    assert__default['default'](s);
+    assert$1(s);
     return s;
 }
 
@@ -12578,7 +12570,7 @@ function prepareMacros(dict_macros, opts) {
                         //
                         // Note: make sure we don't try to expand any XRegExp `\p{...}` or `\P{...}`
                         // macros here:
-                        if (XRegExp__default['default']._getUnicodeProperty(k)) {
+                        if (XRegExp._getUnicodeProperty(k)) {
                             // Work-around so that you can use `\p{ascii}` for a XRegExp slug, a.k.a.
                             // Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories,
                             // while using `\p{ASCII}` as a *macro expansion* of the `ASCII`
@@ -12592,7 +12584,7 @@ function prepareMacros(dict_macros, opts) {
                         a = m.split('{' + k + '}');
                         if (a.length > 1) {
                             var x = expandMacroInSet(k);
-                            assert__default['default'](x);
+                            assert$1(x);
                             if (x instanceof Error) {
                                 m = x;
                                 break;
@@ -12683,7 +12675,7 @@ function prepareMacros(dict_macros, opts) {
                     var a = s.split('{' + i + '}');
                     if (a.length > 1) {
                         x = expandMacroInSet(i);
-                        assert__default['default'](x);
+                        assert$1(x);
                         if (x instanceof Error) {
                             return new Error('failure to expand the macro [' + i + '] in set [' + s + ']: ' + x.message);
                         }
@@ -12720,7 +12712,7 @@ function prepareMacros(dict_macros, opts) {
                     var a = s.split('{' + i + '}');
                     if (a.length > 1) {
                         x = expandMacroElsewhere(i);
-                        assert__default['default'](x);
+                        assert$1(x);
                         if (x instanceof Error) {
                             return new Error('failure to expand the macro [' + i + '] in regex /' + s + '/: ' + x.message);
                         }
@@ -12788,7 +12780,7 @@ function expandMacros(src, macros, opts) {
                     if (a.length > 1) {
                         x = m.in_set;
 
-                        assert__default['default'](x);
+                        assert$1(x);
                         if (x instanceof Error) {
                             // this turns out to be an macro with 'issues' and it is used, so the 'issues' do matter: bombs away!
                             throw x;
@@ -12835,7 +12827,7 @@ function expandMacros(src, macros, opts) {
                     if (a.length > 1) {
                         // These are all main macro expansions, hence CAPTURING grouping is applied:
                         x = m.elsewhere;
-                        assert__default['default'](x);
+                        assert$1(x);
 
                         // detect definition loop:
                         if (x === false) {
@@ -13028,7 +13020,7 @@ function RegExpLexer(dict, input, tokens, build_options) {
         opts = processGrammar(dict, tokens, build_options);
         opts.__in_rules_failure_analysis_mode__ = false;
         prepExportStructures(opts);
-        assert__default['default'](opts.options);
+        assert$1(opts.options);
         if (tweak_cb) {
             tweak_cb();
         }
@@ -13045,10 +13037,10 @@ function RegExpLexer(dict, input, tokens, build_options) {
                     return ${opts.moduleName};
                 }
             `;
-if (0x0) ;
+if (0x0) helpers.dump(testcode, '____testcode-dump-A');
             var lexer = code_exec$1(testcode, function generated_code_exec_wrapper_regexp_lexer(sourcecode) {
                 //console.log("===============================LEXER TEST CODE\n", sourcecode, "\n=====================END====================\n");
-if (0x0) ;
+if (0x0) helpers.dump(sourcecode, '____testcode-dump-CB');
                 chkBugger$2(sourcecode);
 
                 // babelize the source code for subsequent execution by Node:
@@ -13061,7 +13053,7 @@ if (0x0) ;
                 .replace(/function _typeof\(obj\) \{.*?\}$/m, '')
                 .replace(/\b_typeof\(/g, 'typeof (');
 
-if (0x0) ;
+if (0x0) helpers.dump(fcode, '____testcode-dump-ES5-F');
                 var lexer_f = new Function('', fcode);
                 return lexer_f();
             }, opts.options, "lexer");
@@ -13125,11 +13117,11 @@ if (0x0) ;
         //
         // Now we go and try to narrow down the problem area/category:
 console.error('### TEST_ME EXCEPTION:', ex);
-        assert__default['default'](opts.options);
-        assert__default['default'](opts.options.xregexp !== undefined);
+        assert$1(opts.options);
+        assert$1(opts.options.xregexp !== undefined);
         var orig_xregexp_opt = !!opts.options.xregexp;
         if (!test_me(function () {
-            assert__default['default'](opts.options.xregexp !== undefined);
+            assert$1(opts.options.xregexp !== undefined);
             opts.options.xregexp = false;
             opts.showSource = false;
         }, 'When you have specified %option xregexp, you must also properly IMPORT the XRegExp library in the generated lexer.', ex, null)) {
@@ -13140,8 +13132,8 @@ console.error('### TEST_ME EXCEPTION:', ex);
                 opts.conditions = [];
                 opts.showSource = false;
             }, function () {
-                assert__default['default'](Array.isArray(opts.lex_rule_dictionary.rules));
-                assert__default['default'](Array.isArray(opts.rules));
+                assert$1(Array.isArray(opts.lex_rule_dictionary.rules));
+                assert$1(Array.isArray(opts.rules));
                 return (opts.lex_rule_dictionary.rules.length > 0 ?
                     'One or more of your lexer state names are possibly botched?' :
                     'Your custom lexer is somehow botched.'
@@ -13151,8 +13143,8 @@ console.error('### TEST_ME EXCEPTION:', ex);
                 if (!test_me(function () {
                     // store the parsed rule set size so we can use that info in case
                     // this attempt also fails:
-                    assert__default['default'](Array.isArray(opts.lex_rule_dictionary.rules));
-                    assert__default['default'](Array.isArray(opts.rules));
+                    assert$1(Array.isArray(opts.lex_rule_dictionary.rules));
+                    assert$1(Array.isArray(opts.rules));
                     rulesSpecSize = opts.lex_rule_dictionary.rules.length;
 
                     // opts.conditions = [];
@@ -13165,8 +13157,8 @@ console.error('### TEST_ME EXCEPTION:', ex);
                     for (var i = 0, len = rulesSpecSize; i < len; i++) {
                         var lastEditedRuleSpec;
                         rv = test_me(function () {
-                            assert__default['default'](Array.isArray(opts.lex_rule_dictionary.rules));
-                            assert__default['default'](opts.lex_rule_dictionary.rules.length === rulesSpecSize);
+                            assert$1(Array.isArray(opts.lex_rule_dictionary.rules));
+                            assert$1(opts.lex_rule_dictionary.rules.length === rulesSpecSize);
 
                             // opts.conditions = [];
                             // opts.rules = [];
@@ -13177,8 +13169,8 @@ console.error('### TEST_ME EXCEPTION:', ex);
                                 // rules, when parsed, have 2 or 3 elements: [conditions, handle, action];
                                 // now we want to edit the *action* part:
                                 var rule = opts.lex_rule_dictionary.rules[j];
-                                assert__default['default'](Array.isArray(rule));
-                                assert__default['default'](rule.length === 2 || rule.length === 3);
+                                assert$1(Array.isArray(rule));
+                                assert$1(rule.length === 2 || rule.length === 3);
                                 rule.pop();
                                 rule.push('{ /* nada */ }');
                                 lastEditedRuleSpec = rule;
@@ -14934,7 +14926,7 @@ function generateRegexesInitTableCode(opt) {
     var b = a.map(function generateXRegExpInitCode(re, idx) {
         var idx_str = (ws_prefix + idx).substr(-id_display_width);
 
-        if (re instanceof XRegExp__default['default']) {
+        if (re instanceof XRegExp) {
             // When we don't need the special XRegExp sauce at run-time, we do with the original
             // JavaScript RegExp instance a.k.a. 'native regex':
             if (re.xregexp.isNative || !print_xregexp) {
@@ -15047,7 +15039,7 @@ function generateModuleBody(opt) {
 
         var js = JSON.stringify(obj, null, 2);
 
-        js = js.replace(new XRegExp__default['default'](`  "(${ID_REGEX_BASE$1})": `, 'g'), '  $1: ');
+        js = js.replace(new XRegExp(`  "(${ID_REGEX_BASE$1})": `, 'g'), '  $1: ');
         js = js.replace(/^( +)pre_lex: true(,)?$/gm, function (m, ls, tc) {
             return ls + 'pre_lex: ' + String(pre) + (tc || '');
         });
@@ -15076,9 +15068,9 @@ function generateModuleBody(opt) {
         .trim();
         code.push(protosrc + ',\n');
 
-        assert__default['default'](opt.options);
+        assert$1(opt.options);
         // Assure all options are camelCased:
-        assert__default['default'](typeof opt.options['case-insensitive'] === 'undefined');
+        assert$1(typeof opt.options['case-insensitive'] === 'undefined');
 
         code.push('    options: ' + produceOptions(opt.options));
 
@@ -15122,8 +15114,8 @@ function generateModuleBody(opt) {
         // what crazy stuff (or lack thereof) the userland code is pulling in the `actionInclude` chunk.
         out = 'var lexer;\n';
 
-        assert__default['default'](opt.regular_rule_count === 0);
-        assert__default['default'](opt.simple_rule_count === 0);
+        assert$1(opt.regular_rule_count === 0);
+        assert$1(opt.simple_rule_count === 0);
         opt.is_custom_lexer = true;
 
         if (opt.actionInclude) {
@@ -15521,7 +15513,7 @@ var version$1 = '0.6.5-223';                              // require('./package.
 
 function getCommandlineOptions() {
 
-    var opts = nomnom__default['default']
+    var opts = nomnom
         .script('jison-lex')
         .unknownOptionTreatment(false)              // do not accept unknown options!
         .options({
@@ -15618,7 +15610,7 @@ function cliMain(opts) {
 
     function isDirectory(fp) {
         try {
-            return fs__default['default'].lstatSync(fp).isDirectory();
+            return fs.lstatSync(fp).isDirectory();
         } catch (e) {
             return false;
         }
@@ -15629,17 +15621,17 @@ function cliMain(opts) {
             return false;
         }
         try {
-            fs__default['default'].mkdirSync(fp);
+            fs.mkdirSync(fp);
             return true;
         } catch (e) {
             if (e.code === 'ENOENT') {
-                var parent = path__default['default'].dirname(fp);
+                var parent = path$1.dirname(fp);
                 // Did we hit the root directory by now? If so, abort!
                 // Else, create the parent; iff that fails, we fail too...
                 if (parent !== fp && mkdirp(parent)) {
                     try {
                         // Retry creating the original directory: it should succeed now
-                        fs__default['default'].mkdirSync(fp);
+                        fs.mkdirSync(fp);
                         return true;
                     } catch (e) {
                         return false;
@@ -15653,10 +15645,10 @@ function cliMain(opts) {
     function processInputFile() {
         var original_cwd = process.cwd();
 
-        var raw = fs__default['default'].readFileSync(path__default['default'].normalize(opts.file), 'utf8');
+        var raw = fs.readFileSync(path$1.normalize(opts.file), 'utf8');
 
         // making best guess at json mode
-        opts.json = path__default['default'].extname(opts.file) === '.json' || opts.json;
+        opts.json = path$1.extname(opts.file) === '.json' || opts.json;
 
         // When only the directory part of the output path was specified, then we
         // do NOT have the target module name in there as well!
@@ -15666,7 +15658,7 @@ function cliMain(opts) {
                 opts.outfile = null;
                 outpath = outpath.replace(/[\\\/]$/, '');
             } else {
-                outpath = path__default['default'].dirname(outpath);
+                outpath = path$1.dirname(outpath);
             }
         } else {
             outpath = null;
@@ -15679,11 +15671,11 @@ function cliMain(opts) {
 
         // setting output file name and module name based on input file name
         // if they aren't specified.
-        var name = path__default['default'].basename(opts.outfile || opts.file);
+        var name = path$1.basename(opts.outfile || opts.file);
 
         // get the base name (i.e. the file name without extension)
         // i.e. strip off only the extension and keep any other dots in the filename
-        name = path__default['default'].basename(name, path__default['default'].extname(name));
+        name = path$1.basename(name, path$1.extname(name));
 
         opts.outfile = opts.outfile || (outpath + name + '.js');
         if (!opts.moduleName && name) {
@@ -15692,7 +15684,7 @@ function cliMain(opts) {
 
         // Change CWD to the directory where the source grammar resides: this helps us properly
         // %include any files mentioned in the grammar with relative paths:
-        var new_cwd = path__default['default'].dirname(path__default['default'].normalize(opts.file));
+        var new_cwd = path$1.dirname(path$1.normalize(opts.file));
         process.chdir(new_cwd);
 
         var lexer = cli.generateLexerString(raw, opts);
@@ -15700,9 +15692,9 @@ function cliMain(opts) {
         // and change back to the CWD we started out with:
         process.chdir(original_cwd);
 
-        opts.outfile = path__default['default'].normalize(opts.outfile);
-        mkdirp(path__default['default'].dirname(opts.outfile));
-        fs__default['default'].writeFileSync(opts.outfile, lexer);
+        opts.outfile = path$1.normalize(opts.outfile);
+        mkdirp(path$1.dirname(opts.outfile));
+        fs.writeFileSync(opts.outfile, lexer);
         console.log('JISON-LEX output for module [' + opts.moduleName + '] has been written to file:', opts.outfile);
     }
 

@@ -1,36 +1,22 @@
 'use strict';
 
-var XRegExp = require('@gerhobbelt/xregexp');
+function _interopDefault(ex) {
+  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
+}
 
-var JSON5 = require('@gerhobbelt/json5');
+var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
 
-var fs = require('fs');
+var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
 
-var path$1 = require('path');
+var fs = _interopDefault(require('fs'));
 
-var recast = require('recast');
+var path$1 = _interopDefault(require('path'));
+
+var recast = _interopDefault(require('recast'));
 
 var babel = require('@babel/core');
 
-var assert$1 = require('assert');
-
-function _interopDefaultLegacy(e) {
-  return e && typeof e === 'object' && 'default' in e ? e : {
-    'default': e
-  };
-}
-
-var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp);
-
-var JSON5__default = /*#__PURE__*/_interopDefaultLegacy(JSON5);
-
-var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
-
-var path__default = /*#__PURE__*/_interopDefaultLegacy(path$1);
-
-var recast__default = /*#__PURE__*/_interopDefaultLegacy(recast);
-
-var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert$1); // Return TRUE if `src` starts with `searchString`. 
+var assert$1 = _interopDefault(require('assert')); // Return TRUE if `src` starts with `searchString`. 
 
 
 function startsWith(src, searchString) {
@@ -277,8 +263,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
   options = options || {};
 
   try {
-    var dumpPaths = [options.outfile ? path__default['default'].dirname(options.outfile) : null, options.inputPath, process.cwd()];
-    var dumpName = path__default['default'].basename(options.inputFilename || options.moduleName || (options.outfile ? path__default['default'].dirname(options.outfile) : null) || options.defaultModuleName || errname).replace(/\.[a-z]{1,5}$/i, '') // remove extension .y, .yacc, .jison, ...whatever
+    var dumpPaths = [options.outfile ? path$1.dirname(options.outfile) : null, options.inputPath, process.cwd()];
+    var dumpName = path$1.basename(options.inputFilename || options.moduleName || (options.outfile ? path$1.dirname(options.outfile) : null) || options.defaultModuleName || errname).replace(/\.[a-z]{1,5}$/i, '') // remove extension .y, .yacc, .jison, ...whatever
     .replace(/[^a-z0-9_]/ig, '_'); // make sure it's legal in the destination filesystem: the least common denominator.
 
     if (dumpName === '' || dumpName === '_') {
@@ -296,8 +282,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
       }
 
       try {
-        dumpfile = path__default['default'].normalize(dumpPaths[i] + '/' + dumpName);
-        fs__default['default'].writeFileSync(dumpfile, sourcecode, 'utf8');
+        dumpfile = path$1.normalize(dumpPaths[i] + '/' + dumpName);
+        fs.writeFileSync(dumpfile, sourcecode, 'utf8');
         console.error("****** offending generated " + errname + " source code dumped into file: ", dumpfile);
         break; // abort loop once a dump action was successful!
       } catch (ex3) {
@@ -375,13 +361,13 @@ var code_exec = {
   dump: dumpSourceToFile
 }; //
 
-assert__default['default'](recast__default['default']);
-var types = recast__default['default'].types;
-assert__default['default'](types);
+assert$1(recast);
+var types = recast.types;
+assert$1(types);
 var namedTypes = types.namedTypes;
-assert__default['default'](namedTypes);
+assert$1(namedTypes);
 var b = types.builders;
-assert__default['default'](b); // //assert(astUtils);
+assert$1(b); // //assert(astUtils);
 // WARNING: this regex MUST match the regex for `ID` in ebnf-parser::bnf.l jison language lexer spec! (`ID = [{ALPHA}]{ALNUM}*`)
 //
 // This is the base XRegExp ID regex used in many places; this should match the ID macro definition in the EBNF/BNF parser et al as well!
@@ -554,7 +540,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
   function pickChar(set, input) {
     // strip out the spaces:
     set = set.replace(/\s+/g, '');
-    assert__default['default'](set.length >= 1);
+    assert$1(set.length >= 1);
     let lsidx = 0;
     let lsfreq = Infinity;
 
@@ -696,7 +682,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     //   
     //   -> (1) start-#
     tokenDirectIdentifierStart: escChar + typeIdChar[0],
-    tokenDirectIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})#`, 'g'),
+    tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
     // - alias/token value references, e.g. `$token`, `$2`
     // 
     //   -> $ is an accepted starter, so no encoding required
@@ -704,7 +690,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> $ is an accepted starter, so no encoding required
     tokenValueReferenceStart: '$',
-    tokenValueReferenceRe: new XRegExp__default['default'](`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+    tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
     // - alias/token location reference, e.g. `@token`, `@2`
     // 
     //   -> (6) single-@
@@ -712,7 +698,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (6) single-@
     tokenLocationStart: escChar + typeIdChar[1],
-    tokenLocationRe: new XRegExp__default['default'](`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+    tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
     // - alias/token id numbers, e.g. `#token`, `#2`
     // 
     //   -> (3) single-#
@@ -720,7 +706,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (3) single-#
     tokenIdentifierStart: escChar + typeIdChar[2],
-    tokenIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+    tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
     // - alias/token stack indexes, e.g. `##token`, `##2`
     // 
     //   -> (4) double-#
@@ -728,26 +714,26 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (4) double-#
     tokenStackIndexStart: escChar + typeIdChar[3],
-    tokenStackIndexRe: new XRegExp__default['default'](`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+    tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
     // - 'negative index' value references, e.g. `$-2`
     // 
     //   -> (8) single-negative-$
     tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-    tokenValueReferenceRe: new XRegExp__default['default'](`$-([0-9]+)`, 'g'),
+    tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
     // - 'negative index' location reference, e.g. `@-2`
     // 
     //   -> (7) single-negative-@
     tokenNegativeLocationStart: escChar + typeIdChar[5],
-    tokenNegativeLocationRe: new XRegExp__default['default'](`@-([0-9]+)`, 'g'),
+    tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
     // - 'negative index' stack indexes, e.g. `##-2`
     // 
     //   -> (5) double-negative-#
     tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-    tokenNegativeStackIndexRe: new XRegExp__default['default'](`#-([0-9]+)`, 'g'),
+    tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
     // combined regex for encoding direction
-    tokenDetect4EncodeRe: new XRegExp__default['default'](`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+    tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
     // combined regex for decoding direction
-    tokenDetect4DecodeRe: new XRegExp__default['default'](`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0, 7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+    tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0, 7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
     encode: function encodeJisonTokens(src, locationOffsetSpec) {
       let re = this.tokenDetect4EncodeRe; // reset regex
 
@@ -906,7 +892,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
 
 function parseCodeChunkToAST(src, options) {
   let s = options.mapper4JisonGrammarIdentifiers.encode(src, options.mapperErrorReporter);
-  let ast = recast__default['default'].parse(s);
+  let ast = recast.parse(s);
   return ast;
 }
 
@@ -943,7 +929,7 @@ function prettyPrintAST(ast, options) {
     // when printing generically.
     reuseWhitespace: false
   };
-  let s = recast__default['default'].prettyPrint(ast, defaultOptions);
+  let s = recast.prettyPrint(ast, defaultOptions);
   let new_src = s.code;
   new_src = new_src.replace(/\r\n|\n|\r/g, '\n'); // platform dependent EOL fixup
   // backpatch possible jison variables extant in the prettified code:
@@ -2369,7 +2355,7 @@ var parser = {
         // Note: make sure we don't try re-define/override any XRegExp `\p{...}` or `\P{...}`
         // macros here:
 
-        if (XRegExp__default['default']._getUnicodeProperty(yyvstack[yysp - 2])) {
+        if (XRegExp._getUnicodeProperty(yyvstack[yysp - 2])) {
           // Work-around so that you can use `\p{ascii}` for a XRegExp slug, a.k.a.
           // Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories,
           // while using `\p{ASCII}` as a *macro expansion* of the `ASCII`
@@ -3451,9 +3437,9 @@ var parser = {
           // followed by zero or more alphanumerics or digits:
 
 
-          var re = new XRegExp__default['default']('\\w[\\w\\d]*$');
+          var re = new XRegExp('\\w[\\w\\d]*$');
 
-          if (XRegExp__default['default'].match(this.$, re)) {
+          if (XRegExp.match(this.$, re)) {
             this.$ = yyvstack[yysp] + "\\b";
           } else {
             this.$ = yyvstack[yysp];
@@ -3678,7 +3664,7 @@ var parser = {
         // default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-):
         this._$ = yylstack[yysp]; // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
 
-        if (XRegExp__default['default']._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, '')) && yyvstack[yysp].toUpperCase() !== yyvstack[yysp]) {
+        if (XRegExp._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, '')) && yyvstack[yysp].toUpperCase() !== yyvstack[yysp]) {
           // treat this as part of an XRegExp `\p{...}` Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories
           this.$ = yyvstack[yysp];
         } else {
@@ -3905,7 +3891,7 @@ var parser = {
         // default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-):
         this._$ = yylstack[yysp]; // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
 
-        this.$ = JSON5__default['default'].parse(yyvstack[yysp]);
+        this.$ = JSON5.parse(yyvstack[yysp]);
         break;
 
       case 121:
@@ -4083,7 +4069,7 @@ var parser = {
         } // **Aside**: And no, we don't support nested '%include'!
 
 
-        var fileContent = fs__default['default'].readFileSync(path, {
+        var fileContent = fs.readFileSync(path, {
           encoding: 'utf-8'
         });
         var srcCode = trimActionCode$1(fileContent);
@@ -7957,13 +7943,13 @@ var lexer = function () {
     /*   0: */
     /^(?:\/\/[^\r\n]*)/,
     /*   1: */
-    new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
+    new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
     /*   2: */
-    new XRegExp__default['default']('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
+    new XRegExp('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
     /*   3: */
     /^(?:%include\b)/,
     /*   4: */
-    new XRegExp__default['default']('^(?:\\/\\*[^]*?\\*\\/)', ''),
+    new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
     /*   5: */
     /^(?:\/\/.*)/,
     /*   6: */
@@ -8025,7 +8011,7 @@ var lexer = function () {
     /*  34: */
     /^(?:\*)/,
     /*  35: */
-    new XRegExp__default['default']('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
+    new XRegExp('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
     /*  36: */
     /^(?:([^\s!"$%'-,./:-?\[-\^`{-}])+)/,
     /*  37: */
@@ -8035,7 +8021,7 @@ var lexer = function () {
     /*  39: */
     /^(?:([^\S\n\r])+)/,
     /*  40: */
-    new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+    new XRegExp('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
     /*  41: */
     /^(?:(\r\n|\n|\r)+)/,
     /*  42: */
@@ -8117,15 +8103,15 @@ var lexer = function () {
     /*  80: */
     /^(?:%include\b)/,
     /*  81: */
-    new XRegExp__default['default']('^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))', ''),
+    new XRegExp('^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))', ''),
     /*  82: */
     /^(?:%%)/,
     /*  83: */
     /^(?:\{\d+(,\s*\d+|,)?\})/,
     /*  84: */
-    new XRegExp__default['default']('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+    new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
     /*  85: */
-    new XRegExp__default['default']('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+    new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
     /*  86: */
     /^(?:\{)/,
     /*  87: */
