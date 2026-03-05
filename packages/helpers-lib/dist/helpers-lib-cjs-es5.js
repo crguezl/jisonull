@@ -1,20 +1,32 @@
 'use strict';
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
-}
+var fs = require('fs');
 
-var fs = _interopDefault(require('fs'));
+var path$1 = require('path');
 
-var path$1 = _interopDefault(require('path'));
+var XRegExp = require('@gerhobbelt/xregexp');
 
-var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
-
-var recast = _interopDefault(require('recast'));
+var recast = require('recast');
 
 var babel = require('@babel/core');
 
-var assert = _interopDefault(require('assert')); // Return TRUE if `src` starts with `searchString`. 
+var assert = require('assert');
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
+
+var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
+
+var path__default = /*#__PURE__*/_interopDefaultLegacy(path$1);
+
+var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp);
+
+var recast__default = /*#__PURE__*/_interopDefaultLegacy(recast);
+
+var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert); // Return TRUE if `src` starts with `searchString`. 
 
 
 function startsWith(src, searchString) {
@@ -261,8 +273,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
   options = options || {};
 
   try {
-    var dumpPaths = [options.outfile ? path$1.dirname(options.outfile) : null, options.inputPath, process.cwd()];
-    var dumpName = path$1.basename(options.inputFilename || options.moduleName || (options.outfile ? path$1.dirname(options.outfile) : null) || options.defaultModuleName || errname).replace(/\.[a-z]{1,5}$/i, '') // remove extension .y, .yacc, .jison, ...whatever
+    var dumpPaths = [options.outfile ? path__default['default'].dirname(options.outfile) : null, options.inputPath, process.cwd()];
+    var dumpName = path__default['default'].basename(options.inputFilename || options.moduleName || (options.outfile ? path__default['default'].dirname(options.outfile) : null) || options.defaultModuleName || errname).replace(/\.[a-z]{1,5}$/i, '') // remove extension .y, .yacc, .jison, ...whatever
     .replace(/[^a-z0-9_]/ig, '_'); // make sure it's legal in the destination filesystem: the least common denominator.
 
     if (dumpName === '' || dumpName === '_') {
@@ -280,8 +292,8 @@ function dumpSourceToFile(sourcecode, errname, err_id, options, ex) {
       }
 
       try {
-        dumpfile = path$1.normalize(dumpPaths[i] + '/' + dumpName);
-        fs.writeFileSync(dumpfile, sourcecode, 'utf8');
+        dumpfile = path__default['default'].normalize(dumpPaths[i] + '/' + dumpName);
+        fs__default['default'].writeFileSync(dumpfile, sourcecode, 'utf8');
         console.error("****** offending generated " + errname + " source code dumped into file: ", dumpfile);
         break; // abort loop once a dump action was successful!
       } catch (ex3) {
@@ -359,13 +371,13 @@ var code_exec = {
   dump: dumpSourceToFile
 }; //
 
-assert(recast);
-var types = recast.types;
-assert(types);
+assert__default['default'](recast__default['default']);
+var types = recast__default['default'].types;
+assert__default['default'](types);
 var namedTypes = types.namedTypes;
-assert(namedTypes);
+assert__default['default'](namedTypes);
 var b = types.builders;
-assert(b); // //assert(astUtils);
+assert__default['default'](b); // //assert(astUtils);
 // WARNING: this regex MUST match the regex for `ID` in ebnf-parser::bnf.l jison language lexer spec! (`ID = [{ALPHA}]{ALNUM}*`)
 //
 // This is the base XRegExp ID regex used in many places; this should match the ID macro definition in the EBNF/BNF parser et al as well!
@@ -538,7 +550,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
   function pickChar(set, input) {
     // strip out the spaces:
     set = set.replace(/\s+/g, '');
-    assert(set.length >= 1);
+    assert__default['default'](set.length >= 1);
     let lsidx = 0;
     let lsfreq = Infinity;
 
@@ -680,7 +692,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     //   
     //   -> (1) start-#
     tokenDirectIdentifierStart: escChar + typeIdChar[0],
-    tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
+    tokenDirectIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})#`, 'g'),
     // - alias/token value references, e.g. `$token`, `$2`
     // 
     //   -> $ is an accepted starter, so no encoding required
@@ -688,7 +700,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> $ is an accepted starter, so no encoding required
     tokenValueReferenceStart: '$',
-    tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+    tokenValueReferenceRe: new XRegExp__default['default'](`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
     // - alias/token location reference, e.g. `@token`, `@2`
     // 
     //   -> (6) single-@
@@ -696,7 +708,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (6) single-@
     tokenLocationStart: escChar + typeIdChar[1],
-    tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+    tokenLocationRe: new XRegExp__default['default'](`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
     // - alias/token id numbers, e.g. `#token`, `#2`
     // 
     //   -> (3) single-#
@@ -704,7 +716,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (3) single-#
     tokenIdentifierStart: escChar + typeIdChar[2],
-    tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+    tokenIdentifierRe: new XRegExp__default['default'](`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
     // - alias/token stack indexes, e.g. `##token`, `##2`
     // 
     //   -> (4) double-#
@@ -712,26 +724,26 @@ function generateMapper4JisonGrammarIdentifiers(input) {
     // 
     //   -> (4) double-#
     tokenStackIndexStart: escChar + typeIdChar[3],
-    tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+    tokenStackIndexRe: new XRegExp__default['default'](`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
     // - 'negative index' value references, e.g. `$-2`
     // 
     //   -> (8) single-negative-$
     tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-    tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
+    tokenValueReferenceRe: new XRegExp__default['default'](`$-([0-9]+)`, 'g'),
     // - 'negative index' location reference, e.g. `@-2`
     // 
     //   -> (7) single-negative-@
     tokenNegativeLocationStart: escChar + typeIdChar[5],
-    tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
+    tokenNegativeLocationRe: new XRegExp__default['default'](`@-([0-9]+)`, 'g'),
     // - 'negative index' stack indexes, e.g. `##-2`
     // 
     //   -> (5) double-negative-#
     tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-    tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
+    tokenNegativeStackIndexRe: new XRegExp__default['default'](`#-([0-9]+)`, 'g'),
     // combined regex for encoding direction
-    tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+    tokenDetect4EncodeRe: new XRegExp__default['default'](`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
     // combined regex for decoding direction
-    tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0, 7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+    tokenDetect4DecodeRe: new XRegExp__default['default'](`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0, 7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
     encode: function encodeJisonTokens(src, locationOffsetSpec) {
       let re = this.tokenDetect4EncodeRe; // reset regex
 
@@ -890,7 +902,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
 
 function parseCodeChunkToAST(src, options) {
   let s = options.mapper4JisonGrammarIdentifiers.encode(src, options.mapperErrorReporter);
-  let ast = recast.parse(s);
+  let ast = recast__default['default'].parse(s);
   return ast;
 }
 
@@ -927,7 +939,7 @@ function prettyPrintAST(ast, options) {
     // when printing generically.
     reuseWhitespace: false
   };
-  let s = recast.prettyPrint(ast, defaultOptions);
+  let s = recast__default['default'].prettyPrint(ast, defaultOptions);
   let new_src = s.code;
   new_src = new_src.replace(/\r\n|\n|\r/g, '\n'); // platform dependent EOL fixup
   // backpatch possible jison variables extant in the prettified code:

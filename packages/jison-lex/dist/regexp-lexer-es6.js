@@ -13027,10 +13027,10 @@ function RegExpLexer(dict, input, tokens, build_options) {
                     return ${opts.moduleName};
                 }
             `;
-if (0x0) helpers.dump(testcode, '____testcode-dump-A');
+if (0x0) ;
             var lexer = code_exec$1(testcode, function generated_code_exec_wrapper_regexp_lexer(sourcecode) {
                 //console.log("===============================LEXER TEST CODE\n", sourcecode, "\n=====================END====================\n");
-if (0x0) helpers.dump(sourcecode, '____testcode-dump-CB');
+if (0x0) ;
                 chkBugger$2(sourcecode);
 
                 // babelize the source code for subsequent execution by Node:
@@ -13043,7 +13043,7 @@ if (0x0) helpers.dump(sourcecode, '____testcode-dump-CB');
                 .replace(/function _typeof\(obj\) \{.*?\}$/m, '')
                 .replace(/\b_typeof\(/g, 'typeof (');
 
-if (0x0) helpers.dump(fcode, '____testcode-dump-ES5-F');
+if (0x0) ;
                 var lexer_f = new Function('', fcode);
                 return lexer_f();
             }, opts.options, "lexer");
