@@ -10,7 +10,7 @@
 var recast = require('recast');
 var fs = require('fs');
 var path = require('path');
-var json5 = require('@crguezl/json5');
+var json5 = require('@gerhobbelt/json5');
 var assert = require("assert");
 
 var types = recast.types;

@@ -1928,9 +1928,9 @@ var assert$1 = require('assert');
 
 var XRegExp$1 = require('@gerhobbelt/xregexp');
 
-var json5 = require('@crguezl/json5');
-
 var JSON5$1 = require('@gerhobbelt/json5');
+
+var json5 = require('@crguezl/json5');
 
 var XRegExp$2 = require('@crguezl/xregexp');
 
@@ -1952,9 +1952,9 @@ var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert$1);
 
 var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp$1);
 
-var json5__default = /*#__PURE__*/_interopDefaultLegacy(json5);
-
 var JSON5__default = /*#__PURE__*/_interopDefaultLegacy(JSON5$1);
+
+var json5__default = /*#__PURE__*/_interopDefaultLegacy(json5);
 
 var XRegExp__default$1 = /*#__PURE__*/_interopDefaultLegacy(XRegExp$2);
 
@@ -15974,7 +15974,7 @@ function autodetectAndConvertToJSONformat(lexerSpec, options) {
   if (typeof lexerSpec === 'string') {
     if (options.json) {
       try {
-        chk_l = json5__default['default'].parse(lexerSpec); // When JSON5-based parsing of the lexer spec succeeds, this implies the lexer spec is specified in `JSON mode`
+        chk_l = JSON5__default['default'].parse(lexerSpec); // When JSON5-based parsing of the lexer spec succeeds, this implies the lexer spec is specified in `JSON mode`
         // *OR* there's a JSON/JSON5 format error in the input:
       } catch (e) {
         ex1 = e;
@@ -20052,11 +20052,11 @@ var lexer$1 = function () {
     /*  0: */
     /^(?:\s+)/,
     /*  1: */
-    new XRegExp__default$1['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+    new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
     /*  2: */
     /^(?:\$end\b)/,
     /*  3: */
-    new XRegExp__default$1['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+    new XRegExp__default['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
     /*  4: */
     /^(?:'((?:\\'|\\[^']|[^'\\])*)')/,
     /*  5: */

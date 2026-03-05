@@ -6,8 +6,8 @@ var recast = require('recast');
 var babel = require('@babel/core');
 var assert$1 = require('assert');
 var XRegExp$1 = require('@gerhobbelt/xregexp');
-var json5 = require('@crguezl/json5');
 var JSON5$1 = require('@gerhobbelt/json5');
+var json5 = require('@crguezl/json5');
 var XRegExp$2 = require('@crguezl/xregexp');
 var astUtils = require('ast-util');
 
@@ -18,8 +18,8 @@ var path__default = /*#__PURE__*/_interopDefaultLegacy(path$1);
 var recast__default = /*#__PURE__*/_interopDefaultLegacy(recast);
 var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert$1);
 var XRegExp__default = /*#__PURE__*/_interopDefaultLegacy(XRegExp$1);
-var json5__default = /*#__PURE__*/_interopDefaultLegacy(json5);
 var JSON5__default = /*#__PURE__*/_interopDefaultLegacy(JSON5$1);
+var json5__default = /*#__PURE__*/_interopDefaultLegacy(json5);
 var XRegExp__default$1 = /*#__PURE__*/_interopDefaultLegacy(XRegExp$2);
 var astUtils__default = /*#__PURE__*/_interopDefaultLegacy(astUtils);
 
@@ -17575,7 +17575,7 @@ function autodetectAndConvertToJSONformat(lexerSpec, options) {
     if (typeof lexerSpec === 'string') {
         if (options.json) {
             try {
-                chk_l = json5__default['default'].parse(lexerSpec);
+                chk_l = JSON5__default['default'].parse(lexerSpec);
 
                 // When JSON5-based parsing of the lexer spec succeeds, this implies the lexer spec is specified in `JSON mode`
                 // *OR* there's a JSON/JSON5 format error in the input:
@@ -23986,9 +23986,9 @@ EOF: 1,
 
     rules: [
       /*  0: */  /^(?:\s+)/,
-      /*  1: */  new XRegExp__default$1['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /*  1: */  new XRegExp__default['default']('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /*  2: */  /^(?:\$end\b)/,
-      /*  3: */  new XRegExp__default$1['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+      /*  3: */  new XRegExp__default['default']('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
       /*  4: */  /^(?:'((?:\\'|\\[^']|[^'\\])*)')/,
       /*  5: */  /^(?:"((?:\\"|\\[^"]|[^"\\])*)")/,
       /*  6: */  /^(?:\.)/,

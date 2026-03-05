@@ -4,8 +4,8 @@ import recast from 'recast';
 import { transformSync } from '@babel/core';
 import assert$1 from 'assert';
 import XRegExp$1 from '@gerhobbelt/xregexp';
-import json5 from '@crguezl/json5';
 import JSON5$1 from '@gerhobbelt/json5';
+import json5 from '@crguezl/json5';
 import XRegExp$2 from '@crguezl/xregexp';
 import astUtils from 'ast-util';
 
@@ -17561,7 +17561,7 @@ function autodetectAndConvertToJSONformat(lexerSpec, options) {
     if (typeof lexerSpec === 'string') {
         if (options.json) {
             try {
-                chk_l = json5.parse(lexerSpec);
+                chk_l = JSON5$1.parse(lexerSpec);
 
                 // When JSON5-based parsing of the lexer spec succeeds, this implies the lexer spec is specified in `JSON mode`
                 // *OR* there's a JSON/JSON5 format error in the input:
@@ -23972,9 +23972,9 @@ EOF: 1,
 
     rules: [
       /*  0: */  /^(?:\s+)/,
-      /*  1: */  new XRegExp$2('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /*  1: */  new XRegExp$1('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /*  2: */  /^(?:\$end\b)/,
-      /*  3: */  new XRegExp$2('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
+      /*  3: */  new XRegExp$1('^(?:\\[([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\])', ''),
       /*  4: */  /^(?:'((?:\\'|\\[^']|[^'\\])*)')/,
       /*  5: */  /^(?:"((?:\\"|\\[^"]|[^"\\])*)")/,
       /*  6: */  /^(?:\.)/,

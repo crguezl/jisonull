@@ -2,10 +2,10 @@ var assert = require("chai").assert;
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
-var yaml = require('@crguezl/js-yaml');
-var JSON5 = require('@crguezl/json5');
+var yaml = require('@gerhobbelt/js-yaml');
+var JSON5 = require('@gerhobbelt/json5');
 var globby = require('globby');
-var XRegExp = require("@crguezl/xregexp");
+var XRegExp = require("@gerhobbelt/xregexp");
 var RegExpLexer = require('../dist/regexp-lexer-cjs-es5');
 var helpers = require('../../helpers-lib/dist/helpers-lib-cjs-es5');
 var trimErrorForTestReporting = helpers.trimErrorForTestReporting;
@@ -2518,7 +2518,7 @@ console.error('lexer:', typeof lexer);
           {
             qualifier: 'imports',
             include: `
-              import XRegExp from '@crguezl/xregexp';
+              import XRegExp from '@gerhobbelt/xregexp';
             `,
           },
         ],
