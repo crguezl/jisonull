@@ -38,7 +38,7 @@
     "@crguezl/lex-parser": "0.6.5-223",
     "@crguezl/nomnom": "1.8.4-29",
     "recast": "0.18.5",
-    "@crguezl/xregexp": "4.2.0-30",
+    "@gerhobbelt/xregexp": "4.2.0-30",
     "jison-helpers-lib": "0.6.5-223"
   },
   "devDependencies": {

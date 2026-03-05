@@ -15,7 +15,7 @@
 
 'use strict';
 
-import XRegExp from '@crguezl/xregexp';
+import XRegExp from '@gerhobbelt/xregexp';
 import assert from 'assert';
 
 

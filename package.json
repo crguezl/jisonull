@@ -55,7 +55,7 @@
     "@crguezl/json5": "2.1.0-48",
     "@crguezl/nomnom": "1.8.4-30",
     "recast": "0.20.4",
-    "@crguezl/xregexp": "4.4.0-32"
+    "@gerhobbelt/xregexp": "4.4.0-32"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
