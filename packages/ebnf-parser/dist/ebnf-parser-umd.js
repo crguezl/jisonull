@@ -1,15 +1,17 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@gerhobbelt/xregexp'), require('@gerhobbelt/json5'), require('fs'), require('path'), require('recast'), require('@babel/core'), require('assert')) :
-    typeof define === 'function' && define.amd ? define(['@gerhobbelt/xregexp', '@gerhobbelt/json5', 'fs', 'path', 'recast', '@babel/core', 'assert'], factory) :
-    (global = global || self, global['ebnf-parser'] = factory(global.XRegExp, global.JSON5, global.fs, global.path$1, global.recast, global.babel, global.assert$1));
-}(this, (function (XRegExp, JSON5, fs, path$1, recast, babel, assert$1) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@gerhobbelt/xregexp'), require('@gerhobbelt/json5'), require('fs'), require('path'), require('@crguezl/xregexp'), require('recast'), require('@babel/core'), require('assert'), require('@crguezl/json5')) :
+    typeof define === 'function' && define.amd ? define(['@gerhobbelt/xregexp', '@gerhobbelt/json5', 'fs', 'path', '@crguezl/xregexp', 'recast', '@babel/core', 'assert', '@crguezl/json5'], factory) :
+    (global = global || self, global['ebnf-parser'] = factory(global.XRegExp, global.JSON5, global.fs, global.path$1, global.XRegExp$1, global.recast, global.babel, global.assert$1, global.JSON5$1));
+}(this, (function (XRegExp, JSON5, fs, path$1, XRegExp$1, recast, babel, assert$1, JSON5$1) { 'use strict';
 
     XRegExp = XRegExp && XRegExp.hasOwnProperty('default') ? XRegExp['default'] : XRegExp;
     JSON5 = JSON5 && JSON5.hasOwnProperty('default') ? JSON5['default'] : JSON5;
     fs = fs && fs.hasOwnProperty('default') ? fs['default'] : fs;
     path$1 = path$1 && path$1.hasOwnProperty('default') ? path$1['default'] : path$1;
+    XRegExp$1 = XRegExp$1 && XRegExp$1.hasOwnProperty('default') ? XRegExp$1['default'] : XRegExp$1;
     recast = recast && recast.hasOwnProperty('default') ? recast['default'] : recast;
     assert$1 = assert$1 && assert$1.hasOwnProperty('default') ? assert$1['default'] : assert$1;
+    JSON5$1 = JSON5$1 && JSON5$1.hasOwnProperty('default') ? JSON5$1['default'] : JSON5$1;
 
     // Return TRUE if `src` starts with `searchString`. 
     function startsWith(src, searchString) {
@@ -720,7 +722,7 @@
             //   
             //   -> (1) start-#
             tokenDirectIdentifierStart: escChar + typeIdChar[0],
-            tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
+            tokenDirectIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})#`, 'g'),
 
             // - alias/token value references, e.g. `$token`, `$2`
             // 
@@ -729,7 +731,7 @@
             // 
             //   -> $ is an accepted starter, so no encoding required
             tokenValueReferenceStart: '$',
-            tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+            tokenValueReferenceRe: new XRegExp$1(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
 
             // - alias/token location reference, e.g. `@token`, `@2`
             // 
@@ -738,7 +740,7 @@
             // 
             //   -> (6) single-@
             tokenLocationStart: escChar + typeIdChar[1],
-            tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+            tokenLocationRe: new XRegExp$1(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
 
             // - alias/token id numbers, e.g. `#token`, `#2`
             // 
@@ -747,7 +749,7 @@
             // 
             //   -> (3) single-#
             tokenIdentifierStart: escChar + typeIdChar[2],
-            tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+            tokenIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
             
             // - alias/token stack indexes, e.g. `##token`, `##2`
             // 
@@ -756,31 +758,31 @@
             // 
             //   -> (4) double-#
             tokenStackIndexStart: escChar + typeIdChar[3],
-            tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+            tokenStackIndexRe: new XRegExp$1(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
 
             // - 'negative index' value references, e.g. `$-2`
             // 
             //   -> (8) single-negative-$
             tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-            tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
+            tokenValueReferenceRe: new XRegExp$1(`$-([0-9]+)`, 'g'),
                
             // - 'negative index' location reference, e.g. `@-2`
             // 
             //   -> (7) single-negative-@
             tokenNegativeLocationStart: escChar + typeIdChar[5],
-            tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
+            tokenNegativeLocationRe: new XRegExp$1(`@-([0-9]+)`, 'g'),
                
             // - 'negative index' stack indexes, e.g. `##-2`
             // 
             //   -> (5) double-negative-#
             tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-            tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
+            tokenNegativeStackIndexRe: new XRegExp$1(`#-([0-9]+)`, 'g'),
 
             // combined regex for encoding direction
-            tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+            tokenDetect4EncodeRe: new XRegExp$1(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
             // combined regex for decoding direction
-            tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+            tokenDetect4DecodeRe: new XRegExp$1(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
             encode: function encodeJisonTokens(src, locationOffsetSpec) {
                 let re = this.tokenDetect4EncodeRe;
@@ -1232,7 +1234,7 @@
     // - does it have captures, and if yes, how many?
     //
 
-    //import XRegExp from '@gerhobbelt/xregexp';
+    //import XRegExp from '@crguezl/xregexp';
 
 
     // validate the given regex.
@@ -15258,7 +15260,7 @@
         
         // Note: make sure we don't try re-define/override any XRegExp `\p{...}` or `\P{...}`
         // macros here:
-        if (XRegExp._getUnicodeProperty(yyvstack[yysp - 2])) {
+        if (XRegExp$1._getUnicodeProperty(yyvstack[yysp - 2])) {
             // Work-around so that you can use `\p{ascii}` for a XRegExp slug, a.k.a.
             // Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories,
             // while using `\p{ASCII}` as a *macro expansion* of the `ASCII`
@@ -16474,8 +16476,8 @@
           }
           // a 'keyword' starts with an alphanumeric character,
           // followed by zero or more alphanumerics or digits:
-          var re = new XRegExp('\\w[\\w\\d]*$');
-          if (XRegExp.match(this.$, re)) {
+          var re = new XRegExp$1('\\w[\\w\\d]*$');
+          if (XRegExp$1.match(this.$, re)) {
             this.$ = yyvstack[yysp] + "\\b";
           } else {
             this.$ = yyvstack[yysp];
@@ -16749,7 +16751,7 @@
         // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
         
         
-        if (XRegExp._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
+        if (XRegExp$1._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
             && yyvstack[yysp].toUpperCase() !== yyvstack[yysp]
         ) {
             // treat this as part of an XRegExp `\p{...}` Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories
@@ -17002,7 +17004,7 @@
         // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
         
         
-        this.$ = JSON5.parse(yyvstack[yysp]);
+        this.$ = JSON5$1.parse(yyvstack[yysp]);
         break;
 
     case 121:
@@ -22874,10 +22876,10 @@
 
         rules: [
           /*   0: */  /^(?:\/\/[^\r\n]*)/,
-          /*   1: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
-          /*   2: */  new XRegExp('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
+          /*   1: */  new XRegExp$1('^(?:\\/\\*[^]*?\\*\\/)', ''),
+          /*   2: */  new XRegExp$1('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
           /*   3: */  /^(?:%include\b)/,
-          /*   4: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
+          /*   4: */  new XRegExp$1('^(?:\\/\\*[^]*?\\*\\/)', ''),
           /*   5: */  /^(?:\/\/.*)/,
           /*   6: */  /^(?:\|)/,
           /*   7: */  /^(?:%%)/,
@@ -22908,12 +22910,12 @@
           /*  32: */  /^(?:>)/,
           /*  33: */  /^(?:,)/,
           /*  34: */  /^(?:\*)/,
-          /*  35: */  new XRegExp('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
+          /*  35: */  new XRegExp$1('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
           /*  36: */  /^(?:([^\s!"$%'-,./:-?\[-\^`{-}])+)/,
           /*  37: */  /^(?:(\r\n|\n|\r)([^\S\n\r])+(?=\S))/,
           /*  38: */  /^(?:(\r\n|\n|\r))/,
           /*  39: */  /^(?:([^\S\n\r])+)/,
-          /*  40: */  new XRegExp('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+          /*  40: */  new XRegExp$1('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
           /*  41: */  /^(?:(\r\n|\n|\r)+)/,
           /*  42: */  /^(?:$)/,
           /*  43: */  /^(?:(\r\n|\n|\r)+)/,
@@ -22954,14 +22956,14 @@
           /*  78: */  /^(?:%pointer\b)/,
           /*  79: */  /^(?:%array\b)/,
           /*  80: */  /^(?:%include\b)/,
-          /*  81: */  new XRegExp(
+          /*  81: */  new XRegExp$1(
             '^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))',
             ''
           ),
           /*  82: */  /^(?:%%)/,
           /*  83: */  /^(?:\{\d+(,\s*\d+|,)?\})/,
-          /*  84: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
-          /*  85: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+          /*  84: */  new XRegExp$1('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+          /*  85: */  new XRegExp$1('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
           /*  86: */  /^(?:\{)/,
           /*  87: */  /^(?:\})/,
           /*  88: */  /^(?:(?:\\[^\n\r]|[^\]{])+)/,

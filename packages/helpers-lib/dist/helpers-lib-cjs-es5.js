@@ -8,7 +8,7 @@ var fs = _interopDefault(require('fs'));
 
 var path$1 = _interopDefault(require('path'));
 
-var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
+var XRegExp = _interopDefault(require('@crguezl/xregexp'));
 
 var recast = _interopDefault(require('recast'));
 
@@ -1149,7 +1149,7 @@ function detectIstanbulGlobal() {
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 // validate the given regex.
 //
 // You can specify an (advanced or regular) regex class as a third parameter.

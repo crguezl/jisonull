@@ -2,8 +2,8 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
-var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
+var XRegExp = _interopDefault(require('@crguezl/xregexp'));
+var JSON5 = _interopDefault(require('@crguezl/json5'));
 var fs = _interopDefault(require('fs'));
 var path$1 = _interopDefault(require('path'));
 var recast = _interopDefault(require('recast'));
@@ -1231,7 +1231,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.

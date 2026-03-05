@@ -4,9 +4,9 @@ function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
 }
 
-var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
+var XRegExp = _interopDefault(require('@crguezl/xregexp'));
 
-var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
+var JSON5 = _interopDefault(require('@crguezl/json5'));
 
 var fs = _interopDefault(require('fs'));
 
@@ -1151,7 +1151,7 @@ function detectIstanbulGlobal() {
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 // validate the given regex.
 //
 // You can specify an (advanced or regular) regex class as a third parameter.

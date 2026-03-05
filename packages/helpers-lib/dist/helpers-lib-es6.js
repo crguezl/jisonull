@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path$1 from 'path';
-import XRegExp from '@gerhobbelt/xregexp';
+import XRegExp from '@crguezl/xregexp';
 import recast from 'recast';
 import { transformSync } from '@babel/core';
 import assert from 'assert';
@@ -1226,7 +1226,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.

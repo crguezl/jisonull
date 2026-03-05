@@ -1,6 +1,6 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('fs'), require('path'), require('@gerhobbelt/xregexp'), require('recast'), require('@babel/core'), require('assert')) :
-    typeof define === 'function' && define.amd ? define(['fs', 'path', '@gerhobbelt/xregexp', 'recast', '@babel/core', 'assert'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('fs'), require('path'), require('@crguezl/xregexp'), require('recast'), require('@babel/core'), require('assert')) :
+    typeof define === 'function' && define.amd ? define(['fs', 'path', '@crguezl/xregexp', 'recast', '@babel/core', 'assert'], factory) :
     (global = global || self, global['jison-helpers-lib'] = factory(global.fs, global.path$1, global.XRegExp, global.recast, global.babel, global.assert));
 }(this, (function (fs, path$1, XRegExp, recast, babel, assert) { 'use strict';
 
@@ -1231,7 +1231,7 @@
     // - does it have captures, and if yes, how many?
     //
 
-    //import XRegExp from '@gerhobbelt/xregexp';
+    //import XRegExp from '@crguezl/xregexp';
 
 
     // validate the given regex.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-'use strict';function _interopDefault(ex){return ex&&typeof ex==='object'&&'default'in ex?ex['default']:ex;}var fs=_interopDefault(require('fs'));var path$1=_interopDefault(require('path'));var nomnom=_interopDefault(require('@gerhobbelt/nomnom'));var XRegExp=_interopDefault(require('@gerhobbelt/xregexp'));var recast=_interopDefault(require('recast'));var babel=require('@babel/core');var assert$1=_interopDefault(require('assert'));var JSON5=_interopDefault(require('@gerhobbelt/json5'));// Return TRUE if `src` starts with `searchString`. 
+'use strict';function _interopDefault(ex){return ex&&typeof ex==='object'&&'default'in ex?ex['default']:ex;}var fs=_interopDefault(require('fs'));var path$1=_interopDefault(require('path'));var nomnom=_interopDefault(require('@crguezl/nomnom'));var XRegExp=_interopDefault(require('@crguezl/xregexp'));var recast=_interopDefault(require('recast'));var babel=require('@babel/core');var assert$1=_interopDefault(require('assert'));var JSON5=_interopDefault(require('@crguezl/json5'));// Return TRUE if `src` starts with `searchString`. 
 function startsWith(src,searchString){return src.substr(0,searchString.length)===searchString;}// tagged template string helper which removes the indentation common to all
 // non-empty lines: that indentation was added as part of the source code
 // formatting of this lexer spec file and must be removed to produce what
@@ -528,7 +528,7 @@ function detectIstanbulGlobal(){const gcv="__coverage__";const globalvar=new Fun
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 // validate the given regex.
 //
 // You can specify an (advanced or regular) regex class as a third parameter.

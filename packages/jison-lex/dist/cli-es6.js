@@ -3,12 +3,12 @@
 
 import fs from 'fs';
 import path$1 from 'path';
-import nomnom from '@gerhobbelt/nomnom';
-import XRegExp from '@gerhobbelt/xregexp';
+import nomnom from '@crguezl/nomnom';
+import XRegExp from '@crguezl/xregexp';
 import recast from 'recast';
 import { transformSync } from '@babel/core';
 import assert$1 from 'assert';
-import JSON5 from '@gerhobbelt/json5';
+import JSON5 from '@crguezl/json5';
 
 // Return TRUE if `src` starts with `searchString`. 
 function startsWith(src, searchString) {
@@ -1231,7 +1231,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.

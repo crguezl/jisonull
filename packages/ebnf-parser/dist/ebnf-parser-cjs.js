@@ -6,9 +6,11 @@ var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
 var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
 var fs = _interopDefault(require('fs'));
 var path$1 = _interopDefault(require('path'));
+var XRegExp$1 = _interopDefault(require('@crguezl/xregexp'));
 var recast = _interopDefault(require('recast'));
 var babel = require('@babel/core');
 var assert$1 = _interopDefault(require('assert'));
+var JSON5$1 = _interopDefault(require('@crguezl/json5'));
 
 // Return TRUE if `src` starts with `searchString`. 
 function startsWith(src, searchString) {
@@ -719,7 +721,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         //   
         //   -> (1) start-#
         tokenDirectIdentifierStart: escChar + typeIdChar[0],
-        tokenDirectIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})#`, 'g'),
+        tokenDirectIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})#`, 'g'),
 
         // - alias/token value references, e.g. `$token`, `$2`
         // 
@@ -728,7 +730,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> $ is an accepted starter, so no encoding required
         tokenValueReferenceStart: '$',
-        tokenValueReferenceRe: new XRegExp(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp$1(`$(${ID_REGEX_BASE})|$([0-9]+)`, 'g'),
 
         // - alias/token location reference, e.g. `@token`, `@2`
         // 
@@ -737,7 +739,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (6) single-@
         tokenLocationStart: escChar + typeIdChar[1],
-        tokenLocationRe: new XRegExp(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
+        tokenLocationRe: new XRegExp$1(`@(${ID_REGEX_BASE})|@([0-9]+)`, 'g'),
 
         // - alias/token id numbers, e.g. `#token`, `#2`
         // 
@@ -746,7 +748,7 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (3) single-#
         tokenIdentifierStart: escChar + typeIdChar[2],
-        tokenIdentifierRe: new XRegExp(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
+        tokenIdentifierRe: new XRegExp$1(`#(${ID_REGEX_BASE})|#([0-9]+)`, 'g'),
         
         // - alias/token stack indexes, e.g. `##token`, `##2`
         // 
@@ -755,31 +757,31 @@ function generateMapper4JisonGrammarIdentifiers(input) {
         // 
         //   -> (4) double-#
         tokenStackIndexStart: escChar + typeIdChar[3],
-        tokenStackIndexRe: new XRegExp(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
+        tokenStackIndexRe: new XRegExp$1(`##(${ID_REGEX_BASE})|##([0-9]+)`, 'g'),
 
         // - 'negative index' value references, e.g. `$-2`
         // 
         //   -> (8) single-negative-$
         tokenNegativeValueReferenceStart: escChar + typeIdChar[4],
-        tokenValueReferenceRe: new XRegExp(`$-([0-9]+)`, 'g'),
+        tokenValueReferenceRe: new XRegExp$1(`$-([0-9]+)`, 'g'),
            
         // - 'negative index' location reference, e.g. `@-2`
         // 
         //   -> (7) single-negative-@
         tokenNegativeLocationStart: escChar + typeIdChar[5],
-        tokenNegativeLocationRe: new XRegExp(`@-([0-9]+)`, 'g'),
+        tokenNegativeLocationRe: new XRegExp$1(`@-([0-9]+)`, 'g'),
            
         // - 'negative index' stack indexes, e.g. `##-2`
         // 
         //   -> (5) double-negative-#
         tokenNegativeStackIndexStart: escChar + typeIdChar[6],
-        tokenNegativeStackIndexRe: new XRegExp(`#-([0-9]+)`, 'g'),
+        tokenNegativeStackIndexRe: new XRegExp$1(`#-([0-9]+)`, 'g'),
 
         // combined regex for encoding direction
-        tokenDetect4EncodeRe: new XRegExp(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4EncodeRe: new XRegExp$1(`([^$@#${IN_ID_CHARSET}])([$@#]|##)(${ID_REGEX_BASE}|[$]|-?[0-9]+)(#?)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         // combined regex for decoding direction
-        tokenDetect4DecodeRe: new XRegExp(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
+        tokenDetect4DecodeRe: new XRegExp$1(`([^$${IN_ID_CHARSET}])(${escChar}[${typeIdChar.slice(0,7).join('')}])(${ID_REGEX_BASE}|[$]|[0-9]+)(?![$@#${IN_ID_CHARSET}])`, 'g'),
 
         encode: function encodeJisonTokens(src, locationOffsetSpec) {
             let re = this.tokenDetect4EncodeRe;
@@ -1231,7 +1233,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.
@@ -15257,7 +15259,7 @@ case 10:
     
     // Note: make sure we don't try re-define/override any XRegExp `\p{...}` or `\P{...}`
     // macros here:
-    if (XRegExp._getUnicodeProperty(yyvstack[yysp - 2])) {
+    if (XRegExp$1._getUnicodeProperty(yyvstack[yysp - 2])) {
         // Work-around so that you can use `\p{ascii}` for a XRegExp slug, a.k.a.
         // Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories,
         // while using `\p{ASCII}` as a *macro expansion* of the `ASCII`
@@ -16473,8 +16475,8 @@ case 73:
       }
       // a 'keyword' starts with an alphanumeric character,
       // followed by zero or more alphanumerics or digits:
-      var re = new XRegExp('\\w[\\w\\d]*$');
-      if (XRegExp.match(this.$, re)) {
+      var re = new XRegExp$1('\\w[\\w\\d]*$');
+      if (XRegExp$1.match(this.$, re)) {
         this.$ = yyvstack[yysp] + "\\b";
       } else {
         this.$ = yyvstack[yysp];
@@ -16748,7 +16750,7 @@ case 107:
     // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
     
     
-    if (XRegExp._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
+    if (XRegExp$1._getUnicodeProperty(yyvstack[yysp].replace(/[{}]/g, ''))
         && yyvstack[yysp].toUpperCase() !== yyvstack[yysp]
     ) {
         // treat this as part of an XRegExp `\p{...}` Unicode 'General Category' Property cf. http://unicode.org/reports/tr18/#Categories
@@ -17001,7 +17003,7 @@ case 120:
     // END of default action (generated by JISON mode classic/merge :: 1,VT,VA,VU,-,LT,LA,-,-)
     
     
-    this.$ = JSON5.parse(yyvstack[yysp]);
+    this.$ = JSON5$1.parse(yyvstack[yysp]);
     break;
 
 case 121:
@@ -22873,10 +22875,10 @@ EOF: 1,
 
     rules: [
       /*   0: */  /^(?:\/\/[^\r\n]*)/,
-      /*   1: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
-      /*   2: */  new XRegExp('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
+      /*   1: */  new XRegExp$1('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*   2: */  new XRegExp$1('^(?:%\\{([^]*?)%\\}(?!\\}))', ''),
       /*   3: */  /^(?:%include\b)/,
-      /*   4: */  new XRegExp('^(?:\\/\\*[^]*?\\*\\/)', ''),
+      /*   4: */  new XRegExp$1('^(?:\\/\\*[^]*?\\*\\/)', ''),
       /*   5: */  /^(?:\/\/.*)/,
       /*   6: */  /^(?:\|)/,
       /*   7: */  /^(?:%%)/,
@@ -22907,12 +22909,12 @@ EOF: 1,
       /*  32: */  /^(?:>)/,
       /*  33: */  /^(?:,)/,
       /*  34: */  /^(?:\*)/,
-      /*  35: */  new XRegExp('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
+      /*  35: */  new XRegExp$1('^(?:<([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)>)', ''),
       /*  36: */  /^(?:([^\s!"$%'-,./:-?\[-\^`{-}])+)/,
       /*  37: */  /^(?:(\r\n|\n|\r)([^\S\n\r])+(?=\S))/,
       /*  38: */  /^(?:(\r\n|\n|\r))/,
       /*  39: */  /^(?:([^\S\n\r])+)/,
-      /*  40: */  new XRegExp('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
+      /*  40: */  new XRegExp$1('^(?:([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*))', ''),
       /*  41: */  /^(?:(\r\n|\n|\r)+)/,
       /*  42: */  /^(?:$)/,
       /*  43: */  /^(?:(\r\n|\n|\r)+)/,
@@ -22953,14 +22955,14 @@ EOF: 1,
       /*  78: */  /^(?:%pointer\b)/,
       /*  79: */  /^(?:%array\b)/,
       /*  80: */  /^(?:%include\b)/,
-      /*  81: */  new XRegExp(
+      /*  81: */  new XRegExp$1(
         '^(?:%([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}\\-_]*(?:[\\p{Alphabetic}\\p{Number}_]))?)([^\\n\\r]*))',
         ''
       ),
       /*  82: */  /^(?:%%)/,
       /*  83: */  /^(?:\{\d+(,\s*\d+|,)?\})/,
-      /*  84: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
-      /*  85: */  new XRegExp('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+      /*  84: */  new XRegExp$1('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
+      /*  85: */  new XRegExp$1('^(?:\\{([\\p{Alphabetic}_](?:[\\p{Alphabetic}\\p{Number}_])*)\\})', ''),
       /*  86: */  /^(?:\{)/,
       /*  87: */  /^(?:\})/,
       /*  88: */  /^(?:(?:\\[^\n\r]|[^\]{])+)/,

@@ -1,6 +1,6 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@gerhobbelt/xregexp'), require('@gerhobbelt/json5'), require('fs'), require('path'), require('recast'), require('@babel/core'), require('assert')) :
-    typeof define === 'function' && define.amd ? define(['@gerhobbelt/xregexp', '@gerhobbelt/json5', 'fs', 'path', 'recast', '@babel/core', 'assert'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@crguezl/xregexp'), require('@crguezl/json5'), require('fs'), require('path'), require('recast'), require('@babel/core'), require('assert')) :
+    typeof define === 'function' && define.amd ? define(['@crguezl/xregexp', '@crguezl/json5', 'fs', 'path', 'recast', '@babel/core', 'assert'], factory) :
     (global = global || self, global['lex-parser'] = factory(global.XRegExp, global.JSON5, global.fs, global.path$1, global.recast, global.babel, global.assert$1));
 }(this, (function (XRegExp, JSON5, fs, path$1, recast, babel, assert$1) { 'use strict';
 
@@ -1232,7 +1232,7 @@
     // - does it have captures, and if yes, how many?
     //
 
-    //import XRegExp from '@gerhobbelt/xregexp';
+    //import XRegExp from '@crguezl/xregexp';
 
 
     // validate the given regex.

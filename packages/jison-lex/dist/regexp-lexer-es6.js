@@ -1,5 +1,5 @@
-import XRegExp from '@gerhobbelt/xregexp';
-import JSON5 from '@gerhobbelt/json5';
+import XRegExp from '@crguezl/xregexp';
+import JSON5 from '@crguezl/json5';
 import fs from 'fs';
 import path$1 from 'path';
 import recast from 'recast';
@@ -1227,7 +1227,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.

@@ -2,8 +2,8 @@
 
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('fs'), require('path'), require('@gerhobbelt/nomnom'), require('@gerhobbelt/xregexp'), require('recast'), require('@babel/core'), require('assert'), require('@gerhobbelt/json5')) :
-    typeof define === 'function' && define.amd ? define(['fs', 'path', '@gerhobbelt/nomnom', '@gerhobbelt/xregexp', 'recast', '@babel/core', 'assert', '@gerhobbelt/json5'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('fs'), require('path'), require('@crguezl/nomnom'), require('@crguezl/xregexp'), require('recast'), require('@babel/core'), require('assert'), require('@crguezl/json5')) :
+    typeof define === 'function' && define.amd ? define(['fs', 'path', '@crguezl/nomnom', '@crguezl/xregexp', 'recast', '@babel/core', 'assert', '@crguezl/json5'], factory) :
     (global = global || self, global['jison-lex'] = factory(global.fs, global.path$1, global.nomnom, global.XRegExp, global.recast, global.babel, global.assert$1, global.JSON5));
 }(this, (function (fs, path$1, nomnom, XRegExp, recast, babel, assert$1, JSON5) { 'use strict';
 
@@ -1236,7 +1236,7 @@
     // - does it have captures, and if yes, how many?
     //
 
-    //import XRegExp from '@gerhobbelt/xregexp';
+    //import XRegExp from '@crguezl/xregexp';
 
 
     // validate the given regex.

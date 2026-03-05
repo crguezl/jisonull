@@ -377,8 +377,8 @@
  */
 
 
-import XRegExp from '@gerhobbelt/xregexp';        // for helping out the `%options xregexp` in the lexer
-  import JSON5 from '@gerhobbelt/json5';            // TODO: quick fix until `%code imports` works in the lexer spec!
+import XRegExp from '@crguezl/xregexp';        // for helping out the `%options xregexp` in the lexer
+  import JSON5 from '@crguezl/json5';            // TODO: quick fix until `%code imports` works in the lexer spec!
   import helpers from '../helpers-lib';
   import fs from 'fs';
 

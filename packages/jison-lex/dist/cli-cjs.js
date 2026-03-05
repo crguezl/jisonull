@@ -7,12 +7,12 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var fs = _interopDefault(require('fs'));
 var path$1 = _interopDefault(require('path'));
-var nomnom = _interopDefault(require('@gerhobbelt/nomnom'));
-var XRegExp = _interopDefault(require('@gerhobbelt/xregexp'));
+var nomnom = _interopDefault(require('@crguezl/nomnom'));
+var XRegExp = _interopDefault(require('@crguezl/xregexp'));
 var recast = _interopDefault(require('recast'));
 var babel = require('@babel/core');
 var assert$1 = _interopDefault(require('assert'));
-var JSON5 = _interopDefault(require('@gerhobbelt/json5'));
+var JSON5 = _interopDefault(require('@crguezl/json5'));
 
 // Return TRUE if `src` starts with `searchString`. 
 function startsWith(src, searchString) {
@@ -1235,7 +1235,7 @@ function detectIstanbulGlobal() {
 // - does it have captures, and if yes, how many?
 //
 
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 
 
 // validate the given regex.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-(function(global,factory){typeof exports==='object'&&typeof module!=='undefined'?module.exports=factory(require('fs'),require('path'),require('@gerhobbelt/nomnom'),require('@gerhobbelt/xregexp'),require('recast'),require('@babel/core'),require('assert'),require('@gerhobbelt/json5')):typeof define==='function'&&define.amd?define(['fs','path','@gerhobbelt/nomnom','@gerhobbelt/xregexp','recast','@babel/core','assert','@gerhobbelt/json5'],factory):(global=global||self,global['jison-lex']=factory(global.fs,global.path$1,global.nomnom,global.XRegExp,global.recast,global.babel,global.assert$1,global.JSON5));})(this,function(fs,path$1,nomnom,XRegExp,recast,babel,assert$1,JSON5){'use strict';fs=fs&&fs.hasOwnProperty('default')?fs['default']:fs;path$1=path$1&&path$1.hasOwnProperty('default')?path$1['default']:path$1;nomnom=nomnom&&nomnom.hasOwnProperty('default')?nomnom['default']:nomnom;XRegExp=XRegExp&&XRegExp.hasOwnProperty('default')?XRegExp['default']:XRegExp;recast=recast&&recast.hasOwnProperty('default')?recast['default']:recast;assert$1=assert$1&&assert$1.hasOwnProperty('default')?assert$1['default']:assert$1;JSON5=JSON5&&JSON5.hasOwnProperty('default')?JSON5['default']:JSON5;// Return TRUE if `src` starts with `searchString`. 
+(function(global,factory){typeof exports==='object'&&typeof module!=='undefined'?module.exports=factory(require('fs'),require('path'),require('@crguezl/nomnom'),require('@crguezl/xregexp'),require('recast'),require('@babel/core'),require('assert'),require('@crguezl/json5')):typeof define==='function'&&define.amd?define(['fs','path','@crguezl/nomnom','@crguezl/xregexp','recast','@babel/core','assert','@crguezl/json5'],factory):(global=global||self,global['jison-lex']=factory(global.fs,global.path$1,global.nomnom,global.XRegExp,global.recast,global.babel,global.assert$1,global.JSON5));})(this,function(fs,path$1,nomnom,XRegExp,recast,babel,assert$1,JSON5){'use strict';fs=fs&&fs.hasOwnProperty('default')?fs['default']:fs;path$1=path$1&&path$1.hasOwnProperty('default')?path$1['default']:path$1;nomnom=nomnom&&nomnom.hasOwnProperty('default')?nomnom['default']:nomnom;XRegExp=XRegExp&&XRegExp.hasOwnProperty('default')?XRegExp['default']:XRegExp;recast=recast&&recast.hasOwnProperty('default')?recast['default']:recast;assert$1=assert$1&&assert$1.hasOwnProperty('default')?assert$1['default']:assert$1;JSON5=JSON5&&JSON5.hasOwnProperty('default')?JSON5['default']:JSON5;// Return TRUE if `src` starts with `searchString`. 
 function startsWith(src,searchString){return src.substr(0,searchString.length)===searchString;}// tagged template string helper which removes the indentation common to all
 // non-empty lines: that indentation was added as part of the source code
 // formatting of this lexer spec file and must be removed to produce what
@@ -528,7 +528,7 @@ function detectIstanbulGlobal(){const gcv="__coverage__";const globalvar=new Fun
 // - is this a valid regex, i.e. does it compile?
 // - does it have captures, and if yes, how many?
 //
-//import XRegExp from '@gerhobbelt/xregexp';
+//import XRegExp from '@crguezl/xregexp';
 // validate the given regex.
 //
 // You can specify an (advanced or regular) regex class as a third parameter.
